@@ -1,0 +1,14 @@
+group 'de.bluemx'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+    compile group: 'com.yahoofinance-api', name: 'YahooFinanceAPI', version: '3.5.0'
+    compile 'org.jsoup:jsoup:1.10.1'
+}
