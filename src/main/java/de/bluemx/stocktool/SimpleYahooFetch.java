@@ -9,9 +9,6 @@ import yahoofinance.YahooFinance;
 import java.io.IOException;
 import java.math.BigDecimal;
 
-/**
- * Created by Patrick Labonte on 09.12.2016.
- */
 public class SimpleYahooFetch {
     public static void main(String[] args) throws IOException {
         Stock stock = YahooFinance.get("VOW3.DE");
