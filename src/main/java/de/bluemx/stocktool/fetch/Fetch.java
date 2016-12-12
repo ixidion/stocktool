@@ -10,5 +10,4 @@ import javax.cache.Cache;
 public interface Fetch {
     StockQuoteData fetch(String isin);
 
-    StockQuoteData fetch(String isin, Cache<String, String> cache);
 }

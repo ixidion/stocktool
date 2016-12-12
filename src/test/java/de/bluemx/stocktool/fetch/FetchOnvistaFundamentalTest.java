@@ -3,27 +3,27 @@ package de.bluemx.stocktool.fetch;
 import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+import de.bluemx.stocktool.helper.DefaultInject;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-/**
- * Created by teclis on 10.12.16.
- */
+import javax.cache.Cache;
+
+
 class FetchOnvistaFundamentalTest {
+
+    private static Injector injector;
+
+    @BeforeAll
+    static void beforeAll() {
+        injector = Guice.createInjector(new DefaultInject());
+    }
+
     @Test
     void fetch() {
-        Injector injector = Guice.createInjector(new AbstractModule() {
-            @Override
-            protected void configure() {
-            }
-        });
-
-
         FetchOnvistaFundamental onvista = injector.getInstance(FetchOnvistaFundamental.class);
+        onvista.fetch("DE000A1K0409");
     }
 
-    @Test
-    void fetch1() {
-
-    }
 
 }

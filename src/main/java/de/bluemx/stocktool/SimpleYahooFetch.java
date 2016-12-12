@@ -1,5 +1,6 @@
 package de.bluemx.stocktool;
 
+import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
@@ -20,7 +21,9 @@ public class SimpleYahooFetch {
 
         stock.print();
 
-        Document doc = Jsoup.connect("http://en.wikipedia.org/").get();
-        Elements newsHeadlines = doc.select("#mp-itn b a");
+        Connection con = Jsoup.connect("http://www.onvista.de/suche/?searchValue=DE000A1K0409")
+                .userAgent("Mozilla");
+        con.get();
+        System.out.println(con.response().url());
     }
 }
