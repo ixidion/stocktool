@@ -1,13 +1,25 @@
 package de.bluemx.stocktool.model;
 
 
+import de.bluemx.stocktool.annotations.*;
+
 import java.time.LocalDate;
 import java.util.Map;
-
+@Config({@Provider(name="onvista-basic", url="",
+        variables={@Variable(dataprovider = Dataprovider.ONVISTA, attributeName = "urlParts")},
+        required="onvista-isin"),
+        @Provider(name="onvista-isin-search", url="",
+                variables={@Variable(attributeName = "isin")})})
 public class StockQuoteData {
-    private Datasource datasource;
     private String stockname;
+
     private String isin;
+
+    private Map<Dataprovider,String> urlParts;
+
+    @Resolvers({@Resolver(name = "onvista-basic", extractors = {@Extract(searchType = SearchType.REGEXP, expression = "//adasd[]3234")}, source = Source.RESPONSE)})
+    private Map<Dataprovider,String> historyParts;
+
     private String symbol;
     private LocalDate fetchDate;
 
