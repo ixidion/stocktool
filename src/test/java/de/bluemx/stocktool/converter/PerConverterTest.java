@@ -14,10 +14,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-/**
- * Created by plabonte on 15.12.2016.
- */
-class PerConverterTest {
+public class PerConverterTest {
     @Test
     void convert() {
         PerConverter conv = new PerConverter();

@@ -9,25 +9,31 @@ import java.time.LocalDate;
 import java.time.Year;
 import java.util.Map;
 @Config(providers = {@Provider(name="onvista-basic", dataprovider = Dataprovider.ONVISTA, url="",
-        variables={@Variable(attributeName = "urlParts")},
-        required="urlParts"),
+        variables={@Variable(key="urlPart", source = "urlParts")},
+        required=""),
         @Provider(name="onvista-isin-search", dataprovider = Dataprovider.ONVISTA, url="",
-                variables={@Variable(attributeName = "isin")})})
+                variables={@Variable(key="isin", source = "isin")})})
 public class StockQuoteData {
-    private String stockname;
+    @Resolvers({@Resolver(name = "onvista-basic",
+            extractors = {@Extract(searchType = SearchType.XPath, expression = "//adasd[]3234")},
+            source = Source.RESPONSE)})
+    private String stockname = "";
 
     private String isin;
 
     @Resolvers({@Resolver(name="onvista-isin-search",
             source = Source.URL,
-            extractors = {@Extract(searchType = SearchType.REGEXP, expression = "")})})
+            extractors = {@Extract(searchType = SearchType.REGEXP, expression = ""),
+                    @Extract(searchType = SearchType.REGEXP, expression = "")})})
+    @ProviderMap
     private Map<Dataprovider,String> urlParts;
 
-    @Resolvers({@Resolver(name = "onvista-basic",
-            extractors = {@Extract(searchType = SearchType.REGEXP, expression = "//adasd[]3234")},
-            source = Source.RESPONSE,
-            converterClass = StringConverter.class)})
+//    @Resolvers({@Resolver(name = "onvista-basic",
+//            extractors = {@Extract(searchType = SearchType.REGEXP, expression = "//adasd[]3234")},
+//            source = Source.RESPONSE,
+//            converterClass = StringConverter.class)})
     private Map<Dataprovider,String> historyParts;
+
 
     private String symbol;
     private LocalDate fetchDate;
@@ -46,10 +52,10 @@ public class StockQuoteData {
 
     // Price Earnings Ratio / KGV
     // No 4 (Basis)
-    @Resolvers({@Resolver(name = "onvista-basic",
-            extractors = {@Extract(searchType = SearchType.REGEXP, expression = "//adasd[]3234")},
-            source = Source.RESPONSE,
-            converterClass = PerConverter.class)})
+//    @Resolvers({@Resolver(name = "onvista-basic",
+//            extractors = {@Extract(searchType = SearchType.REGEXP, expression = "//adasd[]3234")},
+//            source = Source.RESPONSE,
+//            converterClass = PerConverter.class)})
     private Map<Year, String> per;
 
     // PER actual

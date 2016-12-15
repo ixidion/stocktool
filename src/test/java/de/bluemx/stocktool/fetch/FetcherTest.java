@@ -9,10 +9,7 @@ import org.junit.jupiter.api.Test;
 
 
 class FetcherTest {
-    @Test
-    void fetch1() {
 
-    }
 
     private static Injector injector;
 
@@ -24,7 +21,7 @@ class FetcherTest {
     @Test
     void fetch() {
         Fetcher fetcher = new Fetcher();
-        StockQuoteData stock = fetcher.fetch("1236136");
+        StockQuoteData stock = fetcher.populateByIsin("1236136");
 
     }
 
