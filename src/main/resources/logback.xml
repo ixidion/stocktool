@@ -7,10 +7,10 @@
         </layout>
     </appender>
 
-    <logger name="com.base22" level="TRACE"/>
+    <logger name="de.bluemx" level="debug"/>
 
 
-    <root level="debug">
+    <root level="error">
         <appender-ref ref="STDOUT" />
     </root>
 </configuration>

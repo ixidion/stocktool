@@ -2,22 +2,31 @@ package de.bluemx.stocktool.model;
 
 
 import de.bluemx.stocktool.annotations.*;
+import de.bluemx.stocktool.converter.PerConverter;
+import de.bluemx.stocktool.converter.StringConverter;
 
 import java.time.LocalDate;
+import java.time.Year;
 import java.util.Map;
-@Config({@Provider(name="onvista-basic", url="",
-        variables={@Variable(dataprovider = Dataprovider.ONVISTA, attributeName = "urlParts")},
-        required="onvista-isin"),
-        @Provider(name="onvista-isin-search", url="",
+@Config(providers = {@Provider(name="onvista-basic", dataprovider = Dataprovider.ONVISTA, url="",
+        variables={@Variable(attributeName = "urlParts")},
+        required="urlParts"),
+        @Provider(name="onvista-isin-search", dataprovider = Dataprovider.ONVISTA, url="",
                 variables={@Variable(attributeName = "isin")})})
 public class StockQuoteData {
     private String stockname;
 
     private String isin;
 
+    @Resolvers({@Resolver(name="onvista-isin-search",
+            source = Source.URL,
+            extractors = {@Extract(searchType = SearchType.REGEXP, expression = "")})})
     private Map<Dataprovider,String> urlParts;
 
-    @Resolvers({@Resolver(name = "onvista-basic", extractors = {@Extract(searchType = SearchType.REGEXP, expression = "//adasd[]3234")}, source = Source.RESPONSE)})
+    @Resolvers({@Resolver(name = "onvista-basic",
+            extractors = {@Extract(searchType = SearchType.REGEXP, expression = "//adasd[]3234")},
+            source = Source.RESPONSE,
+            converterClass = StringConverter.class)})
     private Map<Dataprovider,String> historyParts;
 
     private String symbol;
@@ -35,9 +44,13 @@ public class StockQuoteData {
     // No 3
     private String equityRatio;
 
-    // Price Earnings Ratio
+    // Price Earnings Ratio / KGV
     // No 4 (Basis)
-    private Map<Integer, String> per;
+    @Resolvers({@Resolver(name = "onvista-basic",
+            extractors = {@Extract(searchType = SearchType.REGEXP, expression = "//adasd[]3234")},
+            source = Source.RESPONSE,
+            converterClass = PerConverter.class)})
+    private Map<Year, String> per;
 
     // PER actual
     // No 5
@@ -81,6 +94,8 @@ public class StockQuoteData {
     // Earnigs per Share Actual Year
     private String epsAY;
 
-    public StockQuoteData() {
+    public StockQuoteData(String isin) {
+        this.isin = isin;
     }
+
 }

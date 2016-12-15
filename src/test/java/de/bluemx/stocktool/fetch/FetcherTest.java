@@ -1,16 +1,18 @@
 package de.bluemx.stocktool.fetch;
 
-import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import de.bluemx.stocktool.helper.DefaultInject;
+import de.bluemx.stocktool.model.StockQuoteData;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import javax.cache.Cache;
 
+class FetcherTest {
+    @Test
+    void fetch1() {
 
-class FetchOnvistaFundamentalTest {
+    }
 
     private static Injector injector;
 
@@ -21,8 +23,9 @@ class FetchOnvistaFundamentalTest {
 
     @Test
     void fetch() {
-        FetchOnvistaFundamental onvista = injector.getInstance(FetchOnvistaFundamental.class);
-        onvista.fetch("DE000A1K0409");
+        Fetcher fetcher = new Fetcher();
+        StockQuoteData stock = fetcher.fetch("1236136");
+
     }
 
 

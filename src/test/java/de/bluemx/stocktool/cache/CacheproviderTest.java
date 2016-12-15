@@ -12,8 +12,8 @@ class CacheproviderTest {
 //        Cacheprovider provider = Cacheprovider();
 //        Cache<String,String> cache = provider.getCache();
 //        cache.put("TEST1", "TEST2");
-//        String value = cache.get("TEST1");
-//        assertEquals("TEST2", value);
+//        String providers = cache.get("TEST1");
+//        assertEquals("TEST2", providers);
     }
 
 }

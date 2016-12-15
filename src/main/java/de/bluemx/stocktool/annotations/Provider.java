@@ -1,14 +1,17 @@
 package de.bluemx.stocktool.annotations;
 
-/**
- * Created by Patrick Labonte on 13.12.2016.
- */
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+
+@Retention(value = RetentionPolicy.RUNTIME)
 public @interface Provider {
     String name();
 
     String url();
 
     String required() default "";
+
+    Dataprovider dataprovider();
 
     Variable[] variables();
 }
