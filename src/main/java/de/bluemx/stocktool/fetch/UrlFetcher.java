@@ -4,7 +4,6 @@ import com.google.inject.Inject;
 import de.bluemx.stocktool.annotations.*;
 import de.bluemx.stocktool.helper.StringUtil;
 import org.jsoup.Connection;
-import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,13 +36,13 @@ public class UrlFetcher {
 
     private String[] callJsoupAPI(String url, Resolver resolver) {
         Source source = resolver.source();
-        Connection con = Jsoup.connect(url)
+        Connection con = jsoup.connect(url)
                 .userAgent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_1) AppleWebKit/602.2.14 (KHTML, like Gecko) Version/10.0.1 Safari/602.2.14")
                 .timeout(10000); // 10sec
         String resultingUrl;
         try {
-            Document doc = con.get();
             if (source.equals(Source.RESPONSE)) {
+                Document doc = con.get();
                 return extractFromResponse(doc, resolver);
             } else if (source.equals(Source.URL)){
                 // After forwarding to new page
@@ -87,14 +86,5 @@ public class UrlFetcher {
     private String[] callYahooAPi() {
         return null;
 
-    }
-
-    public JsoupWrapper getJsoup() {
-        return jsoup;
-    }
-
-    @Inject
-    public void setJsoup(JsoupWrapper jsoup) {
-        this.jsoup = jsoup;
     }
 }

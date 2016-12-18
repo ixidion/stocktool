@@ -38,14 +38,14 @@ public class GenericFetcher<T> {
         for (Field field : fields) {
             if (!processedFields.contains(field.getName())) {
                 log.debug("Processing field: {}", field.getName());
-                recursiveFetch(field, pojo);
+                recursiveFetchField(field, pojo);
             }
         }
         return pojo;
 
     }
 
-    private void recursiveFetch(Field field, Object pojo) {
+    private void recursiveFetchField(Field field, Object pojo) {
         Resolvers resolvers = field.getAnnotation(Resolvers.class);
         if (resolvers instanceof Resolvers) {
             for (Resolver resolver : resolvers.value()) {
@@ -53,21 +53,21 @@ public class GenericFetcher<T> {
                 Provider provider = getProviderByName(providername);
                 if (!provider.required().equals("")) {
                     Field newField = getFieldByName(provider.required(), pojo);
-                    recursiveFetch(newField, pojo);
+                    recursiveFetchField(newField, pojo);
                 }
-                fetch(field, pojo, resolver, provider);
+                fetchField(field, pojo, resolver, provider);
             }
         }
     }
 
-    private void fetch(Field field, Object pojo, Resolver resolver, Provider provider) {
+    private void fetchField(Field field, Object pojo, Resolver resolver, Provider provider) {
         if (field.getAnnotation(ProviderMap.class) != null) {
             Map<Dataprovider, String> providerMap = null;
             providerMap = (Map<Dataprovider, String>) reflectUtil.reflectionGet(field, pojo);
             if (providerMap == null) {
                 providerMap = new HashMap<>();
             }
-            String[] obj = fetchValue(field, resolver, provider, pojo);
+            String[] obj = fetchUrlWith(provider, resolver, pojo);
             if (obj != null && obj.length == 1) {
                 providerMap.put(provider.dataprovider(), obj[0]);
                 reflectUtil.reflectionSet(field, pojo, providerMap);
@@ -76,16 +76,10 @@ public class GenericFetcher<T> {
                 throw new IllegalArgumentException("Annotation Providermap can only fetch one value!");
             }
         } else {
-            String[] obj;
-            obj = fetchValue(field, resolver, provider, pojo);
+            String[] obj = fetchUrlWith(provider, resolver, pojo);
             reflectUtil.reflectionSet(field, pojo, String.valueOf(obj[0]));
         }
         processedFields.add(field.getName());
-    }
-
-    private String[] fetchValue(Field field, Resolver resolver, Provider provider, Object pojo) {
-        log.debug("Fetch field: {}", field.getName());
-        return fetchUrlWith(provider, resolver, pojo);
     }
 
     private String[] fetchUrlWith(Provider provider, Resolver resolver, Object pojo) {

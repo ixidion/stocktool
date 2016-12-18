@@ -9,13 +9,14 @@ task wrapper(type: Wrapper) {
 }
 
 repositories {
-    mavenCentral()
+    jcenter()
 }
 
 
 dependencies {
     testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.0.0-M3'
     testCompile 'org.hamcrest:java-hamcrest:2.0.0.0'
+    testCompile 'org.mockito:mockito-core:2.3.7'
     compile group: 'com.yahoofinance-api', name: 'YahooFinanceAPI', version: '3.5.0'
     compile 'org.jsoup:jsoup:1.10.1'
     compile 'org.ehcache:ehcache:3.1.3'

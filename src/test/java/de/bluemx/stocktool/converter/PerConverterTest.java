@@ -1,19 +1,15 @@
 package de.bluemx.stocktool.converter;
 
-import static org.hamcrest.collection.IsMapContaining.*;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
 import java.time.Year;
 import java.util.Map;
 
-import static org.hamcrest.collection.IsMapContaining.*;
-import static org.junit.jupiter.api.Assertions.*;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.collection.IsMapContaining.hasEntry;
 
+@SuppressWarnings("unchecked")
 public class PerConverterTest {
     @Test
     void convert() {
