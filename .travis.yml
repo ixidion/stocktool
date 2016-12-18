@@ -5,3 +5,4 @@ notifications:
   email:
     recipients:
       - ixidion@bluemx.de
+  slack: bluemx:YiKU3dUoKRKfio72VHr2OTMc
