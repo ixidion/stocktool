@@ -2,6 +2,7 @@ group 'de.bluemx'
 version '1.0-SNAPSHOT'
 
 apply plugin: 'java'
+apply plugin: 'idea'
 
 task wrapper(type: Wrapper) {
     gradleVersion = '3.2.1'
