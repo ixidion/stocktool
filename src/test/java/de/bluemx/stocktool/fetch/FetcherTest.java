@@ -20,8 +20,8 @@ class FetcherTest {
 
     @Test
     void fetch() {
-        Fetcher fetcher = new Fetcher();
-        StockQuoteData stock = fetcher.populateByIsin("1236136");
+        Fetcher fetcher = injector.getInstance(Fetcher.class);
+        StockQuoteData stock = fetcher.populateByIsin("DE000A1K0409");
 
     }
 

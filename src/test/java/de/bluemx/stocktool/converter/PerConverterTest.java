@@ -27,7 +27,7 @@ public class PerConverterTest {
     void convertBadParameter() {
         PerConverter conv = new PerConverter();
         Map<Year, BigDecimal> map = (Map<Year, BigDecimal>) conv.convert("2012e", "1,3", "2013", "1,5");
-        assertThat(map, not(hasEntry(Year.of(2012), BigDecimal.valueOf(1.3))));
+        assertThat(map, hasEntry(Year.of(2012), BigDecimal.valueOf(1.3)));
         assertThat(map, hasEntry(Year.of(2013), BigDecimal.valueOf(1.5)));
     }
 

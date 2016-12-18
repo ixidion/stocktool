@@ -8,7 +8,7 @@ import java.lang.annotation.RetentionPolicy;
 @Retention(value = RetentionPolicy.RUNTIME)
 public @interface Resolver {
 
-    String name();
+    String provider();
     Source source();
     Extract[] extractors();
     Class converterClass() default StringConverter.class;

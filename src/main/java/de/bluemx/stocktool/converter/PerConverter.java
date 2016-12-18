@@ -1,5 +1,6 @@
 package de.bluemx.stocktool.converter;
 
+import de.bluemx.stocktool.helper.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -7,12 +8,23 @@ import java.math.BigDecimal;
 import java.time.Year;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class PerConverter implements Conversion {
     final static Logger log = LoggerFactory.getLogger(PerConverter.class);
+    final static String digitPattern = "(\\d{4})";
+    final static String bigdecimalPattern = "\\d+[,.]\\d+";
+
+    private StringUtil stringUtil;
+
     Map<Year, BigDecimal> perMap = new HashMap<>();
+
+    PerConverter() {
+        stringUtil = new StringUtil();
+    }
+
     @Override
     public Object convert(String... strings) {
         if (strings != null) {
@@ -21,18 +33,18 @@ public class PerConverter implements Conversion {
                     Year year = null;
                     BigDecimal decimal = null;
                     // Extract year
-                    if (strings[i].matches("\\d{4}.*")) {
-                        Pattern pattern = Pattern.compile("(\\d{4}).*");
-                        Matcher match = pattern.matcher(strings[i]);
-                        String strYear = match.group();
-                        int intYear = Integer.parseInt(strYear);
+
+                    String extractedYear = stringUtil.extractPatternFromString(strings[i], digitPattern);
+
+                    if (extractedYear != null) {
+                        int intYear = Integer.parseInt(extractedYear);
                         year = Year.of(intYear);
                     } else {
                         log.error("Extraction of year '{}' failed.", strings[i]);
                     }
 
                     // Extract PER-Value
-                    if (strings[i+1].matches("\\d+[,.]\\d+")) {
+                    if (strings[i+1].matches(bigdecimalPattern)) {
                         String number = strings[i+1].replace(",", ".");
                         decimal = new BigDecimal(number);
                     } else {
