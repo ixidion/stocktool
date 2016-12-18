@@ -2,6 +2,7 @@ package de.bluemx.stocktool.fetch;
 
 import com.google.inject.Inject;
 import de.bluemx.stocktool.annotations.*;
+import de.bluemx.stocktool.converter.Conversion;
 import de.bluemx.stocktool.helper.ReflectionUtil;
 import de.bluemx.stocktool.helper.StringUtil;
 import org.slf4j.Logger;
@@ -56,30 +57,51 @@ public class GenericFetcher<T> {
                     recursiveFetchField(newField, pojo);
                 }
                 fetchField(field, pojo, resolver, provider);
+                if (reflectUtil.reflectionGet(field, pojo) != null) {
+                    break;
+                }
+                log.info("Fetching alternative for {} with Resolver {}", field.getName(), resolver.provider());
             }
         }
     }
 
     private void fetchField(Field field, Object pojo, Resolver resolver, Provider provider) {
         if (field.getAnnotation(ProviderMap.class) != null) {
-            Map<Dataprovider, String> providerMap = null;
-            providerMap = (Map<Dataprovider, String>) reflectUtil.reflectionGet(field, pojo);
-            if (providerMap == null) {
-                providerMap = new HashMap<>();
-            }
-            String[] obj = fetchUrlWith(provider, resolver, pojo);
-            if (obj != null && obj.length == 1) {
-                providerMap.put(provider.dataprovider(), obj[0]);
-                reflectUtil.reflectionSet(field, pojo, providerMap);
-            } else {
-                log.error("At Field {} - Reduce Extract Annotations to one.", field.getName());
-                throw new IllegalArgumentException("Annotation Providermap can only fetch one value!");
-            }
+            fetchProviderMap(field, pojo, resolver, provider);
         } else {
-            String[] obj = fetchUrlWith(provider, resolver, pojo);
-            reflectUtil.reflectionSet(field, pojo, String.valueOf(obj[0]));
+            fetchCommonField(field, pojo, resolver, provider);
         }
         processedFields.add(field.getName());
+    }
+
+    private void fetchCommonField(Field field, Object pojo, Resolver resolver, Provider provider) {
+        try {
+            String[] strArr = fetchUrlWith(provider, resolver, pojo);
+            Conversion converter = reflectUtil.getConverter(resolver);
+            Object obj = converter.convert(strArr);
+            reflectUtil.reflectionSet(field, pojo, obj);
+        } catch (ValidationException e) {
+            log.error("Please check the Definition of field {}. Actual value: {} Expected value: {}",
+                    field.getName(), e.getActual(), e.getValidator().expected());
+        } catch (IllegalArgumentException e) {
+            log.error("Converter Error at field {} with Resolver {}. Error-Msg: {}", field, resolver, e.getMessage());
+        }
+    }
+
+    private void fetchProviderMap(Field field, Object pojo, Resolver resolver, Provider provider) {
+        Map<Dataprovider, String> providerMap = null;
+        providerMap = (Map<Dataprovider, String>) reflectUtil.reflectionGet(field, pojo);
+        if (providerMap == null) {
+            providerMap = new HashMap<>();
+        }
+        String[] obj = fetchUrlWith(provider, resolver, pojo);
+        if (obj != null && obj.length == 1) {
+            providerMap.put(provider.dataprovider(), obj[0]);
+            reflectUtil.reflectionSet(field, pojo, providerMap);
+        } else {
+            log.error("At Field {} - Reduce Extract Annotations to one.", field.getName());
+            throw new IllegalArgumentException("Annotation Providermap can only fetch one value!");
+        }
     }
 
     private String[] fetchUrlWith(Provider provider, Resolver resolver, Object pojo) {

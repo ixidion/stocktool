@@ -5,6 +5,7 @@ import de.bluemx.stocktool.annotations.*;
 import de.bluemx.stocktool.helper.StringUtil;
 import org.jsoup.Connection;
 import org.jsoup.nodes.Document;
+import org.jsoup.select.Elements;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -43,6 +44,7 @@ public class UrlFetcher {
         try {
             if (source.equals(Source.RESPONSE)) {
                 Document doc = con.get();
+                validateResponse(doc, resolver);
                 return extractFromResponse(doc, resolver);
             } else if (source.equals(Source.URL)){
                 // After forwarding to new page
@@ -58,11 +60,24 @@ public class UrlFetcher {
         }
     }
 
+    private void validateResponse(Document doc, Resolver resolver) {
+        List<String> results = new ArrayList<>();
+        for (Validate validator : resolver.validators()) {
+            String extract = doc.select(validator.expression()).first().text();
+            if (!extract.equals(validator.expected())) {
+                throw new ValidationException("Validation failed.", validator, extract);
+            }
+        }
+
+    }
+
     private String[] extractFromResponse(Document doc, Resolver resolver) {
         List<String> results = new ArrayList<>();
         for (Extract extractor : resolver.extractors()) {
-            String extract = doc.select(extractor.expression()).first().text();
-            results.add(extract);
+            Elements select = doc.select(extractor.expression());
+            if (select.size() > 0) {
+                results.add(select.first().text());
+            }
         }
         return results.toArray(new String[results.size()]);
 

@@ -30,6 +30,7 @@ class FetcherTest {
     {
         urlToFile.put("http://www.onvista.de/suche/?searchValue=DE000A1K0409", "http://www.onvista.de/aktien/PFERDEWETTEN-DE-AG-Aktie-DE000A1K0409");
         urlToFile.put("http://www.onvista.de/aktien/PFERDEWETTEN-DE-AG-Aktie-DE000A1K0409", "/onvista_test.htm");
+        urlToFile.put("http://www.onvista.de/aktien/fundamental/PFERDEWETTEN-DE-AG-Aktie-DE000A1K0409", "/onvista_test_fundamental.htm");
     }
 
     @BeforeEach
@@ -41,7 +42,7 @@ class FetcherTest {
             when(con.response()).thenReturn(response);
             when(con.userAgent(any())).thenReturn(con);
             when(con.timeout(anyInt())).thenReturn(con);
-            if (!entry.getKey().equals("http://www.onvista.de/suche/?searchValue=DE000A1K0409")) {
+            if (!entry.getKey().equals(searchUrl)) {
                 when(response.url()).thenReturn(new URL(entry.getKey()));
                 // File Access
                 InputStream is = this.getClass().getResourceAsStream(entry.getValue());

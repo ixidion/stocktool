@@ -12,4 +12,6 @@ public @interface Resolver {
     Source source();
     Extract[] extractors();
     Class converterClass() default StringConverter.class;
+
+    Validate[] validators() default {};
 }

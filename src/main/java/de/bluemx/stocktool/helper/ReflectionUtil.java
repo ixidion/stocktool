@@ -1,6 +1,8 @@
 package de.bluemx.stocktool.helper;
 
 import com.google.inject.Singleton;
+import de.bluemx.stocktool.annotations.Resolver;
+import de.bluemx.stocktool.converter.Conversion;
 
 import java.lang.reflect.Field;
 
@@ -29,6 +31,16 @@ public class ReflectionUtil {
         try {
             return obj.getClass().getField(name);
         } catch (NoSuchFieldException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public Conversion getConverter(Resolver resolver) {
+        try {
+            return (Conversion) resolver.converterClass().newInstance();
+        } catch (InstantiationException e) {
+            throw new RuntimeException(e);
+        } catch (IllegalAccessException e) {
             throw new RuntimeException(e);
         }
     }
