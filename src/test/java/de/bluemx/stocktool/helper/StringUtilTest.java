@@ -1,11 +1,10 @@
 package de.bluemx.stocktool.helper;
 
-import com.google.inject.Inject;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class StringUtilTest {
 
@@ -26,7 +25,7 @@ class StringUtilTest {
         String result = "TEXT1 TEXT2 TEXT3";
         String replacement = "TEXT2";
         String actual = stringUtil.replacePlaceholder(testString, search, replacement);
-        Assertions.assertEquals(result, actual);
+        assertEquals(result, actual);
     }
 
     /**

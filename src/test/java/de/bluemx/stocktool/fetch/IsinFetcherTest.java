@@ -1,5 +1,6 @@
 package de.bluemx.stocktool.fetch;
 
+import de.bluemx.stocktool.model.StockQuoteData;
 import de.bluemx.stocktool.model.TestData1;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
@@ -8,10 +9,13 @@ import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.math.BigDecimal;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.collection.IsMapContaining.hasValue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
@@ -25,6 +29,7 @@ class IsinFetcherTest {
 
     Map<String, String> urlToFile = new HashMap<>();
     GenericFetcher<TestData1> testdata1Fetcher;
+    GenericFetcher<StockQuoteData> stockquoteFetcher;
 
     {
         urlToFile.put("http://www.onvista.de/suche/?searchValue=DE000A1K0409", "http://www.onvista.de/aktien/PFERDEWETTEN-DE-AG-Aktie-DE000A1K0409");
@@ -55,6 +60,7 @@ class IsinFetcherTest {
 
         UrlFetcher urlFetcher = new UrlFetcher(jsoup);
         testdata1Fetcher = new GenericFetcher<>(urlFetcher);
+        stockquoteFetcher = new GenericFetcher<>(urlFetcher);
     }
 
     @Test
@@ -63,8 +69,28 @@ class IsinFetcherTest {
         testdata = testdata1Fetcher.process(testdata);
         assertEquals("EMH1", testdata.getSymbol());
         assertEquals("PFERDEWETTEN.DE AG Aktie", testdata.getStockname());
-        assertEquals("PFERDEWETTEN.DE AG Aktiej", testdata.getStockname());
+        assertThat(testdata.getUrlParts(), hasValue("PFERDEWETTEN-DE-AG-Aktie-DE000A1K0409"));
+        assertEquals("PFERDEWETTEN.DE AG Aktie", testdata.getStockname());
+        assertEquals(new BigDecimal("34.17"), testdata.getRoe());
+        assertEquals(new BigDecimal("28.35"), testdata.getEbitMargin());
+        assertEquals(new BigDecimal("73.83"), testdata.getEquityRatio());
+    }
 
+    /**
+     * A separate Fetcher for Stockquote data, because it can change over time.
+     * The testdata Fetcher is more experimental.
+     */
+    @Test
+    void fetchStockquoteData() {
+        StockQuoteData testdata = new StockQuoteData("DE000A1K0409");
+        testdata = stockquoteFetcher.process(testdata);
+        assertEquals("EMH1", testdata.getSymbol());
+        assertEquals("PFERDEWETTEN.DE AG Aktie", testdata.getStockname());
+        assertThat(testdata.getUrlParts(), hasValue("PFERDEWETTEN-DE-AG-Aktie-DE000A1K0409"));
+        assertEquals("PFERDEWETTEN.DE AG Aktie", testdata.getStockname());
+        assertEquals(new BigDecimal("34.17"), testdata.getRoe());
+        assertEquals(new BigDecimal("28.35"), testdata.getEbitMargin());
+        assertEquals(new BigDecimal("73.83"), testdata.getEquityRatio());
     }
 
 

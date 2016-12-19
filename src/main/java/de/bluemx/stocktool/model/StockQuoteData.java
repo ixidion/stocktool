@@ -129,4 +129,87 @@ public class StockQuoteData {
         this.isin = isin;
     }
 
+    public String getStockname() {
+        return stockname;
+    }
+
+    public String getIsin() {
+        return isin;
+    }
+
+    public Map<Dataprovider, String> getUrlParts() {
+        return urlParts;
+    }
+
+    public Map<Dataprovider, String> getHistoryParts() {
+        return historyParts;
+    }
+
+    public String getSymbol() {
+        return symbol;
+    }
+
+    public LocalDate getFetchDate() {
+        return fetchDate;
+    }
+
+    public BigDecimal getRoe() {
+        return roe;
+    }
+
+    public BigDecimal getEbitMargin() {
+        return ebitMargin;
+    }
+
+    public BigDecimal getEquityRatio() {
+        return equityRatio;
+    }
+
+    public Map<Year, String> getPer() {
+        return per;
+    }
+
+    public String getAnalystsOpinion() {
+        return analystsOpinion;
+    }
+
+    public String getAnalystsCount() {
+        return analystsCount;
+    }
+
+    public String getQuote() {
+        return quote;
+    }
+
+    public String[] getQuarterQuote() {
+        return quarterQuote;
+    }
+
+    public String[] getQuarterQuoteIndex() {
+        return quarterQuoteIndex;
+    }
+
+    public String getEarningsRevision() {
+        return earningsRevision;
+    }
+
+    public String getStockPriceHalfYear() {
+        return stockPriceHalfYear;
+    }
+
+    public String getStockPriceYear() {
+        return stockPriceYear;
+    }
+
+    public String[] getThreeMonthReversal() {
+        return threeMonthReversal;
+    }
+
+    public String getEpsLY() {
+        return epsLY;
+    }
+
+    public String getEpsAY() {
+        return epsAY;
+    }
 }
