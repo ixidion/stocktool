@@ -63,7 +63,7 @@ class IsinFetcherTest {
         testdata = testdata1Fetcher.process(testdata);
         assertEquals("EMH1", testdata.getSymbol());
         assertEquals("PFERDEWETTEN.DE AG Aktie", testdata.getStockname());
-        assertEquals("PFERDEWETTEN.DE AG Aktie", testdata.getStockname());
+        assertEquals("PFERDEWETTEN.DE AG Aktiej", testdata.getStockname());
 
     }
 
