@@ -2,7 +2,6 @@ package de.bluemx.stocktool.fetch;
 
 import com.google.inject.Inject;
 import de.bluemx.stocktool.annotations.*;
-import de.bluemx.stocktool.helper.StringUtil;
 import org.jsoup.Connection;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
@@ -13,16 +12,16 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static de.bluemx.stocktool.helper.StringUtil.extractPatternFromString;
+
 public class UrlFetcher {
     final static Logger log = LoggerFactory.getLogger(UrlFetcher.class);
 
     private JsoupWrapper jsoup;
-    private StringUtil stringUtil;
 
     @Inject
-    public UrlFetcher(JsoupWrapper jsoup, StringUtil stringUtil) {
+    public UrlFetcher(JsoupWrapper jsoup) {
         this.jsoup = jsoup;
-        this.stringUtil = stringUtil;
     }
 
     public String[] urlFetch(String url, Provider provider, Resolver resolver, Object obj) {
@@ -89,7 +88,7 @@ public class UrlFetcher {
             Extract extractor = resolver.extractors()[0];
             if (extractor.searchType().equals(SearchType.REGEXP)) {
                 String[] strArray = new String[1];
-                strArray[0] = stringUtil.extractPatternFromString(resultingUrl, extractor.expression());
+                strArray[0] = extractPatternFromString(resultingUrl, extractor.expression());
 
                 return strArray;
             }

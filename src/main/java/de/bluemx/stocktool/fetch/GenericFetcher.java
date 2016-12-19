@@ -3,7 +3,6 @@ package de.bluemx.stocktool.fetch;
 import com.google.inject.Inject;
 import de.bluemx.stocktool.annotations.*;
 import de.bluemx.stocktool.converter.Conversion;
-import de.bluemx.stocktool.helper.ReflectionUtil;
 import de.bluemx.stocktool.helper.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,21 +14,21 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import static de.bluemx.stocktool.helper.ReflectionUtil.*;
+import static de.bluemx.stocktool.helper.StringUtil.replacePlaceholder;
+
 public class GenericFetcher<T> {
 
     final static Logger log = LoggerFactory.getLogger(GenericFetcher.class);
 
     private Provider[] providers;
     private UrlFetcher urlFetcher;
-    private ReflectionUtil reflectUtil;
     private StringUtil stringUtil;
     private Set<String> processedFields = new HashSet<>();
 
     @Inject
-    public GenericFetcher(UrlFetcher urlFetcher, ReflectionUtil reflectUtil, StringUtil stringUtil) {
+    public GenericFetcher(UrlFetcher urlFetcher) {
         this.urlFetcher = urlFetcher;
-        this.reflectUtil = reflectUtil;
-        this.stringUtil = stringUtil;
     }
 
     public <T> T process(T pojo) {
@@ -57,7 +56,7 @@ public class GenericFetcher<T> {
                     recursiveFetchField(newField, pojo);
                 }
                 fetchField(field, pojo, resolver, provider);
-                if (reflectUtil.reflectionGet(field, pojo) != null) {
+                if (reflectionGet(field, pojo) != null) {
                     break;
                 }
                 log.info("Fetching alternative for {} with Resolver {}", field.getName(), resolver.provider());
@@ -77,9 +76,9 @@ public class GenericFetcher<T> {
     private void fetchCommonField(Field field, Object pojo, Resolver resolver, Provider provider) {
         try {
             String[] strArr = fetchUrlWith(provider, resolver, pojo);
-            Conversion converter = reflectUtil.getConverter(resolver);
+            Conversion converter = getConverter(resolver);
             Object obj = converter.convert(strArr);
-            reflectUtil.reflectionSet(field, pojo, obj);
+            reflectionSet(field, pojo, obj);
         } catch (ValidationException e) {
             log.error("Please check the Definition of field {}. Actual value: {} Expected value: {}",
                     field.getName(), e.getActual(), e.getValidator().expected());
@@ -90,14 +89,14 @@ public class GenericFetcher<T> {
 
     private void fetchProviderMap(Field field, Object pojo, Resolver resolver, Provider provider) {
         Map<Dataprovider, String> providerMap = null;
-        providerMap = (Map<Dataprovider, String>) reflectUtil.reflectionGet(field, pojo);
+        providerMap = (Map<Dataprovider, String>) reflectionGet(field, pojo);
         if (providerMap == null) {
             providerMap = new HashMap<>();
         }
         String[] obj = fetchUrlWith(provider, resolver, pojo);
         if (obj != null && obj.length == 1) {
             providerMap.put(provider.dataprovider(), obj[0]);
-            reflectUtil.reflectionSet(field, pojo, providerMap);
+            reflectionSet(field, pojo, providerMap);
         } else {
             log.error("At Field {} - Reduce Extract Annotations to one.", field.getName());
             throw new IllegalArgumentException("Annotation Providermap can only fetch one value!");
@@ -114,7 +113,7 @@ public class GenericFetcher<T> {
     private String createResultingUrl(String url, Map<String, String> variablesList) {
         String finishedUrl = url;
         for (String variableKey : variablesList.keySet()) {
-            finishedUrl = stringUtil.replacePlaceholder(finishedUrl, variableKey, variablesList.get(variableKey));
+            finishedUrl = replacePlaceholder(finishedUrl, variableKey, variablesList.get(variableKey));
         }
         log.info("Created URL: {}", finishedUrl);
         return finishedUrl;
@@ -126,7 +125,7 @@ public class GenericFetcher<T> {
         for (Variable variable : variableAnnotations) {
             Field field = getFieldByName(variable.source(), pojo);
             if (field.getType().equals(Map.class)) {
-                Map<Dataprovider, String> configMap = (Map) reflectUtil.reflectionGet(field, pojo);
+                Map<Dataprovider, String> configMap = (Map) reflectionGet(field, pojo);
                 if (configMap != null) {
                     String variableValue = configMap.get(provider.dataprovider());
                     resultingVariables.put(variable.key(), variableValue);
@@ -135,7 +134,7 @@ public class GenericFetcher<T> {
                             String.format("Definition is wrong. Field %s requested, but is null.", variable.source()));
                 }
             } else if (field.getType().equals(String.class)) {
-                String variableValue = (String) reflectUtil.reflectionGet(field, pojo);
+                String variableValue = (String) reflectionGet(field, pojo);
                 resultingVariables.put(variable.key(), variableValue);
             } else {
                 throw new IllegalArgumentException("Definition is wrong.");

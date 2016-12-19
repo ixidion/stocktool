@@ -1,8 +1,6 @@
 package de.bluemx.stocktool.fetch;
 
-import de.bluemx.stocktool.helper.ReflectionUtil;
-import de.bluemx.stocktool.helper.StringUtil;
-import de.bluemx.stocktool.model.StockQuoteData;
+import de.bluemx.stocktool.model.TestData1;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.junit.jupiter.api.BeforeEach;
@@ -14,18 +12,19 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-class FetcherTest {
+class IsinFetcherTest {
 
     static String searchUrl = "http://www.onvista.de/suche/?searchValue=DE000A1K0409";
     static String returnUrl = "http://www.onvista.de/aktien/PFERDEWETTEN-DE-AG-Aktie-DE000A1K0409";
 
     Map<String, String> urlToFile = new HashMap<>();
-    Fetcher fetcher;
+    GenericFetcher<TestData1> testdata1Fetcher;
 
     {
         urlToFile.put("http://www.onvista.de/suche/?searchValue=DE000A1K0409", "http://www.onvista.de/aktien/PFERDEWETTEN-DE-AG-Aktie-DE000A1K0409");
@@ -54,14 +53,17 @@ class FetcherTest {
         }
 
 
-        UrlFetcher urlFetcher = new UrlFetcher(jsoup, new StringUtil());
-        GenericFetcher<StockQuoteData> genericFetcher = new GenericFetcher<>(urlFetcher, new ReflectionUtil(), new StringUtil());
-        fetcher = new Fetcher(genericFetcher);
+        UrlFetcher urlFetcher = new UrlFetcher(jsoup);
+        testdata1Fetcher = new GenericFetcher<>(urlFetcher);
     }
 
     @Test
     void fetch() {
-        StockQuoteData stock = fetcher.populateByIsin("DE000A1K0409");
+        TestData1 testdata = new TestData1("DE000A1K0409");
+        testdata = testdata1Fetcher.process(testdata);
+        assertEquals("EMH1", testdata.getSymbol());
+        assertEquals("PFERDEWETTEN.DE AG Aktie", testdata.getStockname());
+        assertEquals("PFERDEWETTEN.DE AG Aktie", testdata.getStockname());
 
     }
 

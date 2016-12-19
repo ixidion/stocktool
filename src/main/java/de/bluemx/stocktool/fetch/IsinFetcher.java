@@ -6,13 +6,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 
-public class Fetcher {
-    final static Logger log = LoggerFactory.getLogger(Fetcher.class);
+public class IsinFetcher {
+    final static Logger log = LoggerFactory.getLogger(IsinFetcher.class);
 
     private GenericFetcher<StockQuoteData> genericFetcher;
 
     @Inject
-    public Fetcher(GenericFetcher<StockQuoteData> genericFetcher) {
+    public IsinFetcher(GenericFetcher<StockQuoteData> genericFetcher) {
         this.genericFetcher = genericFetcher;
     }
 
