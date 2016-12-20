@@ -85,9 +85,8 @@ class IsinFetcherTest {
         StockQuoteData testdata = new StockQuoteData("DE000A1K0409");
         testdata = stockquoteFetcher.process(testdata);
         assertEquals("EMH1", testdata.getSymbol());
-        assertEquals("PFERDEWETTEN.DE AG Aktie", testdata.getStockname());
+        assertEquals("PFERDEWETTEN.DE AG", testdata.getStockname());
         assertThat(testdata.getUrlParts(), hasValue("PFERDEWETTEN-DE-AG-Aktie-DE000A1K0409"));
-        assertEquals("PFERDEWETTEN.DE AG Aktie", testdata.getStockname());
         assertEquals(new BigDecimal("34.17"), testdata.getRoe());
         assertEquals(new BigDecimal("28.35"), testdata.getEbitMargin());
         assertEquals(new BigDecimal("73.83"), testdata.getEquityRatio());

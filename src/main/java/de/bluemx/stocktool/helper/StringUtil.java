@@ -52,4 +52,28 @@ public class StringUtil {
         return null;
     }
 
+    /**
+     * Extract all group hits of the given pattern from a given text.
+     *
+     * @param text
+     * @param pattern
+     * @return The found Strings or null, if nothing found
+     */
+    public static String[] extractPatternGroupsFromString(String text, String pattern) {
+        Pattern p = Pattern.compile(pattern);
+        Matcher m = p.matcher(text);
+        String[] retStr;
+
+        if (m.find()) {
+            retStr = new String[m.groupCount()];
+            for (int i = 1; i <= m.groupCount(); i++) {
+                log.debug("Found Regexp '{}'", m.group(1));
+                retStr[i - 1] = m.group(i);
+            }
+            return retStr;
+        }
+        log.error("Regexp '{}' in String '{}' not found.", pattern, text);
+        return null;
+    }
+
 }

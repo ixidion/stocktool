@@ -19,7 +19,7 @@ import java.util.Map;
                 required = "urlParts")})
 public class TestData1 {
     @Resolvers({@Resolver(provider = "onvista-basic",
-            extractors = {@Extract(searchType = SearchType.XPath, expression = "a.INSTRUMENT")},
+            extractors = {@Extract(searchType = SearchType.Selector, expression = "a.INSTRUMENT")},
             source = Source.RESPONSE)})
     private String stockname = "";
 
@@ -39,7 +39,7 @@ public class TestData1 {
 
 
     @Resolvers({@Resolver(provider = "onvista-basic",
-            extractors = {@Extract(searchType = SearchType.XPath, expression = "div.WERTPAPIER_DETAILS > dl:nth-of-type(2) > dd")},
+            extractors = {@Extract(searchType = SearchType.Selector, expression = "div.WERTPAPIER_DETAILS > dl:nth-of-type(2) > dd")},
             source = Source.RESPONSE)})
     private String symbol;
     private LocalDate fetchDate = LocalDate.now();
@@ -47,7 +47,7 @@ public class TestData1 {
     // Return of Equity
     // No 1
     @Resolvers({@Resolver(provider = "onvista-fundamental",
-            extractors = {@Extract(searchType = SearchType.XPath, expression = "article.KENNZAHLEN table:nth-of-type(8) tbody tr:nth-of-type(4) td:nth-of-type(5)")},
+            extractors = {@Extract(searchType = SearchType.Selector, expression = "article.KENNZAHLEN table:nth-of-type(8) tbody tr:nth-of-type(4) td:nth-of-type(5)")},
             source = Source.RESPONSE,
             converterClass = BigDecimalConverter.class,
             validators = {@Validate(expression = "article.KENNZAHLEN table th.ZAHL", expected = "2018e"),
@@ -57,7 +57,7 @@ public class TestData1 {
     // EBIT-Margin
     // No 2
     @Resolvers({@Resolver(provider = "onvista-fundamental",
-            extractors = {@Extract(searchType = SearchType.XPath, expression = "article.KENNZAHLEN table:nth-of-type(8) tbody tr:nth-of-type(2) td:nth-of-type(5)")},
+            extractors = {@Extract(searchType = SearchType.Selector, expression = "article.KENNZAHLEN table:nth-of-type(8) tbody tr:nth-of-type(2) td:nth-of-type(5)")},
             source = Source.RESPONSE,
             converterClass = BigDecimalConverter.class,
             validators = {@Validate(expression = "article.KENNZAHLEN table th.ZAHL", expected = "2018e"),
@@ -67,7 +67,7 @@ public class TestData1 {
     // Equity Ratio
     // No 3
     @Resolvers({@Resolver(provider = "onvista-fundamental",
-            extractors = {@Extract(searchType = SearchType.XPath, expression = "article.KENNZAHLEN table:nth-of-type(6) tbody tr:nth-of-type(2) td:nth-of-type(5)")},
+            extractors = {@Extract(searchType = SearchType.Selector, expression = "article.KENNZAHLEN table:nth-of-type(6) tbody tr:nth-of-type(2) td:nth-of-type(5)")},
             source = Source.RESPONSE,
             converterClass = BigDecimalConverter.class,
             validators = {@Validate(expression = "article.KENNZAHLEN table th.ZAHL", expected = "2018e"),
