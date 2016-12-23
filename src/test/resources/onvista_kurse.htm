@@ -1,0 +1,2201 @@
+<!DOCTYPE html>
+<html lang="de" class="no-js">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta charset="utf-8">
+    <meta name="Publisher" content="OnVista Media GmbH"/>
+    <meta name="Copyright" content="OnVista Media GmbH"/>
+    <meta name="page-topic" content="Börse/Finanzen"/>
+    <meta name="page-type" content="Portal"/>
+    <meta name="audience" content="Alle"/>
+    <meta name="language" content="de"/>
+    <meta property="og:image" content="http://s.onvista.de/img/logos/ov_logo_400x400Neu.png"/>
+    <meta property="fb:app_id" content="130755253636388"/>
+    <meta property="fb:pages" content="126427804636"/>
+    <title>Kurshistorie - OnVista</title>
+    <meta name="description" content=""/>
+    <meta name="robots" content="noindex"/>
+    <!--[if lte IE 9]>
+    <link rel="stylesheet" href="//s.onvista.de/css-67943/web/portal/nl/onvistaIE.css">
+    <link rel="stylesheet" href="//s.onvista.de/css-67943/web/portal/nl/ie.css"> <![endif]-->
+    <!--[if (gt IE 9)|!(IE)]><!-->
+    <link rel="stylesheet" href="//s.onvista.de/css-67943/web/portal/nl/onvista.css"> <!--<![endif]--> <!--[if lt IE 9]>
+    <link href="//s.onvista.de/css-67943/web/portal/nl/layout_img/icons_shrinked/icons.fallback.css" rel="stylesheet">
+    <![endif]-->  <!--[if lt IE 9]>
+    <script src="//script.ioam.de/iam.js"></script> <![endif]-->
+    <link rel="search" type="application/opensearchdescription+xml" title="OnVista"
+          href="http://www.onvista.de/service/searchplugin.xml">
+    <link rel="shortcut icon" href="//s.onvista.de/css-67943/web/portal/nl/layout_img/favicon.ico">
+    <link rel="apple-touch-icon" href="//s.onvista.de/css-67943/web/portal/nl/layout_img/apple-touch-icon.png">
+    <link href="//fonts.googleapis.com/css?family=PT+Sans:400,700" rel="stylesheet">
+    <link rel="stylesheet" href="//s.onvista.de/css-67943/web/portal/nl/popups.css">
+    <link rel="canonical" href="http://www.onvista.de/onvista/times+sales/popup/historische-kurse/">
+    <link rel="alternate" media="only screen and (max-width: 640px)" href="http://m.onvista.de">
+    <script src="//s.onvista.de/static/libs-67876.js"></script>
+    <script> if (typeof jQuery == 'undefined') {
+        document.write(unescape("%3Cscript src='//s.onvista.de/js-67876/base/src/lib/jquery.js'%3E%3C/script%3E"));
+    }
+    if (typeof require == 'undefined') {
+        document.write(unescape("%3Cscript src='//s.onvista.de/js-67876/base/src/lib/require.js'%3E%3C/script%3E"));
+    } </script>
+    <script> require.config({
+        baseUrl: "//s.onvista.de/js-67876",
+        paths: {
+            "ivw": "//script.ioam.de/iam",
+            "conversion_async": "//www.googleadservices.com/pagead/conversion_async",
+            "base": "base/src",
+            "web": "web/src",
+            "mobile": "mobile/src",
+            "templates": "/templates",
+            "jquery": "//s.onvista.de/js-67876/base/src/lib/jquery",
+            "OnVista": "//s.onvista.de/js-67876/base/src/lib/OnVista",
+            "jqueryui": "//s.onvista.de/js-67876/base/src/lib/jquery-ui",
+            "unveil": "//s.onvista.de/js-67876/base/src/lib/jQueryUnveil",
+            "moment_timezone": "//s.onvista.de/js-67876/base/src/lib/moment-timezone-with-data",
+            "moment": "//s.onvista.de/js-67876/base/src/lib/moment",
+            "modernizr": "//s.onvista.de/js-67876/base/src/lib/modernizr",
+            "mustache": "//s.onvista.de/js-67876/base/src/lib/mustache",
+            "jqueryCookie": "//s.onvista.de/js-67876/base/src/lib/jquery.cookie",
+            "jqueryColor": "//s.onvista.de/js-67876/base/src/lib/jquery.color",
+            "underscore": "//s.onvista.de/js-67876/base/src/lib/underscore",
+            "backbone": "//s.onvista.de/js-67876/base/src/lib/backbone",
+            "backbone-localStorage": "//s.onvista.de/js-67876/base/src/lib/backbone.localStorage",
+            "has": "//s.onvista.de/js-67876/base/src/lib/has",
+            "highstock": "//s.onvista.de/js-67876/base/src/lib/highstock.src",
+            "highstockMore": "//s.onvista.de/js-67876/base/src/lib/highcharts-more.src",
+            "D3Charts": "//s.onvista.de/js-67876/base/src/lib/d3",
+            "realpush": "//i.onvista.de/push/files/js-api/1.6.x/mdg_js_api",
+            "jsuri": "//s.onvista.de/js-67876/base/src/lib/jsuri-1.1.1",
+            "jqrange": "//s.onvista.de/js-67876/base/src/lib/jquery.nouislider",
+            "jquery.vmap": "//s.onvista.de/js-67876/base/src/lib/jquery.vmap",
+            "jquery.vmap.world": "//s.onvista.de/js-67876/base/src/lib/maps/jquery.vmap.world",
+            "waypoints": "//s.onvista.de/js-67876/base/src/lib/waypoints",
+            "text": "//s.onvista.de/js-67876/text",
+            "order": "//s.onvista.de/js-67876/order",
+            "domReady": "//s.onvista.de/js-67876/domReady",
+            "jwplayer": "//s.onvista.de/js-67876/base/src/lib/jwplayer",
+            "jwplayer.html5": "//s.onvista.de/js-67876/base/src/lib/jwplayer.html5",
+            "lightbox": "https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.8.1/js/lightbox",
+            "featureConfig": "//www.onvista.de/boxes/featureConfig"
+        },
+        shim: {
+            "jqueryui": {deps: ["jquery"], exports: "jqueryui"},
+            "base/OnVista": {deps: ["OnVista"],},
+            "web/OnVista": {deps: ["OnVista"],},
+            "jquery.vmap": {deps: ["jquery"]},
+            "jquery.vmap.world": {deps: ["jquery.vmap"]},
+            "moment": {deps: ["moment_timezone"]}
+        }
+    }); </script>
+    <script> require(['moment', 'moment_timezone', 'base/OnVista'], function (moment) {
+        OnVista.Config.isPrintView = false;
+        OnVista.Config.Timestamp = '1482493328';
+        moment.locale('de', OnVista.Config.momentOptions);
+        moment.tz.setDefault("Europe/Berlin");
+    }); </script>
+    <script> OnVista.AbTest.currentVariant = ''; </script>
+    <script> require(['web/Legacy']);
+    sas_pageid = '39359/(suche_onvista_smart-Suchlayer)';
+    sas_target = 'kw=onvistade;kw=suche;kw=breit;';
+    sas_tmstp = Math.round(Math.random() * 10000000000);
+    sas_masterflag = 1;
+    function SmartAdServer(sas_pageid, sas_formatid, sas_target) {
+        if (sas_masterflag == 1) {
+            sas_masterflag = 0;
+            sas_master = 'M';
+        } else {
+            sas_master = 'S';
+        }
+        ;
+        document.write('<scr' + 'ipt src="http://www4.smartadserver.com/call/pubj/' + sas_pageid + '/' + sas_formatid + '/' + sas_master + '/' + sas_tmstp + '/' + escape(sas_target) + '?"></scr' + 'ipt>');
+    }
+    var crtg_nid = "2110";
+    var crtg_cookiename = "cto_rtt";
+    var crtg_varname = "crtg_content";
+    function crtg_getCookie(c_name) {
+        var i, x, y, ARRCookies = document.cookie.split(";");
+        for (i = 0; i < ARRCookies.length; i++) {
+            x = ARRCookies[i].substr(0, ARRCookies[i].indexOf("="));
+            y = ARRCookies[i].substr(ARRCookies[i].indexOf("=") + 1);
+            x = x.replace(/^\s+|\s+$/g, "");
+            if (x == c_name) {
+                return unescape(y);
+            }
+        }
+        return '';
+    }
+    var crtg_content = crtg_getCookie(crtg_cookiename);
+    var crtg_rnd = Math.floor(Math.random() * 99999999999);
+    var crtg_url = location.protocol + '//rtax.criteo.com/delivery/rta/rta.js?netId=' + escape(crtg_nid);
+    crtg_url += '&cookieName=' + escape(crtg_cookiename);
+    crtg_url += '&rnd=' + crtg_rnd;
+    crtg_url += '&varName=' + escape(crtg_varname);
+    var crtg_script = document.createElement('script');
+    crtg_script.src = crtg_url;
+    crtg_script.async = true;
+    if (document.getElementsByTagName("head").length > 0) document.getElementsByTagName("head")[0].appendChild(crtg_script); else if (document.getElementsByTagName("body").length > 0) document.getElementsByTagName("body")[0].appendChild(crtg_script);  </script>
+    <!--[if IE]>
+    <script> require(['web/ie/DefineAsHomepageView'], function () {
+        view = new OnVista.Web.Ie.DefineAsHomepageView();
+        view.render();
+    }); </script> <![endif]--> <!--[if lt IE 9]>
+    <script src="//s.onvista.de/js-67876/base/src/lib/jquery.extended.js"></script> <![endif]--> <!--[if lt IE 8]>
+    <script> require('web/ie'); </script> <![endif]-->
+    <script type="text/javascript"> var myTipsInitiated = false;
+    function initMyTips() {
+        if (myTipsInitiated == true) {
+            return
+        }
+        myTipsInitiated = true;
+        !function (m, y, T, i, p, s) {
+            m[T[1]] && m[T[1]][T[2]] && m[T[1]][T[2]]();
+            m[T[0]] && m[T[0]].__ && m[T[0]].__[T[2]] && m[T[0]].__[T[2]]();
+            m[T[0]] = function (onReadyHandler) {
+                var l = m[T[0]], n = 'onReadyStack', h = onReadyHandler;
+                (l[n] || (l[n] = [])) && typeof h === 'function' && l[n].push(h)
+            };
+            m[T[0]].__ = {
+                setup: {api_key: 'c815b8a031fe2ef04f33f3705879c032dbd8f647'},
+                version: '1.3.1',
+                apiCallStack: []
+            };
+            ['showTutorialList', 'startTutorial', 'withActiveTutorial'].forEach(function (mn) {
+                m[T[0]][mn] = function () {
+                    m[T[0]].__.apiCallStack.push([mn, arguments])
+                }
+            });
+            s = y.createElement('script'), s.type = 'text/javascript', s.src = 'https://mytips.co/webclient/loader.js', s.async = !0, y.getElementsByTagName('head').item(0).appendChild(s)
+        }(window, document, 'myTips|myTipsApp|destroy'.split('|'));
+    } </script>
+</head>
+<body class="POPUP ">
+<script> var iam_data = {"st": "onvis", "cp": "ONV_HISTORICALQUOTE_POPUP", "sv": "in"};
+require(["ivw"], function () {
+    if (typeof iom != 'undefined') {
+        iom.c(iam_data, 1);
+    }
+}); </script>
+<img class="PRINT_HEADER" src="//s.onvista.de/css-67943/web/portal/nl/layout_img/onvistaLogos/logo_onvista_print.gif"
+     width="130" height="40" alt="">
+<header><span class="icon-ovLogo">OnVista</span> <a class="FENSTER_SCHLIESSEN" href="javascript:self.close();">Fenster
+    schließen</a></header>
+<div class="INHALT WEBSEITE">
+    <article class="TIMESANDSALES HISTORISCHE_DATEN"><h1 class="BOX_HEADLINE">Historische Kurse (Xetra)</h1>
+        <div class="SEITEN_FUNKTIONEN"><a href="javascript:window.print();" class="DRUCK_VERSION">Drucken</a><a
+                href="/onvista/boxes/historicalquote/export.csv?notationId=137936818&amp;dateStart=22.12.2015&amp;interval=Y1"
+                class="DOWNLOAD">CSV exportieren</a></div>
+        <table>
+            <thead>
+            <tr>
+                <th class="ZAHL">Datum</th>
+                <th class="ZAHL">Eröffnung</th>
+                <th class="ZAHL">Hoch</th>
+                <th class="ZAHL">Tief</th>
+                <th class="ZAHL">Schluss</th>
+                <th class="ZAHL">Volumen</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td class="ZAHL">
+                    <time datetime="2015-12-22"><span>22.12.2015</span></time>
+                </td>
+                <td class="ZAHL"> 5,509</td>
+                <td class="ZAHL"> 5,509</td>
+                <td class="ZAHL"> 5,509</td>
+                <td class="ZAHL"> 5,509</td>
+                <td class="ZAHL"> 547</td>
+            </tr>
+            <tr class="HERVORGEHOBEN">
+                <td class="ZAHL">
+                    <time datetime="2015-12-28"><span>28.12.2015</span></time>
+                </td>
+                <td class="ZAHL"> 5,301</td>
+                <td class="ZAHL"> 5,301</td>
+                <td class="ZAHL"> 5,301</td>
+                <td class="ZAHL"> 5,301</td>
+                <td class="ZAHL"> 166</td>
+            </tr>
+            <tr>
+                <td class="ZAHL">
+                    <time datetime="2015-12-30"><span>30.12.2015</span></time>
+                </td>
+                <td class="ZAHL"> 5,299</td>
+                <td class="ZAHL"> 5,299</td>
+                <td class="ZAHL"> 5,299</td>
+                <td class="ZAHL"> 5,299</td>
+                <td class="ZAHL"> 50</td>
+            </tr>
+            <tr class="HERVORGEHOBEN">
+                <td class="ZAHL">
+                    <time datetime="2016-01-04"><span>04.01.2016</span></time>
+                </td>
+                <td class="ZAHL"> 5,101</td>
+                <td class="ZAHL"> 5,101</td>
+                <td class="ZAHL"> 5,100</td>
+                <td class="ZAHL"> 5,100</td>
+                <td class="ZAHL"> 1.000</td>
+            </tr>
+            <tr>
+                <td class="ZAHL">
+                    <time datetime="2016-01-05"><span>05.01.2016</span></time>
+                </td>
+                <td class="ZAHL"> 5,199</td>
+                <td class="ZAHL"> 5,199</td>
+                <td class="ZAHL"> 5,199</td>
+                <td class="ZAHL"> 5,199</td>
+                <td class="ZAHL"> 21</td>
+            </tr>
+            <tr class="HERVORGEHOBEN">
+                <td class="ZAHL">
+                    <time datetime="2016-01-13"><span>13.01.2016</span></time>
+                </td>
+                <td class="ZAHL"> 4,900</td>
+                <td class="ZAHL"> 4,900</td>
+                <td class="ZAHL"> 4,900</td>
+                <td class="ZAHL"> 4,900</td>
+                <td class="ZAHL"> 586</td>
+            </tr>
+            <tr>
+                <td class="ZAHL">
+                    <time datetime="2016-01-14"><span>14.01.2016</span></time>
+                </td>
+                <td class="ZAHL"> 4,801</td>
+                <td class="ZAHL"> 4,850</td>
+                <td class="ZAHL"> 4,799</td>
+                <td class="ZAHL"> 4,850</td>
+                <td class="ZAHL"> 4.120</td>
+            </tr>
+            <tr class="HERVORGEHOBEN">
+                <td class="ZAHL">
+                    <time datetime="2016-01-15"><span>15.01.2016</span></time>
+                </td>
+                <td class="ZAHL"> 4,900</td>
+                <td class="ZAHL"> 4,990</td>
+                <td class="ZAHL"> 4,900</td>
+                <td class="ZAHL"> 4,990</td>
+                <td class="ZAHL"> 407</td>
+            </tr>
+            <tr>
+                <td class="ZAHL">
+                    <time datetime="2016-01-18"><span>18.01.2016</span></time>
+                </td>
+                <td class="ZAHL"> 4,940</td>
+                <td class="ZAHL"> 4,940</td>
+                <td class="ZAHL"> 4,501</td>
+                <td class="ZAHL"> 4,501</td>
+                <td class="ZAHL"> 1.193</td>
+            </tr>
+            <tr class="HERVORGEHOBEN">
+                <td class="ZAHL">
+                    <time datetime="2016-01-19"><span>19.01.2016</span></time>
+                </td>
+                <td class="ZAHL"> 4,700</td>
+                <td class="ZAHL"> 4,950</td>
+                <td class="ZAHL"> 4,681</td>
+                <td class="ZAHL"> 4,950</td>
+                <td class="ZAHL"> 2.809</td>
+            </tr>
+            <tr>
+                <td class="ZAHL">
+                    <time datetime="2016-01-20"><span>20.01.2016</span></time>
+                </td>
+                <td class="ZAHL"> 4,700</td>
+                <td class="ZAHL"> 4,700</td>
+                <td class="ZAHL"> 4,699</td>
+                <td class="ZAHL"> 4,700</td>
+                <td class="ZAHL"> 1.078</td>
+            </tr>
+            <tr class="HERVORGEHOBEN">
+                <td class="ZAHL">
+                    <time datetime="2016-01-21"><span>21.01.2016</span></time>
+                </td>
+                <td class="ZAHL"> 4,749</td>
+                <td class="ZAHL"> 4,749</td>
+                <td class="ZAHL"> 4,749</td>
+                <td class="ZAHL"> 4,749</td>
+                <td class="ZAHL"> 37</td>
+            </tr>
+            <tr>
+                <td class="ZAHL">
+                    <time datetime="2016-01-22"><span>22.01.2016</span></time>
+                </td>
+                <td class="ZAHL"> 4,600</td>
+                <td class="ZAHL"> 4,600</td>
+                <td class="ZAHL"> 4,600</td>
+                <td class="ZAHL"> 4,600</td>
+                <td class="ZAHL"> 600</td>
+            </tr>
+            <tr class="HERVORGEHOBEN">
+                <td class="ZAHL">
+                    <time datetime="2016-01-25"><span>25.01.2016</span></time>
+                </td>
+                <td class="ZAHL"> 4,799</td>
+                <td class="ZAHL"> 4,799</td>
+                <td class="ZAHL"> 4,799</td>
+                <td class="ZAHL"> 4,799</td>
+                <td class="ZAHL"> 87</td>
+            </tr>
+            <tr>
+                <td class="ZAHL">
+                    <time datetime="2016-02-02"><span>02.02.2016</span></time>
+                </td>
+                <td class="ZAHL"> 4,799</td>
+                <td class="ZAHL"> 4,900</td>
+                <td class="ZAHL"> 4,799</td>
+                <td class="ZAHL"> 4,900</td>
+                <td class="ZAHL"> 4.000</td>
+            </tr>
+            <tr class="HERVORGEHOBEN">
+                <td class="ZAHL">
+                    <time datetime="2016-02-09"><span>09.02.2016</span></time>
+                </td>
+                <td class="ZAHL"> 4,500</td>
+                <td class="ZAHL"> 4,500</td>
+                <td class="ZAHL"> 4,500</td>
+                <td class="ZAHL"> 4,500</td>
+                <td class="ZAHL"> 2.833</td>
+            </tr>
+            <tr>
+                <td class="ZAHL">
+                    <time datetime="2016-02-11"><span>11.02.2016</span></time>
+                </td>
+                <td class="ZAHL"> 4,450</td>
+                <td class="ZAHL"> 4,450</td>
+                <td class="ZAHL"> 4,450</td>
+                <td class="ZAHL"> 4,450</td>
+                <td class="ZAHL"> 381</td>
+            </tr>
+            <tr class="HERVORGEHOBEN">
+                <td class="ZAHL">
+                    <time datetime="2016-02-12"><span>12.02.2016</span></time>
+                </td>
+                <td class="ZAHL"> 4,550</td>
+                <td class="ZAHL"> 4,550</td>
+                <td class="ZAHL"> 4,550</td>
+                <td class="ZAHL"> 4,550</td>
+                <td class="ZAHL"> 119</td>
+            </tr>
+            <tr>
+                <td class="ZAHL">
+                    <time datetime="2016-02-15"><span>15.02.2016</span></time>
+                </td>
+                <td class="ZAHL"> 4,600</td>
+                <td class="ZAHL"> 4,600</td>
+                <td class="ZAHL"> 4,600</td>
+                <td class="ZAHL"> 4,600</td>
+                <td class="ZAHL"> 1.211</td>
+            </tr>
+            <tr class="HERVORGEHOBEN">
+                <td class="ZAHL">
+                    <time datetime="2016-02-17"><span>17.02.2016</span></time>
+                </td>
+                <td class="ZAHL"> 4,680</td>
+                <td class="ZAHL"> 4,680</td>
+                <td class="ZAHL"> 4,680</td>
+                <td class="ZAHL"> 4,680</td>
+                <td class="ZAHL"> 2.000</td>
+            </tr>
+            <tr>
+                <td class="ZAHL">
+                    <time datetime="2016-02-22"><span>22.02.2016</span></time>
+                </td>
+                <td class="ZAHL"> 4,885</td>
+                <td class="ZAHL"> 4,900</td>
+                <td class="ZAHL"> 4,885</td>
+                <td class="ZAHL"> 4,900</td>
+                <td class="ZAHL"> 3.002</td>
+            </tr>
+            <tr class="HERVORGEHOBEN">
+                <td class="ZAHL">
+                    <time datetime="2016-02-25"><span>25.02.2016</span></time>
+                </td>
+                <td class="ZAHL"> 4,821</td>
+                <td class="ZAHL"> 4,950</td>
+                <td class="ZAHL"> 4,821</td>
+                <td class="ZAHL"> 4,950</td>
+                <td class="ZAHL"> 816</td>
+            </tr>
+            <tr>
+                <td class="ZAHL">
+                    <time datetime="2016-02-26"><span>26.02.2016</span></time>
+                </td>
+                <td class="ZAHL"> 4,890</td>
+                <td class="ZAHL"> 4,890</td>
+                <td class="ZAHL"> 4,650</td>
+                <td class="ZAHL"> 4,650</td>
+                <td class="ZAHL"> 3.073</td>
+            </tr>
+            <tr class="HERVORGEHOBEN">
+                <td class="ZAHL">
+                    <time datetime="2016-02-29"><span>29.02.2016</span></time>
+                </td>
+                <td class="ZAHL"> 5,000</td>
+                <td class="ZAHL"> 5,000</td>
+                <td class="ZAHL"> 4,960</td>
+                <td class="ZAHL"> 4,960</td>
+                <td class="ZAHL"> 2.889</td>
+            </tr>
+            <tr>
+                <td class="ZAHL">
+                    <time datetime="2016-03-01"><span>01.03.2016</span></time>
+                </td>
+                <td class="ZAHL"> 4,999</td>
+                <td class="ZAHL"> 4,999</td>
+                <td class="ZAHL"> 4,999</td>
+                <td class="ZAHL"> 4,999</td>
+                <td class="ZAHL"> 28</td>
+            </tr>
+            <tr class="HERVORGEHOBEN">
+                <td class="ZAHL">
+                    <time datetime="2016-03-03"><span>03.03.2016</span></time>
+                </td>
+                <td class="ZAHL"> 4,980</td>
+                <td class="ZAHL"> 4,980</td>
+                <td class="ZAHL"> 4,980</td>
+                <td class="ZAHL"> 4,980</td>
+                <td class="ZAHL"> 31</td>
+            </tr>
+            <tr>
+                <td class="ZAHL">
+                    <time datetime="2016-03-04"><span>04.03.2016</span></time>
+                </td>
+                <td class="ZAHL"> 5,023</td>
+                <td class="ZAHL"> 5,023</td>
+                <td class="ZAHL"> 5,023</td>
+                <td class="ZAHL"> 5,023</td>
+                <td class="ZAHL"> 300</td>
+            </tr>
+            <tr class="HERVORGEHOBEN">
+                <td class="ZAHL">
+                    <time datetime="2016-03-07"><span>07.03.2016</span></time>
+                </td>
+                <td class="ZAHL"> 4,921</td>
+                <td class="ZAHL"> 5,060</td>
+                <td class="ZAHL"> 4,921</td>
+                <td class="ZAHL"> 4,999</td>
+                <td class="ZAHL"> 322</td>
+            </tr>
+            <tr>
+                <td class="ZAHL">
+                    <time datetime="2016-03-08"><span>08.03.2016</span></time>
+                </td>
+                <td class="ZAHL"> 5,060</td>
+                <td class="ZAHL"> 5,149</td>
+                <td class="ZAHL"> 5,060</td>
+                <td class="ZAHL"> 5,149</td>
+                <td class="ZAHL"> 500</td>
+            </tr>
+            <tr class="HERVORGEHOBEN">
+                <td class="ZAHL">
+                    <time datetime="2016-03-09"><span>09.03.2016</span></time>
+                </td>
+                <td class="ZAHL"> 5,149</td>
+                <td class="ZAHL"> 5,149</td>
+                <td class="ZAHL"> 5,149</td>
+                <td class="ZAHL"> 5,149</td>
+                <td class="ZAHL"> 233</td>
+            </tr>
+            <tr>
+                <td class="ZAHL">
+                    <time datetime="2016-03-11"><span>11.03.2016</span></time>
+                </td>
+                <td class="ZAHL"> 5,250</td>
+                <td class="ZAHL"> 5,250</td>
+                <td class="ZAHL"> 5,250</td>
+                <td class="ZAHL"> 5,250</td>
+                <td class="ZAHL"> 20</td>
+            </tr>
+            <tr class="HERVORGEHOBEN">
+                <td class="ZAHL">
+                    <time datetime="2016-03-17"><span>17.03.2016</span></time>
+                </td>
+                <td class="ZAHL"> 5,070</td>
+                <td class="ZAHL"> 5,070</td>
+                <td class="ZAHL"> 5,070</td>
+                <td class="ZAHL"> 5,070</td>
+                <td class="ZAHL"> 790</td>
+            </tr>
+            <tr>
+                <td class="ZAHL">
+                    <time datetime="2016-03-21"><span>21.03.2016</span></time>
+                </td>
+                <td class="ZAHL"> 5,021</td>
+                <td class="ZAHL"> 5,021</td>
+                <td class="ZAHL"> 5,021</td>
+                <td class="ZAHL"> 5,021</td>
+                <td class="ZAHL"> 73</td>
+            </tr>
+            <tr class="HERVORGEHOBEN">
+                <td class="ZAHL">
+                    <time datetime="2016-03-24"><span>24.03.2016</span></time>
+                </td>
+                <td class="ZAHL"> 4,901</td>
+                <td class="ZAHL"> 4,901</td>
+                <td class="ZAHL"> 4,900</td>
+                <td class="ZAHL"> 4,900</td>
+                <td class="ZAHL"> 393</td>
+            </tr>
+            <tr>
+                <td class="ZAHL">
+                    <time datetime="2016-03-29"><span>29.03.2016</span></time>
+                </td>
+                <td class="ZAHL"> 4,900</td>
+                <td class="ZAHL"> 4,980</td>
+                <td class="ZAHL"> 4,900</td>
+                <td class="ZAHL"> 4,980</td>
+                <td class="ZAHL"> 442</td>
+            </tr>
+            <tr class="HERVORGEHOBEN">
+                <td class="ZAHL">
+                    <time datetime="2016-03-30"><span>30.03.2016</span></time>
+                </td>
+                <td class="ZAHL"> 5,000</td>
+                <td class="ZAHL"> 5,000</td>
+                <td class="ZAHL"> 5,000</td>
+                <td class="ZAHL"> 5,000</td>
+                <td class="ZAHL"> 2.000</td>
+            </tr>
+            <tr>
+                <td class="ZAHL">
+                    <time datetime="2016-04-01"><span>01.04.2016</span></time>
+                </td>
+                <td class="ZAHL"> 5,100</td>
+                <td class="ZAHL"> 5,100</td>
+                <td class="ZAHL"> 5,100</td>
+                <td class="ZAHL"> 5,100</td>
+                <td class="ZAHL"> 474</td>
+            </tr>
+            <tr class="HERVORGEHOBEN">
+                <td class="ZAHL">
+                    <time datetime="2016-04-05"><span>05.04.2016</span></time>
+                </td>
+                <td class="ZAHL"> 5,080</td>
+                <td class="ZAHL"> 5,080</td>
+                <td class="ZAHL"> 4,951</td>
+                <td class="ZAHL"> 4,951</td>
+                <td class="ZAHL"> 2.221</td>
+            </tr>
+            <tr>
+                <td class="ZAHL">
+                    <time datetime="2016-04-06"><span>06.04.2016</span></time>
+                </td>
+                <td class="ZAHL"> 5,040</td>
+                <td class="ZAHL"> 5,040</td>
+                <td class="ZAHL"> 5,040</td>
+                <td class="ZAHL"> 5,040</td>
+                <td class="ZAHL"> 1.400</td>
+            </tr>
+            <tr class="HERVORGEHOBEN">
+                <td class="ZAHL">
+                    <time datetime="2016-04-07"><span>07.04.2016</span></time>
+                </td>
+                <td class="ZAHL"> 5,150</td>
+                <td class="ZAHL"> 5,150</td>
+                <td class="ZAHL"> 5,150</td>
+                <td class="ZAHL"> 5,150</td>
+                <td class="ZAHL"> 100</td>
+            </tr>
+            <tr>
+                <td class="ZAHL">
+                    <time datetime="2016-04-08"><span>08.04.2016</span></time>
+                </td>
+                <td class="ZAHL"> 5,100</td>
+                <td class="ZAHL"> 5,100</td>
+                <td class="ZAHL"> 5,100</td>
+                <td class="ZAHL"> 5,100</td>
+                <td class="ZAHL"> 55</td>
+            </tr>
+            <tr class="HERVORGEHOBEN">
+                <td class="ZAHL">
+                    <time datetime="2016-04-11"><span>11.04.2016</span></time>
+                </td>
+                <td class="ZAHL"> 5,000</td>
+                <td class="ZAHL"> 5,000</td>
+                <td class="ZAHL"> 5,000</td>
+                <td class="ZAHL"> 5,000</td>
+                <td class="ZAHL"> 2.000</td>
+            </tr>
+            <tr>
+                <td class="ZAHL">
+                    <time datetime="2016-04-12"><span>12.04.2016</span></time>
+                </td>
+                <td class="ZAHL"> 5,080</td>
+                <td class="ZAHL"> 5,099</td>
+                <td class="ZAHL"> 5,080</td>
+                <td class="ZAHL"> 5,099</td>
+                <td class="ZAHL"> 4.463</td>
+            </tr>
+            <tr class="HERVORGEHOBEN">
+                <td class="ZAHL">
+                    <time datetime="2016-04-13"><span>13.04.2016</span></time>
+                </td>
+                <td class="ZAHL"> 5,000</td>
+                <td class="ZAHL"> 5,000</td>
+                <td class="ZAHL"> 5,000</td>
+                <td class="ZAHL"> 5,000</td>
+                <td class="ZAHL"> 5</td>
+            </tr>
+            <tr>
+                <td class="ZAHL">
+                    <time datetime="2016-04-14"><span>14.04.2016</span></time>
+                </td>
+                <td class="ZAHL"> 5,179</td>
+                <td class="ZAHL"> 5,180</td>
+                <td class="ZAHL"> 5,010</td>
+                <td class="ZAHL"> 5,010</td>
+                <td class="ZAHL"> 2.395</td>
+            </tr>
+            <tr class="HERVORGEHOBEN">
+                <td class="ZAHL">
+                    <time datetime="2016-04-21"><span>21.04.2016</span></time>
+                </td>
+                <td class="ZAHL"> 5,020</td>
+                <td class="ZAHL"> 5,020</td>
+                <td class="ZAHL"> 5,020</td>
+                <td class="ZAHL"> 5,020</td>
+                <td class="ZAHL"> 650</td>
+            </tr>
+            <tr>
+                <td class="ZAHL">
+                    <time datetime="2016-04-25"><span>25.04.2016</span></time>
+                </td>
+                <td class="ZAHL"> 5,149</td>
+                <td class="ZAHL"> 5,149</td>
+                <td class="ZAHL"> 5,149</td>
+                <td class="ZAHL"> 5,149</td>
+                <td class="ZAHL"> 297</td>
+            </tr>
+            <tr class="HERVORGEHOBEN">
+                <td class="ZAHL">
+                    <time datetime="2016-04-28"><span>28.04.2016</span></time>
+                </td>
+                <td class="ZAHL"> 5,089</td>
+                <td class="ZAHL"> 5,089</td>
+                <td class="ZAHL"> 5,089</td>
+                <td class="ZAHL"> 5,089</td>
+                <td class="ZAHL"> 685</td>
+            </tr>
+            <tr>
+                <td class="ZAHL">
+                    <time datetime="2016-05-02"><span>02.05.2016</span></time>
+                </td>
+                <td class="ZAHL"> 5,149</td>
+                <td class="ZAHL"> 5,349</td>
+                <td class="ZAHL"> 5,149</td>
+                <td class="ZAHL"> 5,349</td>
+                <td class="ZAHL"> 4.615</td>
+            </tr>
+            <tr class="HERVORGEHOBEN">
+                <td class="ZAHL">
+                    <time datetime="2016-05-03"><span>03.05.2016</span></time>
+                </td>
+                <td class="ZAHL"> 5,300</td>
+                <td class="ZAHL"> 5,311</td>
+                <td class="ZAHL"> 5,300</td>
+                <td class="ZAHL"> 5,311</td>
+                <td class="ZAHL"> 1.492</td>
+            </tr>
+            <tr>
+                <td class="ZAHL">
+                    <time datetime="2016-05-04"><span>04.05.2016</span></time>
+                </td>
+                <td class="ZAHL"> 5,314</td>
+                <td class="ZAHL"> 5,314</td>
+                <td class="ZAHL"> 5,314</td>
+                <td class="ZAHL"> 5,314</td>
+                <td class="ZAHL"> 100</td>
+            </tr>
+            <tr class="HERVORGEHOBEN">
+                <td class="ZAHL">
+                    <time datetime="2016-05-05"><span>05.05.2016</span></time>
+                </td>
+                <td class="ZAHL"> 5,319</td>
+                <td class="ZAHL"> 5,319</td>
+                <td class="ZAHL"> 5,319</td>
+                <td class="ZAHL"> 5,319</td>
+                <td class="ZAHL"> 300</td>
+            </tr>
+            <tr>
+                <td class="ZAHL">
+                    <time datetime="2016-05-06"><span>06.05.2016</span></time>
+                </td>
+                <td class="ZAHL"> 5,279</td>
+                <td class="ZAHL"> 5,279</td>
+                <td class="ZAHL"> 5,279</td>
+                <td class="ZAHL"> 5,279</td>
+                <td class="ZAHL"> 1.180</td>
+            </tr>
+            <tr class="HERVORGEHOBEN">
+                <td class="ZAHL">
+                    <time datetime="2016-05-09"><span>09.05.2016</span></time>
+                </td>
+                <td class="ZAHL"> 5,140</td>
+                <td class="ZAHL"> 5,250</td>
+                <td class="ZAHL"> 4,950</td>
+                <td class="ZAHL"> 5,250</td>
+                <td class="ZAHL"> 6.451</td>
+            </tr>
+            <tr>
+                <td class="ZAHL">
+                    <time datetime="2016-05-11"><span>11.05.2016</span></time>
+                </td>
+                <td class="ZAHL"> 5,350</td>
+                <td class="ZAHL"> 5,350</td>
+                <td class="ZAHL"> 5,350</td>
+                <td class="ZAHL"> 5,350</td>
+                <td class="ZAHL"> 12</td>
+            </tr>
+            <tr class="HERVORGEHOBEN">
+                <td class="ZAHL">
+                    <time datetime="2016-05-12"><span>12.05.2016</span></time>
+                </td>
+                <td class="ZAHL"> 5,400</td>
+                <td class="ZAHL"> 5,400</td>
+                <td class="ZAHL"> 5,400</td>
+                <td class="ZAHL"> 5,400</td>
+                <td class="ZAHL"> 900</td>
+            </tr>
+            <tr>
+                <td class="ZAHL">
+                    <time datetime="2016-05-13"><span>13.05.2016</span></time>
+                </td>
+                <td class="ZAHL"> 5,499</td>
+                <td class="ZAHL"> 5,499</td>
+                <td class="ZAHL"> 5,499</td>
+                <td class="ZAHL"> 5,499</td>
+                <td class="ZAHL"> 450</td>
+            </tr>
+            <tr class="HERVORGEHOBEN">
+                <td class="ZAHL">
+                    <time datetime="2016-05-17"><span>17.05.2016</span></time>
+                </td>
+                <td class="ZAHL"> 5,599</td>
+                <td class="ZAHL"> 5,700</td>
+                <td class="ZAHL"> 5,599</td>
+                <td class="ZAHL"> 5,700</td>
+                <td class="ZAHL"> 2.082</td>
+            </tr>
+            <tr>
+                <td class="ZAHL">
+                    <time datetime="2016-05-18"><span>18.05.2016</span></time>
+                </td>
+                <td class="ZAHL"> 5,780</td>
+                <td class="ZAHL"> 5,780</td>
+                <td class="ZAHL"> 5,780</td>
+                <td class="ZAHL"> 5,780</td>
+                <td class="ZAHL"> 558</td>
+            </tr>
+            <tr class="HERVORGEHOBEN">
+                <td class="ZAHL">
+                    <time datetime="2016-05-19"><span>19.05.2016</span></time>
+                </td>
+                <td class="ZAHL"> 5,600</td>
+                <td class="ZAHL"> 5,600</td>
+                <td class="ZAHL"> 5,600</td>
+                <td class="ZAHL"> 5,600</td>
+                <td class="ZAHL"> 50</td>
+            </tr>
+            <tr>
+                <td class="ZAHL">
+                    <time datetime="2016-05-20"><span>20.05.2016</span></time>
+                </td>
+                <td class="ZAHL"> 5,451</td>
+                <td class="ZAHL"> 5,452</td>
+                <td class="ZAHL"> 5,420</td>
+                <td class="ZAHL"> 5,420</td>
+                <td class="ZAHL"> 2.452</td>
+            </tr>
+            <tr class="HERVORGEHOBEN">
+                <td class="ZAHL">
+                    <time datetime="2016-05-23"><span>23.05.2016</span></time>
+                </td>
+                <td class="ZAHL"> 5,399</td>
+                <td class="ZAHL"> 5,399</td>
+                <td class="ZAHL"> 5,300</td>
+                <td class="ZAHL"> 5,300</td>
+                <td class="ZAHL"> 2.472</td>
+            </tr>
+            <tr>
+                <td class="ZAHL">
+                    <time datetime="2016-05-24"><span>24.05.2016</span></time>
+                </td>
+                <td class="ZAHL"> 5,300</td>
+                <td class="ZAHL"> 5,300</td>
+                <td class="ZAHL"> 5,300</td>
+                <td class="ZAHL"> 5,300</td>
+                <td class="ZAHL"> 140</td>
+            </tr>
+            <tr class="HERVORGEHOBEN">
+                <td class="ZAHL">
+                    <time datetime="2016-05-25"><span>25.05.2016</span></time>
+                </td>
+                <td class="ZAHL"> 5,260</td>
+                <td class="ZAHL"> 5,260</td>
+                <td class="ZAHL"> 5,260</td>
+                <td class="ZAHL"> 5,260</td>
+                <td class="ZAHL"> 500</td>
+            </tr>
+            <tr>
+                <td class="ZAHL">
+                    <time datetime="2016-05-27"><span>27.05.2016</span></time>
+                </td>
+                <td class="ZAHL"> 5,349</td>
+                <td class="ZAHL"> 5,350</td>
+                <td class="ZAHL"> 5,349</td>
+                <td class="ZAHL"> 5,350</td>
+                <td class="ZAHL"> 1.245</td>
+            </tr>
+            <tr class="HERVORGEHOBEN">
+                <td class="ZAHL">
+                    <time datetime="2016-05-30"><span>30.05.2016</span></time>
+                </td>
+                <td class="ZAHL"> 5,549</td>
+                <td class="ZAHL"> 5,550</td>
+                <td class="ZAHL"> 5,549</td>
+                <td class="ZAHL"> 5,550</td>
+                <td class="ZAHL"> 1.000</td>
+            </tr>
+            <tr>
+                <td class="ZAHL">
+                    <time datetime="2016-05-31"><span>31.05.2016</span></time>
+                </td>
+                <td class="ZAHL"> 5,600</td>
+                <td class="ZAHL"> 5,600</td>
+                <td class="ZAHL"> 5,550</td>
+                <td class="ZAHL"> 5,550</td>
+                <td class="ZAHL"> 1.400</td>
+            </tr>
+            <tr class="HERVORGEHOBEN">
+                <td class="ZAHL">
+                    <time datetime="2016-06-01"><span>01.06.2016</span></time>
+                </td>
+                <td class="ZAHL"> 5,570</td>
+                <td class="ZAHL"> 5,570</td>
+                <td class="ZAHL"> 5,550</td>
+                <td class="ZAHL"> 5,550</td>
+                <td class="ZAHL"> 2.054</td>
+            </tr>
+            <tr>
+                <td class="ZAHL">
+                    <time datetime="2016-06-02"><span>02.06.2016</span></time>
+                </td>
+                <td class="ZAHL"> 5,451</td>
+                <td class="ZAHL"> 5,451</td>
+                <td class="ZAHL"> 5,350</td>
+                <td class="ZAHL"> 5,400</td>
+                <td class="ZAHL"> 3.878</td>
+            </tr>
+            <tr class="HERVORGEHOBEN">
+                <td class="ZAHL">
+                    <time datetime="2016-06-03"><span>03.06.2016</span></time>
+                </td>
+                <td class="ZAHL"> 5,600</td>
+                <td class="ZAHL"> 5,600</td>
+                <td class="ZAHL"> 5,451</td>
+                <td class="ZAHL"> 5,451</td>
+                <td class="ZAHL"> 2.000</td>
+            </tr>
+            <tr>
+                <td class="ZAHL">
+                    <time datetime="2016-06-06"><span>06.06.2016</span></time>
+                </td>
+                <td class="ZAHL"> 5,570</td>
+                <td class="ZAHL"> 5,699</td>
+                <td class="ZAHL"> 5,570</td>
+                <td class="ZAHL"> 5,699</td>
+                <td class="ZAHL"> 3.491</td>
+            </tr>
+            <tr class="HERVORGEHOBEN">
+                <td class="ZAHL">
+                    <time datetime="2016-06-07"><span>07.06.2016</span></time>
+                </td>
+                <td class="ZAHL"> 5,850</td>
+                <td class="ZAHL"> 6,002</td>
+                <td class="ZAHL"> 5,850</td>
+                <td class="ZAHL"> 5,850</td>
+                <td class="ZAHL"> 4.743</td>
+            </tr>
+            <tr>
+                <td class="ZAHL">
+                    <time datetime="2016-06-08"><span>08.06.2016</span></time>
+                </td>
+                <td class="ZAHL"> 6,149</td>
+                <td class="ZAHL"> 6,149</td>
+                <td class="ZAHL"> 5,900</td>
+                <td class="ZAHL"> 5,900</td>
+                <td class="ZAHL"> 2.608</td>
+            </tr>
+            <tr class="HERVORGEHOBEN">
+                <td class="ZAHL">
+                    <time datetime="2016-06-10"><span>10.06.2016</span></time>
+                </td>
+                <td class="ZAHL"> 5,900</td>
+                <td class="ZAHL"> 5,900</td>
+                <td class="ZAHL"> 5,900</td>
+                <td class="ZAHL"> 5,900</td>
+                <td class="ZAHL"> 585</td>
+            </tr>
+            <tr>
+                <td class="ZAHL">
+                    <time datetime="2016-06-13"><span>13.06.2016</span></time>
+                </td>
+                <td class="ZAHL"> 5,801</td>
+                <td class="ZAHL"> 5,801</td>
+                <td class="ZAHL"> 5,800</td>
+                <td class="ZAHL"> 5,800</td>
+                <td class="ZAHL"> 2.131</td>
+            </tr>
+            <tr class="HERVORGEHOBEN">
+                <td class="ZAHL">
+                    <time datetime="2016-06-14"><span>14.06.2016</span></time>
+                </td>
+                <td class="ZAHL"> 6,010</td>
+                <td class="ZAHL"> 6,010</td>
+                <td class="ZAHL"> 5,850</td>
+                <td class="ZAHL"> 5,850</td>
+                <td class="ZAHL"> 3.047</td>
+            </tr>
+            <tr>
+                <td class="ZAHL">
+                    <time datetime="2016-06-15"><span>15.06.2016</span></time>
+                </td>
+                <td class="ZAHL"> 5,999</td>
+                <td class="ZAHL"> 5,999</td>
+                <td class="ZAHL"> 5,999</td>
+                <td class="ZAHL"> 5,999</td>
+                <td class="ZAHL"> 32</td>
+            </tr>
+            <tr class="HERVORGEHOBEN">
+                <td class="ZAHL">
+                    <time datetime="2016-06-16"><span>16.06.2016</span></time>
+                </td>
+                <td class="ZAHL"> 5,800</td>
+                <td class="ZAHL"> 5,800</td>
+                <td class="ZAHL"> 5,222</td>
+                <td class="ZAHL"> 5,610</td>
+                <td class="ZAHL"> 23.126</td>
+            </tr>
+            <tr>
+                <td class="ZAHL">
+                    <time datetime="2016-06-17"><span>17.06.2016</span></time>
+                </td>
+                <td class="ZAHL"> 5,699</td>
+                <td class="ZAHL"> 5,710</td>
+                <td class="ZAHL"> 5,699</td>
+                <td class="ZAHL"> 5,710</td>
+                <td class="ZAHL"> 1.400</td>
+            </tr>
+            <tr class="HERVORGEHOBEN">
+                <td class="ZAHL">
+                    <time datetime="2016-06-20"><span>20.06.2016</span></time>
+                </td>
+                <td class="ZAHL"> 5,900</td>
+                <td class="ZAHL"> 6,000</td>
+                <td class="ZAHL"> 5,900</td>
+                <td class="ZAHL"> 6,000</td>
+                <td class="ZAHL"> 1.814</td>
+            </tr>
+            <tr>
+                <td class="ZAHL">
+                    <time datetime="2016-06-21"><span>21.06.2016</span></time>
+                </td>
+                <td class="ZAHL"> 5,990</td>
+                <td class="ZAHL"> 5,990</td>
+                <td class="ZAHL"> 5,900</td>
+                <td class="ZAHL"> 5,900</td>
+                <td class="ZAHL"> 4.367</td>
+            </tr>
+            <tr class="HERVORGEHOBEN">
+                <td class="ZAHL">
+                    <time datetime="2016-06-22"><span>22.06.2016</span></time>
+                </td>
+                <td class="ZAHL"> 5,901</td>
+                <td class="ZAHL"> 5,901</td>
+                <td class="ZAHL"> 5,901</td>
+                <td class="ZAHL"> 5,901</td>
+                <td class="ZAHL"> 1.059</td>
+            </tr>
+            <tr>
+                <td class="ZAHL">
+                    <time datetime="2016-06-23"><span>23.06.2016</span></time>
+                </td>
+                <td class="ZAHL"> 5,950</td>
+                <td class="ZAHL"> 5,960</td>
+                <td class="ZAHL"> 5,950</td>
+                <td class="ZAHL"> 5,960</td>
+                <td class="ZAHL"> 936</td>
+            </tr>
+            <tr class="HERVORGEHOBEN">
+                <td class="ZAHL">
+                    <time datetime="2016-06-24"><span>24.06.2016</span></time>
+                </td>
+                <td class="ZAHL"> 5,700</td>
+                <td class="ZAHL"> 5,900</td>
+                <td class="ZAHL"> 5,700</td>
+                <td class="ZAHL"> 5,900</td>
+                <td class="ZAHL"> 7.555</td>
+            </tr>
+            <tr>
+                <td class="ZAHL">
+                    <time datetime="2016-06-27"><span>27.06.2016</span></time>
+                </td>
+                <td class="ZAHL"> 6,001</td>
+                <td class="ZAHL"> 6,001</td>
+                <td class="ZAHL"> 6,000</td>
+                <td class="ZAHL"> 6,000</td>
+                <td class="ZAHL"> 704</td>
+            </tr>
+            <tr class="HERVORGEHOBEN">
+                <td class="ZAHL">
+                    <time datetime="2016-06-28"><span>28.06.2016</span></time>
+                </td>
+                <td class="ZAHL"> 6,000</td>
+                <td class="ZAHL"> 6,000</td>
+                <td class="ZAHL"> 6,000</td>
+                <td class="ZAHL"> 6,000</td>
+                <td class="ZAHL"> 665</td>
+            </tr>
+            <tr>
+                <td class="ZAHL">
+                    <time datetime="2016-06-29"><span>29.06.2016</span></time>
+                </td>
+                <td class="ZAHL"> 6,000</td>
+                <td class="ZAHL"> 6,000</td>
+                <td class="ZAHL"> 6,000</td>
+                <td class="ZAHL"> 6,000</td>
+                <td class="ZAHL"> 500</td>
+            </tr>
+            <tr class="HERVORGEHOBEN">
+                <td class="ZAHL">
+                    <time datetime="2016-06-30"><span>30.06.2016</span></time>
+                </td>
+                <td class="ZAHL"> 6,500</td>
+                <td class="ZAHL"> 6,650</td>
+                <td class="ZAHL"> 6,500</td>
+                <td class="ZAHL"> 6,500</td>
+                <td class="ZAHL"> 2.948</td>
+            </tr>
+            <tr>
+                <td class="ZAHL">
+                    <time datetime="2016-07-01"><span>01.07.2016</span></time>
+                </td>
+                <td class="ZAHL"> 6,499</td>
+                <td class="ZAHL"> 6,500</td>
+                <td class="ZAHL"> 6,200</td>
+                <td class="ZAHL"> 6,200</td>
+                <td class="ZAHL"> 3.064</td>
+            </tr>
+            <tr class="HERVORGEHOBEN">
+                <td class="ZAHL">
+                    <time datetime="2016-07-04"><span>04.07.2016</span></time>
+                </td>
+                <td class="ZAHL"> 6,450</td>
+                <td class="ZAHL"> 6,450</td>
+                <td class="ZAHL"> 6,450</td>
+                <td class="ZAHL"> 6,450</td>
+                <td class="ZAHL"> 80</td>
+            </tr>
+            <tr>
+                <td class="ZAHL">
+                    <time datetime="2016-07-05"><span>05.07.2016</span></time>
+                </td>
+                <td class="ZAHL"> 6,449</td>
+                <td class="ZAHL"> 6,450</td>
+                <td class="ZAHL"> 6,449</td>
+                <td class="ZAHL"> 6,450</td>
+                <td class="ZAHL"> 542</td>
+            </tr>
+            <tr class="HERVORGEHOBEN">
+                <td class="ZAHL">
+                    <time datetime="2016-07-06"><span>06.07.2016</span></time>
+                </td>
+                <td class="ZAHL"> 6,315</td>
+                <td class="ZAHL"> 6,315</td>
+                <td class="ZAHL"> 6,315</td>
+                <td class="ZAHL"> 6,315</td>
+                <td class="ZAHL"> 99</td>
+            </tr>
+            <tr>
+                <td class="ZAHL">
+                    <time datetime="2016-07-11"><span>11.07.2016</span></time>
+                </td>
+                <td class="ZAHL"> 6,450</td>
+                <td class="ZAHL"> 6,749</td>
+                <td class="ZAHL"> 6,450</td>
+                <td class="ZAHL"> 6,749</td>
+                <td class="ZAHL"> 1.171</td>
+            </tr>
+            <tr class="HERVORGEHOBEN">
+                <td class="ZAHL">
+                    <time datetime="2016-07-12"><span>12.07.2016</span></time>
+                </td>
+                <td class="ZAHL"> 6,849</td>
+                <td class="ZAHL"> 6,849</td>
+                <td class="ZAHL"> 6,699</td>
+                <td class="ZAHL"> 6,699</td>
+                <td class="ZAHL"> 402</td>
+            </tr>
+            <tr>
+                <td class="ZAHL">
+                    <time datetime="2016-07-13"><span>13.07.2016</span></time>
+                </td>
+                <td class="ZAHL"> 6,500</td>
+                <td class="ZAHL"> 6,500</td>
+                <td class="ZAHL"> 6,500</td>
+                <td class="ZAHL"> 6,500</td>
+                <td class="ZAHL"> 971</td>
+            </tr>
+            <tr class="HERVORGEHOBEN">
+                <td class="ZAHL">
+                    <time datetime="2016-07-14"><span>14.07.2016</span></time>
+                </td>
+                <td class="ZAHL"> 6,770</td>
+                <td class="ZAHL"> 7,500</td>
+                <td class="ZAHL"> 6,770</td>
+                <td class="ZAHL"> 7,500</td>
+                <td class="ZAHL"> 3.835</td>
+            </tr>
+            <tr>
+                <td class="ZAHL">
+                    <time datetime="2016-07-15"><span>15.07.2016</span></time>
+                </td>
+                <td class="ZAHL"> 7,750</td>
+                <td class="ZAHL"> 7,750</td>
+                <td class="ZAHL"> 7,449</td>
+                <td class="ZAHL"> 7,450</td>
+                <td class="ZAHL"> 895</td>
+            </tr>
+            <tr class="HERVORGEHOBEN">
+                <td class="ZAHL">
+                    <time datetime="2016-07-18"><span>18.07.2016</span></time>
+                </td>
+                <td class="ZAHL"> 7,450</td>
+                <td class="ZAHL"> 7,450</td>
+                <td class="ZAHL"> 7,350</td>
+                <td class="ZAHL"> 7,350</td>
+                <td class="ZAHL"> 394</td>
+            </tr>
+            <tr>
+                <td class="ZAHL">
+                    <time datetime="2016-07-19"><span>19.07.2016</span></time>
+                </td>
+                <td class="ZAHL"> 7,450</td>
+                <td class="ZAHL"> 7,450</td>
+                <td class="ZAHL"> 7,251</td>
+                <td class="ZAHL"> 7,251</td>
+                <td class="ZAHL"> 740</td>
+            </tr>
+            <tr class="HERVORGEHOBEN">
+                <td class="ZAHL">
+                    <time datetime="2016-07-20"><span>20.07.2016</span></time>
+                </td>
+                <td class="ZAHL"> 7,449</td>
+                <td class="ZAHL"> 7,449</td>
+                <td class="ZAHL"> 7,449</td>
+                <td class="ZAHL"> 7,449</td>
+                <td class="ZAHL"> 40</td>
+            </tr>
+            <tr>
+                <td class="ZAHL">
+                    <time datetime="2016-07-21"><span>21.07.2016</span></time>
+                </td>
+                <td class="ZAHL"> 7,201</td>
+                <td class="ZAHL"> 7,201</td>
+                <td class="ZAHL"> 7,070</td>
+                <td class="ZAHL"> 7,070</td>
+                <td class="ZAHL"> 7.824</td>
+            </tr>
+            <tr class="HERVORGEHOBEN">
+                <td class="ZAHL">
+                    <time datetime="2016-07-22"><span>22.07.2016</span></time>
+                </td>
+                <td class="ZAHL"> 7,100</td>
+                <td class="ZAHL"> 7,100</td>
+                <td class="ZAHL"> 7,100</td>
+                <td class="ZAHL"> 7,100</td>
+                <td class="ZAHL"> 1.545</td>
+            </tr>
+            <tr>
+                <td class="ZAHL">
+                    <time datetime="2016-07-25"><span>25.07.2016</span></time>
+                </td>
+                <td class="ZAHL"> 7,101</td>
+                <td class="ZAHL"> 7,101</td>
+                <td class="ZAHL"> 7,100</td>
+                <td class="ZAHL"> 7,101</td>
+                <td class="ZAHL"> 8.236</td>
+            </tr>
+            <tr class="HERVORGEHOBEN">
+                <td class="ZAHL">
+                    <time datetime="2016-07-26"><span>26.07.2016</span></time>
+                </td>
+                <td class="ZAHL"> 7,199</td>
+                <td class="ZAHL"> 7,300</td>
+                <td class="ZAHL"> 7,199</td>
+                <td class="ZAHL"> 7,300</td>
+                <td class="ZAHL"> 4.210</td>
+            </tr>
+            <tr>
+                <td class="ZAHL">
+                    <time datetime="2016-07-27"><span>27.07.2016</span></time>
+                </td>
+                <td class="ZAHL"> 7,500</td>
+                <td class="ZAHL"> 8,050</td>
+                <td class="ZAHL"> 7,450</td>
+                <td class="ZAHL"> 8,050</td>
+                <td class="ZAHL"> 18.690</td>
+            </tr>
+            <tr class="HERVORGEHOBEN">
+                <td class="ZAHL">
+                    <time datetime="2016-07-28"><span>28.07.2016</span></time>
+                </td>
+                <td class="ZAHL"> 7,990</td>
+                <td class="ZAHL"> 7,990</td>
+                <td class="ZAHL"> 7,846</td>
+                <td class="ZAHL"> 7,846</td>
+                <td class="ZAHL"> 560</td>
+            </tr>
+            <tr>
+                <td class="ZAHL">
+                    <time datetime="2016-07-29"><span>29.07.2016</span></time>
+                </td>
+                <td class="ZAHL"> 7,800</td>
+                <td class="ZAHL"> 7,950</td>
+                <td class="ZAHL"> 7,799</td>
+                <td class="ZAHL"> 7,950</td>
+                <td class="ZAHL"> 3.890</td>
+            </tr>
+            <tr class="HERVORGEHOBEN">
+                <td class="ZAHL">
+                    <time datetime="2016-08-01"><span>01.08.2016</span></time>
+                </td>
+                <td class="ZAHL"> 8,000</td>
+                <td class="ZAHL"> 8,000</td>
+                <td class="ZAHL"> 8,000</td>
+                <td class="ZAHL"> 8,000</td>
+                <td class="ZAHL"> 1.000</td>
+            </tr>
+            <tr>
+                <td class="ZAHL">
+                    <time datetime="2016-08-03"><span>03.08.2016</span></time>
+                </td>
+                <td class="ZAHL"> 7,900</td>
+                <td class="ZAHL"> 7,950</td>
+                <td class="ZAHL"> 7,900</td>
+                <td class="ZAHL"> 7,950</td>
+                <td class="ZAHL"> 2.400</td>
+            </tr>
+            <tr class="HERVORGEHOBEN">
+                <td class="ZAHL">
+                    <time datetime="2016-08-04"><span>04.08.2016</span></time>
+                </td>
+                <td class="ZAHL"> 7,950</td>
+                <td class="ZAHL"> 8,000</td>
+                <td class="ZAHL"> 7,751</td>
+                <td class="ZAHL"> 8,000</td>
+                <td class="ZAHL"> 2.869</td>
+            </tr>
+            <tr>
+                <td class="ZAHL">
+                    <time datetime="2016-08-05"><span>05.08.2016</span></time>
+                </td>
+                <td class="ZAHL"> 8,046</td>
+                <td class="ZAHL"> 8,400</td>
+                <td class="ZAHL"> 8,000</td>
+                <td class="ZAHL"> 8,000</td>
+                <td class="ZAHL"> 6.280</td>
+            </tr>
+            <tr class="HERVORGEHOBEN">
+                <td class="ZAHL">
+                    <time datetime="2016-08-08"><span>08.08.2016</span></time>
+                </td>
+                <td class="ZAHL"> 7,967</td>
+                <td class="ZAHL"> 7,967</td>
+                <td class="ZAHL"> 7,967</td>
+                <td class="ZAHL"> 7,967</td>
+                <td class="ZAHL"> 1.139</td>
+            </tr>
+            <tr>
+                <td class="ZAHL">
+                    <time datetime="2016-08-10"><span>10.08.2016</span></time>
+                </td>
+                <td class="ZAHL"> 8,150</td>
+                <td class="ZAHL"> 8,251</td>
+                <td class="ZAHL"> 8,150</td>
+                <td class="ZAHL"> 8,216</td>
+                <td class="ZAHL"> 4.868</td>
+            </tr>
+            <tr class="HERVORGEHOBEN">
+                <td class="ZAHL">
+                    <time datetime="2016-08-11"><span>11.08.2016</span></time>
+                </td>
+                <td class="ZAHL"> 8,201</td>
+                <td class="ZAHL"> 8,201</td>
+                <td class="ZAHL"> 8,200</td>
+                <td class="ZAHL"> 8,200</td>
+                <td class="ZAHL"> 1.200</td>
+            </tr>
+            <tr>
+                <td class="ZAHL">
+                    <time datetime="2016-08-12"><span>12.08.2016</span></time>
+                </td>
+                <td class="ZAHL"> 8,260</td>
+                <td class="ZAHL"> 8,700</td>
+                <td class="ZAHL"> 8,203</td>
+                <td class="ZAHL"> 8,700</td>
+                <td class="ZAHL"> 11.185</td>
+            </tr>
+            <tr class="HERVORGEHOBEN">
+                <td class="ZAHL">
+                    <time datetime="2016-08-15"><span>15.08.2016</span></time>
+                </td>
+                <td class="ZAHL"> 8,700</td>
+                <td class="ZAHL"> 8,800</td>
+                <td class="ZAHL"> 8,700</td>
+                <td class="ZAHL"> 8,749</td>
+                <td class="ZAHL"> 3.743</td>
+            </tr>
+            <tr>
+                <td class="ZAHL">
+                    <time datetime="2016-08-16"><span>16.08.2016</span></time>
+                </td>
+                <td class="ZAHL"> 8,750</td>
+                <td class="ZAHL"> 9,000</td>
+                <td class="ZAHL"> 8,750</td>
+                <td class="ZAHL"> 9,000</td>
+                <td class="ZAHL"> 1.240</td>
+            </tr>
+            <tr class="HERVORGEHOBEN">
+                <td class="ZAHL">
+                    <time datetime="2016-08-17"><span>17.08.2016</span></time>
+                </td>
+                <td class="ZAHL"> 8,780</td>
+                <td class="ZAHL"> 8,989</td>
+                <td class="ZAHL"> 8,707</td>
+                <td class="ZAHL"> 8,707</td>
+                <td class="ZAHL"> 2.656</td>
+            </tr>
+            <tr>
+                <td class="ZAHL">
+                    <time datetime="2016-08-18"><span>18.08.2016</span></time>
+                </td>
+                <td class="ZAHL"> 8,650</td>
+                <td class="ZAHL"> 8,650</td>
+                <td class="ZAHL"> 8,650</td>
+                <td class="ZAHL"> 8,650</td>
+                <td class="ZAHL"> 184</td>
+            </tr>
+            <tr class="HERVORGEHOBEN">
+                <td class="ZAHL">
+                    <time datetime="2016-08-23"><span>23.08.2016</span></time>
+                </td>
+                <td class="ZAHL"> 8,900</td>
+                <td class="ZAHL"> 8,980</td>
+                <td class="ZAHL"> 8,900</td>
+                <td class="ZAHL"> 8,980</td>
+                <td class="ZAHL"> 1.370</td>
+            </tr>
+            <tr>
+                <td class="ZAHL">
+                    <time datetime="2016-08-24"><span>24.08.2016</span></time>
+                </td>
+                <td class="ZAHL"> 8,990</td>
+                <td class="ZAHL"> 8,990</td>
+                <td class="ZAHL"> 8,990</td>
+                <td class="ZAHL"> 8,990</td>
+                <td class="ZAHL"> 75</td>
+            </tr>
+            <tr class="HERVORGEHOBEN">
+                <td class="ZAHL">
+                    <time datetime="2016-08-25"><span>25.08.2016</span></time>
+                </td>
+                <td class="ZAHL"> 8,950</td>
+                <td class="ZAHL"> 8,950</td>
+                <td class="ZAHL"> 8,950</td>
+                <td class="ZAHL"> 8,950</td>
+                <td class="ZAHL"> 45</td>
+            </tr>
+            <tr>
+                <td class="ZAHL">
+                    <time datetime="2016-08-26"><span>26.08.2016</span></time>
+                </td>
+                <td class="ZAHL"> 8,950</td>
+                <td class="ZAHL"> 8,990</td>
+                <td class="ZAHL"> 8,950</td>
+                <td class="ZAHL"> 8,990</td>
+                <td class="ZAHL"> 1.435</td>
+            </tr>
+            <tr class="HERVORGEHOBEN">
+                <td class="ZAHL">
+                    <time datetime="2016-08-29"><span>29.08.2016</span></time>
+                </td>
+                <td class="ZAHL"> 8,850</td>
+                <td class="ZAHL"> 9,435</td>
+                <td class="ZAHL"> 8,850</td>
+                <td class="ZAHL"> 9,435</td>
+                <td class="ZAHL"> 7.945</td>
+            </tr>
+            <tr>
+                <td class="ZAHL">
+                    <time datetime="2016-08-30"><span>30.08.2016</span></time>
+                </td>
+                <td class="ZAHL"> 9,350</td>
+                <td class="ZAHL"> 9,600</td>
+                <td class="ZAHL"> 9,300</td>
+                <td class="ZAHL"> 9,600</td>
+                <td class="ZAHL"> 6.800</td>
+            </tr>
+            <tr class="HERVORGEHOBEN">
+                <td class="ZAHL">
+                    <time datetime="2016-08-31"><span>31.08.2016</span></time>
+                </td>
+                <td class="ZAHL"> 9,600</td>
+                <td class="ZAHL"> 10,150</td>
+                <td class="ZAHL"> 9,575</td>
+                <td class="ZAHL"> 9,900</td>
+                <td class="ZAHL"> 14.089</td>
+            </tr>
+            <tr>
+                <td class="ZAHL">
+                    <time datetime="2016-09-01"><span>01.09.2016</span></time>
+                </td>
+                <td class="ZAHL"> 9,849</td>
+                <td class="ZAHL"> 9,890</td>
+                <td class="ZAHL"> 9,714</td>
+                <td class="ZAHL"> 9,714</td>
+                <td class="ZAHL"> 3.760</td>
+            </tr>
+            <tr class="HERVORGEHOBEN">
+                <td class="ZAHL">
+                    <time datetime="2016-09-02"><span>02.09.2016</span></time>
+                </td>
+                <td class="ZAHL"> 9,990</td>
+                <td class="ZAHL"> 10,000</td>
+                <td class="ZAHL"> 9,320</td>
+                <td class="ZAHL"> 9,320</td>
+                <td class="ZAHL"> 6.638</td>
+            </tr>
+            <tr>
+                <td class="ZAHL">
+                    <time datetime="2016-09-05"><span>05.09.2016</span></time>
+                </td>
+                <td class="ZAHL"> 9,500</td>
+                <td class="ZAHL"> 9,500</td>
+                <td class="ZAHL"> 9,049</td>
+                <td class="ZAHL"> 9,050</td>
+                <td class="ZAHL"> 2.440</td>
+            </tr>
+            <tr class="HERVORGEHOBEN">
+                <td class="ZAHL">
+                    <time datetime="2016-09-06"><span>06.09.2016</span></time>
+                </td>
+                <td class="ZAHL"> 9,001</td>
+                <td class="ZAHL"> 9,001</td>
+                <td class="ZAHL"> 8,800</td>
+                <td class="ZAHL"> 8,800</td>
+                <td class="ZAHL"> 1.637</td>
+            </tr>
+            <tr>
+                <td class="ZAHL">
+                    <time datetime="2016-09-07"><span>07.09.2016</span></time>
+                </td>
+                <td class="ZAHL"> 9,051</td>
+                <td class="ZAHL"> 9,051</td>
+                <td class="ZAHL"> 9,051</td>
+                <td class="ZAHL"> 9,051</td>
+                <td class="ZAHL"> 600</td>
+            </tr>
+            <tr class="HERVORGEHOBEN">
+                <td class="ZAHL">
+                    <time datetime="2016-09-08"><span>08.09.2016</span></time>
+                </td>
+                <td class="ZAHL"> 9,001</td>
+                <td class="ZAHL"> 9,001</td>
+                <td class="ZAHL"> 9,000</td>
+                <td class="ZAHL"> 9,001</td>
+                <td class="ZAHL"> 6.335</td>
+            </tr>
+            <tr>
+                <td class="ZAHL">
+                    <time datetime="2016-09-09"><span>09.09.2016</span></time>
+                </td>
+                <td class="ZAHL"> 9,001</td>
+                <td class="ZAHL"> 9,001</td>
+                <td class="ZAHL"> 9,000</td>
+                <td class="ZAHL"> 9,000</td>
+                <td class="ZAHL"> 2.698</td>
+            </tr>
+            <tr class="HERVORGEHOBEN">
+                <td class="ZAHL">
+                    <time datetime="2016-09-12"><span>12.09.2016</span></time>
+                </td>
+                <td class="ZAHL"> 9,000</td>
+                <td class="ZAHL"> 9,200</td>
+                <td class="ZAHL"> 9,000</td>
+                <td class="ZAHL"> 9,200</td>
+                <td class="ZAHL"> 3.531</td>
+            </tr>
+            <tr>
+                <td class="ZAHL">
+                    <time datetime="2016-09-13"><span>13.09.2016</span></time>
+                </td>
+                <td class="ZAHL"> 9,490</td>
+                <td class="ZAHL"> 9,910</td>
+                <td class="ZAHL"> 9,300</td>
+                <td class="ZAHL"> 9,450</td>
+                <td class="ZAHL"> 6.432</td>
+            </tr>
+            <tr class="HERVORGEHOBEN">
+                <td class="ZAHL">
+                    <time datetime="2016-09-14"><span>14.09.2016</span></time>
+                </td>
+                <td class="ZAHL"> 9,899</td>
+                <td class="ZAHL"> 9,899</td>
+                <td class="ZAHL"> 9,899</td>
+                <td class="ZAHL"> 9,899</td>
+                <td class="ZAHL"> 250</td>
+            </tr>
+            <tr>
+                <td class="ZAHL">
+                    <time datetime="2016-09-15"><span>15.09.2016</span></time>
+                </td>
+                <td class="ZAHL"> 9,700</td>
+                <td class="ZAHL"> 9,794</td>
+                <td class="ZAHL"> 9,700</td>
+                <td class="ZAHL"> 9,794</td>
+                <td class="ZAHL"> 153</td>
+            </tr>
+            <tr class="HERVORGEHOBEN">
+                <td class="ZAHL">
+                    <time datetime="2016-09-16"><span>16.09.2016</span></time>
+                </td>
+                <td class="ZAHL"> 9,970</td>
+                <td class="ZAHL"> 9,970</td>
+                <td class="ZAHL"> 9,970</td>
+                <td class="ZAHL"> 9,970</td>
+                <td class="ZAHL"> 168</td>
+            </tr>
+            <tr>
+                <td class="ZAHL">
+                    <time datetime="2016-09-19"><span>19.09.2016</span></time>
+                </td>
+                <td class="ZAHL"> 9,970</td>
+                <td class="ZAHL"> 9,970</td>
+                <td class="ZAHL"> 9,970</td>
+                <td class="ZAHL"> 9,970</td>
+                <td class="ZAHL"> 565</td>
+            </tr>
+            <tr class="HERVORGEHOBEN">
+                <td class="ZAHL">
+                    <time datetime="2016-09-20"><span>20.09.2016</span></time>
+                </td>
+                <td class="ZAHL"> 10,000</td>
+                <td class="ZAHL"> 10,100</td>
+                <td class="ZAHL"> 9,850</td>
+                <td class="ZAHL"> 10,100</td>
+                <td class="ZAHL"> 891</td>
+            </tr>
+            <tr>
+                <td class="ZAHL">
+                    <time datetime="2016-09-21"><span>21.09.2016</span></time>
+                </td>
+                <td class="ZAHL"> 10,000</td>
+                <td class="ZAHL"> 10,000</td>
+                <td class="ZAHL"> 9,900</td>
+                <td class="ZAHL"> 9,900</td>
+                <td class="ZAHL"> 303</td>
+            </tr>
+            <tr class="HERVORGEHOBEN">
+                <td class="ZAHL">
+                    <time datetime="2016-09-22"><span>22.09.2016</span></time>
+                </td>
+                <td class="ZAHL"> 9,651</td>
+                <td class="ZAHL"> 9,950</td>
+                <td class="ZAHL"> 9,651</td>
+                <td class="ZAHL"> 9,950</td>
+                <td class="ZAHL"> 1.250</td>
+            </tr>
+            <tr>
+                <td class="ZAHL">
+                    <time datetime="2016-09-23"><span>23.09.2016</span></time>
+                </td>
+                <td class="ZAHL"> 9,800</td>
+                <td class="ZAHL"> 9,900</td>
+                <td class="ZAHL"> 9,800</td>
+                <td class="ZAHL"> 9,900</td>
+                <td class="ZAHL"> 1.200</td>
+            </tr>
+            <tr class="HERVORGEHOBEN">
+                <td class="ZAHL">
+                    <time datetime="2016-09-26"><span>26.09.2016</span></time>
+                </td>
+                <td class="ZAHL"> 9,650</td>
+                <td class="ZAHL"> 9,650</td>
+                <td class="ZAHL"> 9,286</td>
+                <td class="ZAHL"> 9,286</td>
+                <td class="ZAHL"> 1.700</td>
+            </tr>
+            <tr>
+                <td class="ZAHL">
+                    <time datetime="2016-09-27"><span>27.09.2016</span></time>
+                </td>
+                <td class="ZAHL"> 9,050</td>
+                <td class="ZAHL"> 9,050</td>
+                <td class="ZAHL"> 8,939</td>
+                <td class="ZAHL"> 8,939</td>
+                <td class="ZAHL"> 4.168</td>
+            </tr>
+            <tr class="HERVORGEHOBEN">
+                <td class="ZAHL">
+                    <time datetime="2016-09-28"><span>28.09.2016</span></time>
+                </td>
+                <td class="ZAHL"> 9,200</td>
+                <td class="ZAHL"> 9,295</td>
+                <td class="ZAHL"> 9,100</td>
+                <td class="ZAHL"> 9,100</td>
+                <td class="ZAHL"> 1.480</td>
+            </tr>
+            <tr>
+                <td class="ZAHL">
+                    <time datetime="2016-09-29"><span>29.09.2016</span></time>
+                </td>
+                <td class="ZAHL"> 9,010</td>
+                <td class="ZAHL"> 9,010</td>
+                <td class="ZAHL"> 8,850</td>
+                <td class="ZAHL"> 8,850</td>
+                <td class="ZAHL"> 1.906</td>
+            </tr>
+            <tr class="HERVORGEHOBEN">
+                <td class="ZAHL">
+                    <time datetime="2016-09-30"><span>30.09.2016</span></time>
+                </td>
+                <td class="ZAHL"> 8,700</td>
+                <td class="ZAHL"> 8,700</td>
+                <td class="ZAHL"> 8,450</td>
+                <td class="ZAHL"> 8,450</td>
+                <td class="ZAHL"> 1.420</td>
+            </tr>
+            <tr>
+                <td class="ZAHL">
+                    <time datetime="2016-10-04"><span>04.10.2016</span></time>
+                </td>
+                <td class="ZAHL"> 8,301</td>
+                <td class="ZAHL"> 8,301</td>
+                <td class="ZAHL"> 7,610</td>
+                <td class="ZAHL"> 7,994</td>
+                <td class="ZAHL"> 22.535</td>
+            </tr>
+            <tr class="HERVORGEHOBEN">
+                <td class="ZAHL">
+                    <time datetime="2016-10-05"><span>05.10.2016</span></time>
+                </td>
+                <td class="ZAHL"> 8,090</td>
+                <td class="ZAHL"> 8,200</td>
+                <td class="ZAHL"> 8,000</td>
+                <td class="ZAHL"> 8,000</td>
+                <td class="ZAHL"> 3.240</td>
+            </tr>
+            <tr>
+                <td class="ZAHL">
+                    <time datetime="2016-10-07"><span>07.10.2016</span></time>
+                </td>
+                <td class="ZAHL"> 8,000</td>
+                <td class="ZAHL"> 8,000</td>
+                <td class="ZAHL"> 8,000</td>
+                <td class="ZAHL"> 8,000</td>
+                <td class="ZAHL"> 6</td>
+            </tr>
+            <tr class="HERVORGEHOBEN">
+                <td class="ZAHL">
+                    <time datetime="2016-10-10"><span>10.10.2016</span></time>
+                </td>
+                <td class="ZAHL"> 8,000</td>
+                <td class="ZAHL"> 8,000</td>
+                <td class="ZAHL"> 7,850</td>
+                <td class="ZAHL"> 7,900</td>
+                <td class="ZAHL"> 2.949</td>
+            </tr>
+            <tr>
+                <td class="ZAHL">
+                    <time datetime="2016-10-12"><span>12.10.2016</span></time>
+                </td>
+                <td class="ZAHL"> 7,920</td>
+                <td class="ZAHL"> 7,920</td>
+                <td class="ZAHL"> 7,920</td>
+                <td class="ZAHL"> 7,920</td>
+                <td class="ZAHL"> 120</td>
+            </tr>
+            <tr class="HERVORGEHOBEN">
+                <td class="ZAHL">
+                    <time datetime="2016-10-13"><span>13.10.2016</span></time>
+                </td>
+                <td class="ZAHL"> 8,100</td>
+                <td class="ZAHL"> 8,100</td>
+                <td class="ZAHL"> 8,100</td>
+                <td class="ZAHL"> 8,100</td>
+                <td class="ZAHL"> 1.300</td>
+            </tr>
+            <tr>
+                <td class="ZAHL">
+                    <time datetime="2016-10-14"><span>14.10.2016</span></time>
+                </td>
+                <td class="ZAHL"> 8,300</td>
+                <td class="ZAHL"> 8,300</td>
+                <td class="ZAHL"> 8,000</td>
+                <td class="ZAHL"> 8,000</td>
+                <td class="ZAHL"> 800</td>
+            </tr>
+            <tr class="HERVORGEHOBEN">
+                <td class="ZAHL">
+                    <time datetime="2016-10-17"><span>17.10.2016</span></time>
+                </td>
+                <td class="ZAHL"> 8,000</td>
+                <td class="ZAHL"> 8,000</td>
+                <td class="ZAHL"> 7,900</td>
+                <td class="ZAHL"> 7,900</td>
+                <td class="ZAHL"> 198</td>
+            </tr>
+            <tr>
+                <td class="ZAHL">
+                    <time datetime="2016-10-19"><span>19.10.2016</span></time>
+                </td>
+                <td class="ZAHL"> 8,000</td>
+                <td class="ZAHL"> 8,000</td>
+                <td class="ZAHL"> 8,000</td>
+                <td class="ZAHL"> 8,000</td>
+                <td class="ZAHL"> 200</td>
+            </tr>
+            <tr class="HERVORGEHOBEN">
+                <td class="ZAHL">
+                    <time datetime="2016-10-20"><span>20.10.2016</span></time>
+                </td>
+                <td class="ZAHL"> 7,950</td>
+                <td class="ZAHL"> 7,950</td>
+                <td class="ZAHL"> 7,950</td>
+                <td class="ZAHL"> 7,950</td>
+                <td class="ZAHL"> 97</td>
+            </tr>
+            <tr>
+                <td class="ZAHL">
+                    <time datetime="2016-10-21"><span>21.10.2016</span></time>
+                </td>
+                <td class="ZAHL"> 8,000</td>
+                <td class="ZAHL"> 8,000</td>
+                <td class="ZAHL"> 8,000</td>
+                <td class="ZAHL"> 8,000</td>
+                <td class="ZAHL"> 135</td>
+            </tr>
+            <tr class="HERVORGEHOBEN">
+                <td class="ZAHL">
+                    <time datetime="2016-10-24"><span>24.10.2016</span></time>
+                </td>
+                <td class="ZAHL"> 8,000</td>
+                <td class="ZAHL"> 8,000</td>
+                <td class="ZAHL"> 8,000</td>
+                <td class="ZAHL"> 8,000</td>
+                <td class="ZAHL"> 40</td>
+            </tr>
+            <tr>
+                <td class="ZAHL">
+                    <time datetime="2016-10-25"><span>25.10.2016</span></time>
+                </td>
+                <td class="ZAHL"> 8,000</td>
+                <td class="ZAHL"> 8,000</td>
+                <td class="ZAHL"> 8,000</td>
+                <td class="ZAHL"> 8,000</td>
+                <td class="ZAHL"> 1.106</td>
+            </tr>
+            <tr class="HERVORGEHOBEN">
+                <td class="ZAHL">
+                    <time datetime="2016-10-28"><span>28.10.2016</span></time>
+                </td>
+                <td class="ZAHL"> 8,400</td>
+                <td class="ZAHL"> 8,400</td>
+                <td class="ZAHL"> 8,100</td>
+                <td class="ZAHL"> 8,100</td>
+                <td class="ZAHL"> 3.610</td>
+            </tr>
+            <tr>
+                <td class="ZAHL">
+                    <time datetime="2016-10-31"><span>31.10.2016</span></time>
+                </td>
+                <td class="ZAHL"> 8,250</td>
+                <td class="ZAHL"> 8,250</td>
+                <td class="ZAHL"> 8,225</td>
+                <td class="ZAHL"> 8,225</td>
+                <td class="ZAHL"> 1.757</td>
+            </tr>
+            <tr class="HERVORGEHOBEN">
+                <td class="ZAHL">
+                    <time datetime="2016-11-01"><span>01.11.2016</span></time>
+                </td>
+                <td class="ZAHL"> 8,199</td>
+                <td class="ZAHL"> 8,199</td>
+                <td class="ZAHL"> 8,199</td>
+                <td class="ZAHL"> 8,199</td>
+                <td class="ZAHL"> 100</td>
+            </tr>
+            <tr>
+                <td class="ZAHL">
+                    <time datetime="2016-11-02"><span>02.11.2016</span></time>
+                </td>
+                <td class="ZAHL"> 8,099</td>
+                <td class="ZAHL"> 8,099</td>
+                <td class="ZAHL"> 8,000</td>
+                <td class="ZAHL"> 8,000</td>
+                <td class="ZAHL"> 210</td>
+            </tr>
+            <tr class="HERVORGEHOBEN">
+                <td class="ZAHL">
+                    <time datetime="2016-11-04"><span>04.11.2016</span></time>
+                </td>
+                <td class="ZAHL"> 7,800</td>
+                <td class="ZAHL"> 7,800</td>
+                <td class="ZAHL"> 7,800</td>
+                <td class="ZAHL"> 7,800</td>
+                <td class="ZAHL"> 1.300</td>
+            </tr>
+            <tr>
+                <td class="ZAHL">
+                    <time datetime="2016-11-07"><span>07.11.2016</span></time>
+                </td>
+                <td class="ZAHL"> 7,899</td>
+                <td class="ZAHL"> 7,990</td>
+                <td class="ZAHL"> 7,750</td>
+                <td class="ZAHL"> 7,750</td>
+                <td class="ZAHL"> 1.400</td>
+            </tr>
+            <tr class="HERVORGEHOBEN">
+                <td class="ZAHL">
+                    <time datetime="2016-11-08"><span>08.11.2016</span></time>
+                </td>
+                <td class="ZAHL"> 7,849</td>
+                <td class="ZAHL"> 7,849</td>
+                <td class="ZAHL"> 7,849</td>
+                <td class="ZAHL"> 7,849</td>
+                <td class="ZAHL"> 185</td>
+            </tr>
+            <tr>
+                <td class="ZAHL">
+                    <time datetime="2016-11-09"><span>09.11.2016</span></time>
+                </td>
+                <td class="ZAHL"> 7,600</td>
+                <td class="ZAHL"> 8,000</td>
+                <td class="ZAHL"> 7,500</td>
+                <td class="ZAHL"> 7,820</td>
+                <td class="ZAHL"> 3.115</td>
+            </tr>
+            <tr class="HERVORGEHOBEN">
+                <td class="ZAHL">
+                    <time datetime="2016-11-10"><span>10.11.2016</span></time>
+                </td>
+                <td class="ZAHL"> 7,999</td>
+                <td class="ZAHL"> 7,999</td>
+                <td class="ZAHL"> 7,999</td>
+                <td class="ZAHL"> 7,999</td>
+                <td class="ZAHL"> 284</td>
+            </tr>
+            <tr>
+                <td class="ZAHL">
+                    <time datetime="2016-11-11"><span>11.11.2016</span></time>
+                </td>
+                <td class="ZAHL"> 7,900</td>
+                <td class="ZAHL"> 7,900</td>
+                <td class="ZAHL"> 7,900</td>
+                <td class="ZAHL"> 7,900</td>
+                <td class="ZAHL"> 300</td>
+            </tr>
+            <tr class="HERVORGEHOBEN">
+                <td class="ZAHL">
+                    <time datetime="2016-11-14"><span>14.11.2016</span></time>
+                </td>
+                <td class="ZAHL"> 7,900</td>
+                <td class="ZAHL"> 7,900</td>
+                <td class="ZAHL"> 7,700</td>
+                <td class="ZAHL"> 7,700</td>
+                <td class="ZAHL"> 649</td>
+            </tr>
+            <tr>
+                <td class="ZAHL">
+                    <time datetime="2016-11-16"><span>16.11.2016</span></time>
+                </td>
+                <td class="ZAHL"> 7,725</td>
+                <td class="ZAHL"> 7,725</td>
+                <td class="ZAHL"> 7,725</td>
+                <td class="ZAHL"> 7,725</td>
+                <td class="ZAHL"> 724</td>
+            </tr>
+            <tr class="HERVORGEHOBEN">
+                <td class="ZAHL">
+                    <time datetime="2016-11-17"><span>17.11.2016</span></time>
+                </td>
+                <td class="ZAHL"> 7,500</td>
+                <td class="ZAHL"> 7,500</td>
+                <td class="ZAHL"> 7,160</td>
+                <td class="ZAHL"> 7,160</td>
+                <td class="ZAHL"> 1.420</td>
+            </tr>
+            <tr>
+                <td class="ZAHL">
+                    <time datetime="2016-11-21"><span>21.11.2016</span></time>
+                </td>
+                <td class="ZAHL"> 7,250</td>
+                <td class="ZAHL"> 7,949</td>
+                <td class="ZAHL"> 7,250</td>
+                <td class="ZAHL"> 7,770</td>
+                <td class="ZAHL"> 3.667</td>
+            </tr>
+            <tr class="HERVORGEHOBEN">
+                <td class="ZAHL">
+                    <time datetime="2016-11-22"><span>22.11.2016</span></time>
+                </td>
+                <td class="ZAHL"> 8,100</td>
+                <td class="ZAHL"> 8,199</td>
+                <td class="ZAHL"> 8,050</td>
+                <td class="ZAHL"> 8,150</td>
+                <td class="ZAHL"> 2.426</td>
+            </tr>
+            <tr>
+                <td class="ZAHL">
+                    <time datetime="2016-11-23"><span>23.11.2016</span></time>
+                </td>
+                <td class="ZAHL"> 8,200</td>
+                <td class="ZAHL"> 8,249</td>
+                <td class="ZAHL"> 8,090</td>
+                <td class="ZAHL"> 8,249</td>
+                <td class="ZAHL"> 1.500</td>
+            </tr>
+            <tr class="HERVORGEHOBEN">
+                <td class="ZAHL">
+                    <time datetime="2016-11-24"><span>24.11.2016</span></time>
+                </td>
+                <td class="ZAHL"> 8,350</td>
+                <td class="ZAHL"> 8,450</td>
+                <td class="ZAHL"> 8,300</td>
+                <td class="ZAHL"> 8,300</td>
+                <td class="ZAHL"> 1.040</td>
+            </tr>
+            <tr>
+                <td class="ZAHL">
+                    <time datetime="2016-11-28"><span>28.11.2016</span></time>
+                </td>
+                <td class="ZAHL"> 8,200</td>
+                <td class="ZAHL"> 8,935</td>
+                <td class="ZAHL"> 8,200</td>
+                <td class="ZAHL"> 8,690</td>
+                <td class="ZAHL"> 11.435</td>
+            </tr>
+            <tr class="HERVORGEHOBEN">
+                <td class="ZAHL">
+                    <time datetime="2016-11-29"><span>29.11.2016</span></time>
+                </td>
+                <td class="ZAHL"> 8,690</td>
+                <td class="ZAHL"> 8,690</td>
+                <td class="ZAHL"> 8,502</td>
+                <td class="ZAHL"> 8,502</td>
+                <td class="ZAHL"> 215</td>
+            </tr>
+            <tr>
+                <td class="ZAHL">
+                    <time datetime="2016-11-30"><span>30.11.2016</span></time>
+                </td>
+                <td class="ZAHL"> 8,500</td>
+                <td class="ZAHL"> 8,688</td>
+                <td class="ZAHL"> 8,500</td>
+                <td class="ZAHL"> 8,591</td>
+                <td class="ZAHL"> 1.208</td>
+            </tr>
+            <tr class="HERVORGEHOBEN">
+                <td class="ZAHL">
+                    <time datetime="2016-12-01"><span>01.12.2016</span></time>
+                </td>
+                <td class="ZAHL"> 8,650</td>
+                <td class="ZAHL"> 8,650</td>
+                <td class="ZAHL"> 8,500</td>
+                <td class="ZAHL"> 8,649</td>
+                <td class="ZAHL"> 3.232</td>
+            </tr>
+            <tr>
+                <td class="ZAHL">
+                    <time datetime="2016-12-02"><span>02.12.2016</span></time>
+                </td>
+                <td class="ZAHL"> 8,650</td>
+                <td class="ZAHL"> 8,900</td>
+                <td class="ZAHL"> 8,600</td>
+                <td class="ZAHL"> 8,900</td>
+                <td class="ZAHL"> 5.241</td>
+            </tr>
+            <tr class="HERVORGEHOBEN">
+                <td class="ZAHL">
+                    <time datetime="2016-12-05"><span>05.12.2016</span></time>
+                </td>
+                <td class="ZAHL"> 8,949</td>
+                <td class="ZAHL"> 9,450</td>
+                <td class="ZAHL"> 8,949</td>
+                <td class="ZAHL"> 9,250</td>
+                <td class="ZAHL"> 18.172</td>
+            </tr>
+            <tr>
+                <td class="ZAHL">
+                    <time datetime="2016-12-06"><span>06.12.2016</span></time>
+                </td>
+                <td class="ZAHL"> 9,450</td>
+                <td class="ZAHL"> 9,850</td>
+                <td class="ZAHL"> 9,400</td>
+                <td class="ZAHL"> 9,568</td>
+                <td class="ZAHL"> 4.247</td>
+            </tr>
+            <tr class="HERVORGEHOBEN">
+                <td class="ZAHL">
+                    <time datetime="2016-12-07"><span>07.12.2016</span></time>
+                </td>
+                <td class="ZAHL"> 10,055</td>
+                <td class="ZAHL"> 10,055</td>
+                <td class="ZAHL"> 9,800</td>
+                <td class="ZAHL"> 9,800</td>
+                <td class="ZAHL"> 5.126</td>
+            </tr>
+            <tr>
+                <td class="ZAHL">
+                    <time datetime="2016-12-08"><span>08.12.2016</span></time>
+                </td>
+                <td class="ZAHL"> 9,950</td>
+                <td class="ZAHL"> 10,100</td>
+                <td class="ZAHL"> 9,850</td>
+                <td class="ZAHL"> 9,850</td>
+                <td class="ZAHL"> 4.603</td>
+            </tr>
+            <tr class="HERVORGEHOBEN">
+                <td class="ZAHL">
+                    <time datetime="2016-12-09"><span>09.12.2016</span></time>
+                </td>
+                <td class="ZAHL"> 9,900</td>
+                <td class="ZAHL"> 10,050</td>
+                <td class="ZAHL"> 9,800</td>
+                <td class="ZAHL"> 9,800</td>
+                <td class="ZAHL"> 2.050</td>
+            </tr>
+            <tr>
+                <td class="ZAHL">
+                    <time datetime="2016-12-12"><span>12.12.2016</span></time>
+                </td>
+                <td class="ZAHL"> 9,900</td>
+                <td class="ZAHL"> 9,900</td>
+                <td class="ZAHL"> 9,728</td>
+                <td class="ZAHL"> 9,728</td>
+                <td class="ZAHL"> 2.344</td>
+            </tr>
+            <tr class="HERVORGEHOBEN">
+                <td class="ZAHL">
+                    <time datetime="2016-12-13"><span>13.12.2016</span></time>
+                </td>
+                <td class="ZAHL"> 9,809</td>
+                <td class="ZAHL"> 9,810</td>
+                <td class="ZAHL"> 9,809</td>
+                <td class="ZAHL"> 9,810</td>
+                <td class="ZAHL"> 1.000</td>
+            </tr>
+            <tr>
+                <td class="ZAHL">
+                    <time datetime="2016-12-14"><span>14.12.2016</span></time>
+                </td>
+                <td class="ZAHL"> 9,700</td>
+                <td class="ZAHL"> 9,700</td>
+                <td class="ZAHL"> 9,700</td>
+                <td class="ZAHL"> 9,700</td>
+                <td class="ZAHL"> 96</td>
+            </tr>
+            <tr class="HERVORGEHOBEN">
+                <td class="ZAHL">
+                    <time datetime="2016-12-15"><span>15.12.2016</span></time>
+                </td>
+                <td class="ZAHL"> 9,601</td>
+                <td class="ZAHL"> 9,650</td>
+                <td class="ZAHL"> 9,551</td>
+                <td class="ZAHL"> 9,551</td>
+                <td class="ZAHL"> 2.541</td>
+            </tr>
+            <tr>
+                <td class="ZAHL">
+                    <time datetime="2016-12-16"><span>16.12.2016</span></time>
+                </td>
+                <td class="ZAHL"> 9,501</td>
+                <td class="ZAHL"> 9,501</td>
+                <td class="ZAHL"> 9,500</td>
+                <td class="ZAHL"> 9,500</td>
+                <td class="ZAHL"> 1.868</td>
+            </tr>
+            <tr class="HERVORGEHOBEN">
+                <td class="ZAHL">
+                    <time datetime="2016-12-19"><span>19.12.2016</span></time>
+                </td>
+                <td class="ZAHL"> 9,700</td>
+                <td class="ZAHL"> 9,700</td>
+                <td class="ZAHL"> 9,500</td>
+                <td class="ZAHL"> 9,500</td>
+                <td class="ZAHL"> 1.000</td>
+            </tr>
+            <tr>
+                <td class="ZAHL">
+                    <time datetime="2016-12-20"><span>20.12.2016</span></time>
+                </td>
+                <td class="ZAHL"> 9,440</td>
+                <td class="ZAHL"> 9,550</td>
+                <td class="ZAHL"> 9,400</td>
+                <td class="ZAHL"> 9,400</td>
+                <td class="ZAHL"> 854</td>
+            </tr>
+            <tr class="HERVORGEHOBEN">
+                <td class="ZAHL">
+                    <time datetime="2016-12-21"><span>21.12.2016</span></time>
+                </td>
+                <td class="ZAHL"> 9,450</td>
+                <td class="ZAHL"> 9,450</td>
+                <td class="ZAHL"> 9,450</td>
+                <td class="ZAHL"> 9,450</td>
+                <td class="ZAHL"> 687</td>
+            </tr>
+            <tr>
+                <td class="ZAHL">
+                    <time datetime="2016-12-22"><span>22.12.2016</span></time>
+                </td>
+                <td class="ZAHL"> 9,350</td>
+                <td class="ZAHL"> 9,350</td>
+                <td class="ZAHL"> 8,610</td>
+                <td class="ZAHL"> 8,610</td>
+                <td class="ZAHL"> 2.520</td>
+            </tr>
+            </tbody>
+        </table>
+    </article>
+</div>
+<script async src='//www.google-analytics.com/analytics.js'></script>
+<script> window.ga = window.ga || function () {
+        (ga.q = ga.q || []).push(arguments)
+    };
+ga.l = +new Date;
+ga('create', 'UA-16506616-1', 'auto');
+ga('set', 'anonymizeIp', true);
+ga('require', 'linkid', {'levels': 6});
+ga('send', 'pageview'); </script>
+<script> require(['conversion_async'], function () {
+    window.google_trackConversion({
+        google_conversion_id: 1038516848,
+        google_conversion_language: "en",
+        google_conversion_format: "1",
+        google_conversion_color: "666666",
+        google_conversion_label: "oq0eCPSZqQEQ8ISa7wM",
+        google_conversion_value: 0,
+        google_remarketing_only: true
+    });
+}); </script>
+<noscript><img height="1" width="1" alt=""
+               src="//www.googleadservices.com/pagead/conversion/1038516848/?label=oq0eCPSZqQEQ8ISa7wM&amp;guid=ON&amp;script=0"
+               style="border-style:none;display:none;"></noscript>
+<script> require(['base/OnVista'], function () {
+    var controller = new OnVista.Realpush.RealpushControllerView({el: 'BODY'});
+    controller.render();
+}); </script>
+</body>
+</html>

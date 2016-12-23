@@ -1,16 +1,11 @@
 package de.bluemx.stocktool.converter;
 
-import de.bluemx.stocktool.helper.StringUtil;
-
-public class StocknameConverter implements Conversion {
-    final String REGEXP = "(.*)\\sAktie";
-
+public class IntegerConverter implements Conversion {
     @Override
     public Object convert(String... strings) {
         if (strings != null) {
             if (strings.length == 1) {
-                String returnStr = StringUtil.extractPatternFromString(strings[0], REGEXP);
-                return returnStr;
+                return Integer.parseInt(strings[0]);
             }
             throw new IllegalArgumentException("The no of parameters is not 1 as expected.");
         }

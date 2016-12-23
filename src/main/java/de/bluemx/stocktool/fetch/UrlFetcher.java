@@ -41,10 +41,14 @@ public class UrlFetcher {
                 .timeout(10000); // 10sec
         String resultingUrl;
         try {
-            if (source.equals(Source.RESPONSE)) {
+            if (source.equals(Source.RESPONSE_TEXT)) {
                 Document doc = con.get();
                 validateResponse(doc, resolver);
                 return extractFromResponse(doc, resolver);
+            } else if (source.equals(Source.RESPONSE_TAG)) {
+                Document doc = con.get();
+                validateResponse(doc, resolver);
+                return extractTagFromResponse(doc, resolver);
             } else if (source.equals(Source.URL)){
                 // After forwarding to new page
                 resultingUrl = con.response().url().toString();
@@ -70,12 +74,26 @@ public class UrlFetcher {
 
     }
 
-    private String[] extractFromResponse(Document doc, Resolver resolver) {
+    private String[] extractTagFromResponse(Document doc, Resolver resolver) {
         List<String> results = new ArrayList<>();
         for (Extract extractor : resolver.extractors()) {
             Elements select = doc.select(extractor.expression());
             if (select.size() > 0) {
-                results.add(select.first().text());
+                results.add(select.first().toString());
+            }
+        }
+        return results.toArray(new String[results.size()]);
+
+    }
+
+    private String[] extractFromResponse(Document doc, Resolver resolver) {
+        List<String> results = new ArrayList<>();
+        for (Extract extractor : resolver.extractors()) {
+            if (extractor.searchType().equals(SearchType.Selector)) {
+                Elements select = doc.select(extractor.expression());
+                if (select.size() > 0) {
+                    results.add(select.first().text());
+                }
             }
         }
         return results.toArray(new String[results.size()]);

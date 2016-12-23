@@ -1,6 +1,7 @@
 package de.bluemx.stocktool.fetch;
 
 import com.google.inject.Inject;
+import de.bluemx.stocktool.model.Index;
 import de.bluemx.stocktool.model.StockQuoteData;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,7 +18,7 @@ public class IsinFetcher {
     }
 
     public StockQuoteData populateByIsin(String isin) {
-        StockQuoteData stock = new StockQuoteData(isin);
+        StockQuoteData stock = new StockQuoteData(isin, Index.SDAX);
         return genericFetcher.process(stock);
     }
 

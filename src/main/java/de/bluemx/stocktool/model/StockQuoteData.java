@@ -2,14 +2,12 @@ package de.bluemx.stocktool.model;
 
 
 import de.bluemx.stocktool.annotations.*;
-import de.bluemx.stocktool.converter.BigDecimalConverter;
-import de.bluemx.stocktool.converter.FinancialYearConverter;
-import de.bluemx.stocktool.converter.PerConverter;
-import de.bluemx.stocktool.converter.StocknameConverter;
+import de.bluemx.stocktool.converter.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.Year;
+import java.time.format.DateTimeFormatter;
 import java.util.Map;
 
 @Config(providers = {
@@ -20,32 +18,58 @@ import java.util.Map;
                 variables = {@Variable(key = "isin", source = "isin")}),
         @Provider(name = "onvista-fundamental", dataprovider = Dataprovider.ONVISTA, url = "http://www.onvista.de/aktien/fundamental/{urlPart}",
                 variables = {@Variable(key = "urlPart", source = "urlParts")},
-                required = "urlParts")})
+                required = "urlParts"),
+        @Provider(name = "onvista-index", dataprovider = Dataprovider.ONVISTA, url = "http://www.onvista.de/index/{indexString}",
+                variables = {@Variable(key = "indexString", source = "index")}
+        ),
+        @Provider(name = "4traders-isin-search", dataprovider = Dataprovider.FOR_TRADERS, url = "http://de.4-traders.com/indexbasegauche.php?mots={isin}",
+                variables = {@Variable(key = "isin", source = "isin")}),
+        @Provider(name = "4traders-analysts", dataprovider = Dataprovider.FOR_TRADERS, url = "http://de.4-traders.com/{urlPart}/analystenerwartungen/",
+                variables = {@Variable(key = "urlPart", source = "urlParts")},
+                required = "urlParts"),
+        @Provider(name = "onvista-notations",
+                dataprovider = Dataprovider.ONVISTA,
+                url = "http://www.onvista.de/onvista/times+sales/popup/historische-kurse/?notationId={notationId}&dateStart={lastYearsDate}&interval=Y1&assetName=%20&exchange=Xetra",
+                required = "urlParts",
+                variables = {
+                        @Variable(key = "notationId", source = "historyParts"),
+                        @Variable(key = "lastYearsDate", source = "getLastYearsDate")
+                })})
 public class StockQuoteData {
     @Resolvers({@Resolver(provider = "onvista-basic",
             extractors = {@Extract(searchType = SearchType.Selector, expression = "a.INSTRUMENT")},
-            source = Source.RESPONSE,
-            converterClass = StocknameConverter.class)})
-    private String stockname = "";
+            source = Source.RESPONSE_TEXT,
+            converter = @Converter(converterClass = SimpleRegExpConverter.class, variables = {"(.*)\\sAktie"})
+    )})
+    private String stockname;
 
     private String isin;
 
-    @Resolvers({@Resolver(provider = "onvista-isin-search",
+    private Index index;
+
+    @Resolvers({
+            @Resolver(provider = "onvista-isin-search",
             source = Source.URL,
-            extractors = {@Extract(searchType = SearchType.REGEXP, expression = "^.*/(.*)")})})
+                    extractors = {@Extract(searchType = SearchType.REGEXP, expression = "^.*/(.*)")}),
+            @Resolver(provider = "4traders-isin-search",
+                    source = Source.URL,
+                    extractors = {@Extract(searchType = SearchType.REGEXP, expression = "^\\S*/(\\S[^/]+)")})
+    })
     @ProviderMap
     private Map<Dataprovider, String> urlParts;
 
-    //    @Resolvers({@Resolver(provider = "onvista-basic",
-//            extractors = {@Extract(searchType = SearchType.REGEXP, expression = "//adasd[]3234")},
-//            source = Source.RESPONSE,
-//            converterClass = StringConverter.class)})
+    @Resolvers({@Resolver(provider = "onvista-basic",
+            extractors = {@Extract(searchType = SearchType.Selector, expression = "html meta[name=og:image]")},
+            source = Source.RESPONSE_TAG,
+            converter = @Converter(converterClass = SimpleRegExpConverter.class, variables = {"id=(\\d+)"})
+    )})
+    @ProviderMap
     private Map<Dataprovider, String> historyParts;
 
 
     @Resolvers({@Resolver(provider = "onvista-basic",
             extractors = {@Extract(searchType = SearchType.Selector, expression = "div.WERTPAPIER_DETAILS > dl:nth-of-type(2) > dd")},
-            source = Source.RESPONSE)})
+            source = Source.RESPONSE_TEXT)})
     private String symbol;
     private LocalDate fetchDate = LocalDate.now();
 
@@ -53,8 +77,8 @@ public class StockQuoteData {
     // No 1
     @Resolvers({@Resolver(provider = "onvista-fundamental",
             extractors = {@Extract(searchType = SearchType.Selector, expression = "article.KENNZAHLEN table:nth-of-type(8) tbody tr:nth-of-type(4) td:nth-of-type(5)")},
-            source = Source.RESPONSE,
-            converterClass = BigDecimalConverter.class,
+            source = Source.RESPONSE_TEXT,
+            converter = @Converter(converterClass = BigDecimalConverter.class),
             validators = {@Validate(expression = "article.KENNZAHLEN table th.ZAHL", expected = "2018e"),
                     @Validate(expression = "article.KENNZAHLEN table:nth-of-type(8) tbody tr:nth-of-type(4) td.INFOTEXT", expected = "Eigenkapitalrendite")})})
     private BigDecimal roe;
@@ -63,8 +87,8 @@ public class StockQuoteData {
     // No 2
     @Resolvers({@Resolver(provider = "onvista-fundamental",
             extractors = {@Extract(searchType = SearchType.Selector, expression = "article.KENNZAHLEN table:nth-of-type(8) tbody tr:nth-of-type(2) td:nth-of-type(5)")},
-            source = Source.RESPONSE,
-            converterClass = BigDecimalConverter.class,
+            source = Source.RESPONSE_TEXT,
+            converter = @Converter(converterClass = BigDecimalConverter.class),
             validators = {@Validate(expression = "article.KENNZAHLEN table th.ZAHL", expected = "2018e"),
                     @Validate(expression = "article.KENNZAHLEN table:nth-of-type(8) tbody tr:nth-of-type(2) td.INFOTEXT", expected = "EBIT-Marge")})})
     private BigDecimal ebitMargin;
@@ -73,8 +97,8 @@ public class StockQuoteData {
     // No 3
     @Resolvers({@Resolver(provider = "onvista-fundamental",
             extractors = {@Extract(searchType = SearchType.Selector, expression = "article.KENNZAHLEN table:nth-of-type(6) tbody tr:nth-of-type(2) td:nth-of-type(5)")},
-            source = Source.RESPONSE,
-            converterClass = BigDecimalConverter.class,
+            source = Source.RESPONSE_TEXT,
+            converter = @Converter(converterClass = BigDecimalConverter.class),
             validators = {@Validate(expression = "article.KENNZAHLEN table th.ZAHL", expected = "2018e"),
                     @Validate(expression = "article.KENNZAHLEN table:nth-of-type(6) tbody tr:nth-of-type(2) td.INFOTEXT", expected = "Eigenkapitalquote")})})
     private BigDecimal equityRatio;
@@ -98,16 +122,17 @@ public class StockQuoteData {
                     @Extract(searchType = SearchType.Selector, expression = "article.KENNZAHLEN table th.ZAHL:nth-of-type(8)"),
                     @Extract(searchType = SearchType.Selector, expression = "article.KENNZAHLEN table tbody tr:nth-of-type(2) td:nth-of-type(8)")
             },
-            source = Source.RESPONSE,
-            converterClass = PerConverter.class,
+            source = Source.RESPONSE_TEXT,
+            converter = @Converter(converterClass = PerConverter.class),
             validators = {@Validate(expression = "article.KENNZAHLEN table th.ZAHL", expected = "2018e"),
                     @Validate(expression = "article.KENNZAHLEN table tbody tr:nth-of-type(2) td.INFOTEXT", expected = "KGV")})})
     private Map<Year, String> per;
 
     @Resolvers({@Resolver(provider = "onvista-fundamental",
             extractors = {@Extract(searchType = SearchType.Selector, expression = "article.KENNZAHLEN div span")},
-            source = Source.RESPONSE,
-            converterClass = FinancialYearConverter.class)})
+            source = Source.RESPONSE_TEXT,
+            converter = @Converter(converterClass = FinancialYearConverter.class)
+    )})
     private LocalDate financialYear;
 
     // PER actual
@@ -115,15 +140,30 @@ public class StockQuoteData {
 
     // Analysts
     // No 6
-    private String analystsOpinion;
-    private String analystsCount;
+    @Resolvers({@Resolver(provider = "4traders-analysts",
+            extractors = {@Extract(searchType = SearchType.Selector, expression = "table.Bord td:nth-of-type(2)")},
+            source = Source.RESPONSE_TEXT,
+            converter = @Converter(converterClass = AnalystsConverter.class)
+    )})
+    private AnalystsOpinion analystsOpinion;
+    @Resolvers({@Resolver(provider = "4traders-analysts",
+            extractors = {@Extract(searchType = SearchType.Selector, expression = "table.Bord tr:nth-of-type(2) td:nth-of-type(2)")},
+            source = Source.RESPONSE_TEXT,
+            converter = @Converter(converterClass = IntegerConverter.class)
+    )})
+    private int analystsCount;
 
-    private String quote;
+    @Resolvers({@Resolver(provider = "onvista-notations",
+            extractors = {@Extract(searchType = SearchType.Selector, expression = "body table tbody")},
+            source = Source.RESPONSE_TEXT,
+            converter = @Converter(converterClass = QuoteConverter.class)
+    )})
+    private Map<LocalDate, BigDecimal> quotes;
 
     // Reaction Quarter Quote
     // No  7
-    private String[] quarterQuote;
-    private String[] quarterQuoteIndex;
+//    private String[] quarterQuote;
+//    private String[] quarterQuoteIndex;
 
     // Earnings Revision
     // No 8
@@ -131,11 +171,11 @@ public class StockQuoteData {
 
     // Quote half year ago
     // No 9
-    private String stockPriceHalfYear;
+//    private String stockPriceHalfYear;
 
     // Quote year ago
     // No 10 (Basis)
-    private String stockPriceYear;
+//    private String stockPriceYear;
 
     // Quote Momentum / Kursmomentum
     // No 11
@@ -143,7 +183,7 @@ public class StockQuoteData {
 
     // Dreimonatsreversal
     // No 12
-    private String[] threeMonthReversal;
+//    private String[] threeMonthReversal;
 
     // Earnigs per Share last year
     // No 13 (Basis)
@@ -152,8 +192,16 @@ public class StockQuoteData {
     // Earnigs per Share Actual Year
     private String epsAY;
 
-    public StockQuoteData(String isin) {
+    public StockQuoteData(String isin, Index index) {
         this.isin = isin;
+        this.index = index;
+    }
+
+    public String getLastYearsDate() {
+        LocalDate minusOneYear = fetchDate.minusYears(1);
+        minusOneYear = minusOneYear.minusDays(1);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.uuuu");
+        return minusOneYear.format(formatter);
     }
 
     public String getStockname() {
@@ -196,40 +244,29 @@ public class StockQuoteData {
         return per;
     }
 
-    public String getAnalystsOpinion() {
+
+    public LocalDate getFinancialYear() {
+        return financialYear;
+    }
+
+    public AnalystsOpinion getAnalystsOpinion() {
         return analystsOpinion;
     }
 
-    public String getAnalystsCount() {
+    public int getAnalystsCount() {
         return analystsCount;
     }
 
-    public String getQuote() {
-        return quote;
+    public Index getIndex() {
+        return index;
     }
 
-    public String[] getQuarterQuote() {
-        return quarterQuote;
-    }
-
-    public String[] getQuarterQuoteIndex() {
-        return quarterQuoteIndex;
+    public Map<LocalDate, BigDecimal> getQuotes() {
+        return quotes;
     }
 
     public String getEarningsRevision() {
         return earningsRevision;
-    }
-
-    public String getStockPriceHalfYear() {
-        return stockPriceHalfYear;
-    }
-
-    public String getStockPriceYear() {
-        return stockPriceYear;
-    }
-
-    public String[] getThreeMonthReversal() {
-        return threeMonthReversal;
     }
 
     public String getEpsLY() {

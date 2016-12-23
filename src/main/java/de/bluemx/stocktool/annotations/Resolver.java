@@ -1,7 +1,5 @@
 package de.bluemx.stocktool.annotations;
 
-import de.bluemx.stocktool.converter.StringConverter;
-
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -11,7 +9,7 @@ public @interface Resolver {
     String provider();
     Source source();
     Extract[] extractors();
-    Class converterClass() default StringConverter.class;
-
     Validate[] validators() default {};
+
+    Converter converter() default @Converter();
 }
