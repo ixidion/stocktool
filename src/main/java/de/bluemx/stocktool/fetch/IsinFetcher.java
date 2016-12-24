@@ -17,8 +17,8 @@ public class IsinFetcher {
         this.genericFetcher = genericFetcher;
     }
 
-    public StockQuoteData populateByIsin(String isin) {
-        StockQuoteData stock = new StockQuoteData(isin, Index.SDAX);
+    public StockQuoteData populateByIsin(String isin, Index index) {
+        StockQuoteData stock = new StockQuoteData(isin, index);
         return genericFetcher.process(stock);
     }
 

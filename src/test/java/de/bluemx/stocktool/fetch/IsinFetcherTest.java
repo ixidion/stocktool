@@ -1,5 +1,9 @@
 package de.bluemx.stocktool.fetch;
 
+import com.google.inject.Guice;
+import com.google.inject.Injector;
+import de.bluemx.stocktool.cache.Cacheprovider;
+import de.bluemx.stocktool.helper.DefaultInject;
 import de.bluemx.stocktool.model.Index;
 import de.bluemx.stocktool.model.StockQuoteData;
 import org.jsoup.Connection;
@@ -26,11 +30,12 @@ import static org.mockito.Mockito.when;
 
 class IsinFetcherTest {
 
-    static String searchUrl = "http://www.onvista.de/suche/?searchValue=DE000A1K0409";
+    private static String searchUrl = "http://www.onvista.de/suche/?searchValue=DE000A1K0409";
     private static String searchUrl4Traders = "http://de.4-traders.com/indexbasegauche.php?mots=DE000A1K0409";
 
-    Map<String, String> urlToFile = new HashMap<>();
-    GenericFetcher<StockQuoteData> stockquoteFetcher;
+    private Map<String, String> urlToFile = new HashMap<>();
+    private GenericFetcher<StockQuoteData> stockquoteFetcher;
+    private Injector injector;
 
     {
         LocalDate minusOneYear = LocalDate.now().minusYears(1).minusDays(1);
@@ -49,6 +54,10 @@ class IsinFetcherTest {
 
     @BeforeEach
     void beforeEach() throws IOException {
+        injector = Guice.createInjector(new DefaultInject());
+        Cacheprovider cacheprovider = injector.getInstance(Cacheprovider.class);
+
+
         JsoupWrapper jsoup = mock(JsoupWrapper.class);
         for (Map.Entry<String, String> entry : urlToFile.entrySet()) {
             DummyResponse response = mock(DummyResponse.class);
@@ -68,7 +77,7 @@ class IsinFetcherTest {
         }
 
 
-        UrlFetcher urlFetcher = new UrlFetcher(jsoup);
+        UrlFetcher urlFetcher = new UrlFetcher(jsoup, cacheprovider);
         stockquoteFetcher = new GenericFetcher<>(urlFetcher);
     }
 
@@ -89,6 +98,12 @@ class IsinFetcherTest {
         assertEquals(new BigDecimal("28.35"), testdata.getEbitMargin());
         assertEquals(new BigDecimal("73.83"), testdata.getEquityRatio());
         assertThat(testdata.getHistoryParts(), hasValue("54094105"));
+    }
+
+    @Test
+    void realFetchTest() {
+        IsinFetcher fetcher = injector.getInstance(IsinFetcher.class);
+        StockQuoteData stock = fetcher.populateByIsin("DE000A1K0409", Index.SDAX);
     }
 
 

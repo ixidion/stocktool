@@ -10,6 +10,11 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * This converter is a speciality for the Onvista EPS data (Gewinn pro Aktie)
+ * It extracts all entries with Years and saves them in a Map for later use.
+ * Also it is saved, if the value is estimated or not, e.g. 2018e inestead of 2018 without 'e'.
+ */
 public class EPSConverter implements Conversion {
     private final String pattern = "(\\d{4}e?)\\W(\\d{4}e?)\\W(\\d{4}e?)\\W(\\d{4}e?)\\W(\\d{4}e?)\\W(\\d{4}e?)\\W(\\d{4}e?)\\WGewinn pro Aktie in EUR\\W(-|\\d+,\\d+)\\W(-|\\d+,\\d+)\\W(-|\\d+,\\d+)\\W(-|\\d+,\\d+)\\W(-|\\d+,\\d+)\\W(-|\\d+,\\d+)\\W(-|\\d+,\\d+)\\W";
     private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.uuuu");

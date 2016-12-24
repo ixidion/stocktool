@@ -16,7 +16,7 @@ public class Cacheprovider {
     private Cache<String,String> cache;
 
     @Inject
-    private Cacheprovider() {
+    public Cacheprovider() {
         cache = createCache();
     }
 

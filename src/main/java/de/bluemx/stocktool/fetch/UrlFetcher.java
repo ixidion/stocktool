@@ -2,12 +2,14 @@ package de.bluemx.stocktool.fetch;
 
 import com.google.inject.Inject;
 import de.bluemx.stocktool.annotations.*;
+import de.bluemx.stocktool.cache.Cacheprovider;
 import org.jsoup.Connection;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.cache.Cache;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,48 +20,69 @@ public class UrlFetcher {
     final static Logger log = LoggerFactory.getLogger(UrlFetcher.class);
 
     private JsoupWrapper jsoup;
+    private Cacheprovider cacheProvider;
+    private Cache<String, String> cache;
 
     @Inject
-    public UrlFetcher(JsoupWrapper jsoup) {
+    public UrlFetcher(JsoupWrapper jsoup, Cacheprovider cacheprovider) {
         this.jsoup = jsoup;
+        this.cacheProvider = cacheprovider;
+        cache = cacheprovider.getCache();
     }
 
     public String[] urlFetch(String url, Provider provider, Resolver resolver, Object obj) {
         Dataprovider dataprovider = provider.dataprovider();
-        if (dataprovider.equals(Dataprovider.YAHOO)) {
-            return callYahooAPi();
-        } else {
-            return callJsoupAPI(url, resolver);
-        }
+        return callJsoupAPI(url, resolver);
 
     }
 
     private String[] callJsoupAPI(String url, Resolver resolver) {
         Source source = resolver.source();
-        Connection con = jsoup.connect(url)
-                .userAgent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_1) AppleWebKit/602.2.14 (KHTML, like Gecko) Version/10.0.1 Safari/602.2.14")
-                .timeout(10000); // 10sec
-        String resultingUrl;
-        try {
-            if (source.equals(Source.RESPONSE_TEXT)) {
-                Document doc = con.get();
-                validateResponse(doc, resolver);
-                return extractFromResponse(doc, resolver);
-            } else if (source.equals(Source.RESPONSE_TAG)) {
-                Document doc = con.get();
-                validateResponse(doc, resolver);
-                return extractTagFromResponse(doc, resolver);
-            } else if (source.equals(Source.URL)){
-                // After forwarding to new page
-                resultingUrl = con.response().url().toString();
-                return  extractFromUrl(resultingUrl, resolver);
+
+        if (cache.containsKey(url)) {
+            if (source.equals(Source.URL)) {
+                String resultingUrl = cache.get(url);
+                return extractFromUrl(resultingUrl, resolver);
             } else {
+                Document doc = jsoup.parse(cache.get(url));
+                if (source.equals(Source.RESPONSE_TEXT)) {
+                    validateResponse(doc, resolver);
+                    return extractFromResponse(doc, resolver);
+                } else if (source.equals(Source.RESPONSE_TAG)) {
+                    validateResponse(doc, resolver);
+                    return extractTagFromResponse(doc, resolver);
+                }
                 log.error("The given source {} ist not implemented.", source.toString());
-                throw new  IllegalArgumentException("Given Source not implemented.");
+                throw new IllegalArgumentException("Given Source not implemented.");
             }
-        } catch (IOException e) {
-            log.error("Fetch impossible.");
-            throw new RuntimeException(e);
+        } else {
+            Connection con = jsoup.connect(url)
+                    .userAgent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_1) AppleWebKit/602.2.14 (KHTML, like Gecko) Version/10.0.1 Safari/602.2.14")
+                    .timeout(10000); // 10sec
+            try {
+                // doc not needed for Source.URL, but the get has to be done
+                Document doc = con.get();
+                if (source.equals(Source.RESPONSE_TEXT)) {
+                    validateResponse(doc, resolver);
+                    cache.put(url, doc.html());
+                    return extractFromResponse(doc, resolver);
+                } else if (source.equals(Source.RESPONSE_TAG)) {
+                    validateResponse(doc, resolver);
+                    cache.put(url, doc.html());
+                    return extractTagFromResponse(doc, resolver);
+                } else if (source.equals(Source.URL)) {
+                    // After forwarding to new page
+                    String resultingUrl = con.response().url().toString();
+                    cache.put(url, resultingUrl);
+                    return extractFromUrl(resultingUrl, resolver);
+                } else {
+                    log.error("The given source {} ist not implemented.", source.toString());
+                    throw new IllegalArgumentException("Given Source not implemented.");
+                }
+            } catch (IOException e) {
+                log.error("Fetch impossible.");
+                throw new RuntimeException(e);
+            }
         }
     }
 
@@ -115,8 +138,4 @@ public class UrlFetcher {
         throw new IllegalArgumentException("More than one extractor for type Url.");
     }
 
-    private String[] callYahooAPi() {
-        return null;
-
-    }
 }
