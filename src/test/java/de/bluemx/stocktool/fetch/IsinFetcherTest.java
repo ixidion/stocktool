@@ -9,6 +9,7 @@ import de.bluemx.stocktool.model.StockQuoteData;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -77,7 +78,7 @@ class IsinFetcherTest {
         }
 
 
-        UrlFetcher urlFetcher = new UrlFetcher(jsoup, cacheprovider);
+        UrlFetcher urlFetcher = new UrlFetcher(jsoup);
         stockquoteFetcher = new GenericFetcher<>(urlFetcher);
     }
 
@@ -101,6 +102,7 @@ class IsinFetcherTest {
     }
 
     @Test
+    @Disabled
     void realFetchTest() {
         IsinFetcher fetcher = injector.getInstance(IsinFetcher.class);
         StockQuoteData stock = fetcher.populateByIsin("DE000A1K0409", Index.SDAX);

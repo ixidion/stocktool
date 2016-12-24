@@ -22,13 +22,21 @@ public class UrlFetcher {
     private JsoupWrapper jsoup;
     private Cacheprovider cacheProvider;
     private Cache<String, String> cache;
+    private boolean caching;
 
     @Inject
     public UrlFetcher(JsoupWrapper jsoup, Cacheprovider cacheprovider) {
         this.jsoup = jsoup;
         this.cacheProvider = cacheprovider;
         cache = cacheprovider.getCache();
+        caching = true;
     }
+
+    public UrlFetcher(JsoupWrapper jsoup) {
+        this.jsoup = jsoup;
+        caching = false;
+    }
+
 
     public String[] urlFetch(String url, Provider provider, Resolver resolver, Object obj) {
         Dataprovider dataprovider = provider.dataprovider();
@@ -39,7 +47,8 @@ public class UrlFetcher {
     private String[] callJsoupAPI(String url, Resolver resolver) {
         Source source = resolver.source();
 
-        if (cache.containsKey(url)) {
+        if (caching && cache.containsKey(url)) {
+            log.debug("Real [ ] Cache-Hit [X]");
             if (source.equals(Source.URL)) {
                 String resultingUrl = cache.get(url);
                 return extractFromUrl(resultingUrl, resolver);
@@ -56,6 +65,7 @@ public class UrlFetcher {
                 throw new IllegalArgumentException("Given Source not implemented.");
             }
         } else {
+            log.debug("Real [X] Cache-Hit [ ]");
             Connection con = jsoup.connect(url)
                     .userAgent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_1) AppleWebKit/602.2.14 (KHTML, like Gecko) Version/10.0.1 Safari/602.2.14")
                     .timeout(10000); // 10sec
@@ -64,16 +74,22 @@ public class UrlFetcher {
                 Document doc = con.get();
                 if (source.equals(Source.RESPONSE_TEXT)) {
                     validateResponse(doc, resolver);
-                    cache.put(url, doc.html());
+                    if (caching) {
+                        cache.put(url, doc.html());
+                    }
                     return extractFromResponse(doc, resolver);
                 } else if (source.equals(Source.RESPONSE_TAG)) {
                     validateResponse(doc, resolver);
-                    cache.put(url, doc.html());
+                    if (caching) {
+                        cache.put(url, doc.html());
+                    }
                     return extractTagFromResponse(doc, resolver);
                 } else if (source.equals(Source.URL)) {
                     // After forwarding to new page
                     String resultingUrl = con.response().url().toString();
-                    cache.put(url, resultingUrl);
+                    if (caching) {
+                        cache.put(url, doc.html());
+                    }
                     return extractFromUrl(resultingUrl, resolver);
                 } else {
                     log.error("The given source {} ist not implemented.", source.toString());

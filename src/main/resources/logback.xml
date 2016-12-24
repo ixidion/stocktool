@@ -7,8 +7,9 @@
         </layout>
     </appender>
 
+
+    <logger name="de.bluemx.stocktool.helper" level="error"/>
     <logger name="de.bluemx" level="debug"/>
-    <logger name="de.bluemx.helper" level="error"/>
 
 
     <root level="error">
