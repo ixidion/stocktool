@@ -10,6 +10,10 @@ import java.time.Year;
 import java.time.format.DateTimeFormatter;
 import java.util.Map;
 
+/**
+ * This class is the container for all fetched RawData from different Providers.
+ * From theses values others are computed and derived.
+ */
 @Config(providers = {
         @Provider(name = "onvista-basic", dataprovider = Dataprovider.ONVISTA, url = "http://www.onvista.de/aktien/{urlPart}",
                 variables = {@Variable(key = "urlPart", source = "urlParts")},
@@ -49,7 +53,7 @@ public class StockQuoteData {
 
     @Resolvers({
             @Resolver(provider = "onvista-isin-search",
-            source = Source.URL,
+                    source = Source.URL,
                     extractors = {@Extract(searchType = SearchType.REGEXP, expression = "^.*/(.*)")}),
             @Resolver(provider = "4traders-isin-search",
                     source = Source.URL,
@@ -103,7 +107,7 @@ public class StockQuoteData {
                     @Validate(expression = "article.KENNZAHLEN table:nth-of-type(6) tbody tr:nth-of-type(2) td.INFOTEXT", expected = "Eigenkapitalquote")})})
     private BigDecimal equityRatio;
 
-    // Price Earnings Ratio / KGV
+    // Price Earnings Ratio / KGV / PER actual No 5
     // No 4 (Basis)
     @Resolvers({@Resolver(provider = "onvista-fundamental",
             extractors = {
@@ -135,9 +139,6 @@ public class StockQuoteData {
     )})
     private LocalDate financialYear;
 
-    // PER actual
-    // No 5
-
     // Analysts
     // No 6
     @Resolvers({@Resolver(provider = "4traders-analysts",
@@ -165,32 +166,20 @@ public class StockQuoteData {
 //    private String[] quarterQuote;
 //    private String[] quarterQuoteIndex;
 
-    // Earnings Revision
-    // No 8
-    private String earningsRevision;
 
-    // Quote half year ago
-    // No 9
-//    private String stockPriceHalfYear;
-
-    // Quote year ago
-    // No 10 (Basis)
-//    private String stockPriceYear;
-
-    // Quote Momentum / Kursmomentum
-    // No 11
-    // Abbilden in Excel
-
-    // Dreimonatsreversal
-    // No 12
-//    private String[] threeMonthReversal;
-
-    // Earnigs per Share last year
+    // Earnigs per Share / Needed for No 8
     // No 13 (Basis)
-    private String epsLY;
+    @Resolvers({@Resolver(provider = "onvista-fundamental",
+            extractors = {@Extract(searchType = SearchType.Selector, expression = "article.KENNZAHLEN div")},
+            source = Source.RESPONSE_TEXT,
+            converter = @Converter(converterClass = EPSConverter.class),
+            validators = {
+                    @Validate(expression = "article.KENNZAHLEN table th.ZAHL:nth-of-type(4)", expected = "2016e"),
+                    @Validate(expression = "article.KENNZAHLEN table th.ZAHL:nth-of-type(5)", expected = "2015")
+            }
 
-    // Earnigs per Share Actual Year
-    private String epsAY;
+    )})
+    private Map<YearEstimated, BigDecimal> eps;
 
     public StockQuoteData(String isin, Index index) {
         this.isin = isin;
@@ -265,15 +254,4 @@ public class StockQuoteData {
         return quotes;
     }
 
-    public String getEarningsRevision() {
-        return earningsRevision;
-    }
-
-    public String getEpsLY() {
-        return epsLY;
-    }
-
-    public String getEpsAY() {
-        return epsAY;
-    }
 }
