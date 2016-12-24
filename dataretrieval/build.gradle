@@ -1,4 +1,4 @@
-group 'de.bluemx'
+group 'de.bluemx.stocktool'
 version '1.0-SNAPSHOT'
 
 apply plugin: 'java'
