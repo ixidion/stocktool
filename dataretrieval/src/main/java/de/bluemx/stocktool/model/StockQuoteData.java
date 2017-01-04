@@ -130,7 +130,7 @@ public class StockQuoteData {
             converter = @Converter(converterClass = PerConverter.class),
             validators = {@Validate(expression = "article.KENNZAHLEN table th.ZAHL", expected = "2018e"),
                     @Validate(expression = "article.KENNZAHLEN table tbody tr:nth-of-type(2) td.INFOTEXT", expected = "KGV")})})
-    private Map<Year, String> per;
+    private Map<Year, BigDecimal> per;
 
     @Resolvers({@Resolver(provider = "onvista-fundamental",
             extractors = {@Extract(searchType = SearchType.Selector, expression = "article.KENNZAHLEN div span")},
@@ -229,7 +229,7 @@ public class StockQuoteData {
         return equityRatio;
     }
 
-    public Map<Year, String> getPer() {
+    public Map<Year, BigDecimal> getPer() {
         return per;
     }
 
