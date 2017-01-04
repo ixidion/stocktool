@@ -18,6 +18,7 @@ import static org.junit.jupiter.api.Assertions.*;
 /**
  * Created by teclis on 02.01.17.
  */
+@Disabled
 class StockquoteBasicTest {
     private static EntityManagerFactory emf;
     private static EntityManager em;
