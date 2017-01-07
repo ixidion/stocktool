@@ -3,14 +3,14 @@ package de.bluemx.stocktool.db.model;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.sql.Date;
+import java.time.LocalDate;
 
 @Entity(name="historical_quotes")
 public class HistoricalQuote implements Serializable {
     @Id @GeneratedValue(strategy=GenerationType.IDENTITY) @Column(name="historical_quotes_id")
     private int epsId;
     @Column(name="quote_date")
-    private Date quoteDate;
+    private LocalDate quoteDate;
     @Column(name="quote")
     private BigDecimal quote;
     @ManyToOne
@@ -49,11 +49,11 @@ public class HistoricalQuote implements Serializable {
         this.epsId = epsId;
     }
 
-    public Date getQuoteDate() {
+    public LocalDate getQuoteDate() {
         return quoteDate;
     }
 
-    public void setQuoteDate(Date quoteDate) {
+    public void setQuoteDate(LocalDate quoteDate) {
         this.quoteDate = quoteDate;
     }
 

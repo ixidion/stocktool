@@ -5,7 +5,7 @@ import org.eclipse.persistence.annotations.JoinFetchType;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Vector;
 
@@ -23,7 +23,7 @@ public class StockquoteBasic implements Serializable {
     @Column(name="symbol")
     private String symbol;
     @Column(name="financial_year")
-    private Date financialYear;
+    private LocalDate financialYear;
     @OneToMany(mappedBy = "stockquoteBasics", cascade = CascadeType.ALL)
     @JoinFetch(JoinFetchType.OUTER)
     private List<StockquoteDetail> fetches;
@@ -115,11 +115,11 @@ public class StockquoteBasic implements Serializable {
         this.symbol = symbol;
     }
 
-    public Date getFinancialYear() {
+    public LocalDate getFinancialYear() {
         return financialYear;
     }
 
-    public void setFinancialYear(Date financialYear) {
+    public void setFinancialYear(LocalDate financialYear) {
         this.financialYear = financialYear;
     }
 

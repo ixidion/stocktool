@@ -5,7 +5,7 @@ import org.eclipse.persistence.annotations.JoinFetchType;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Vector;
 
@@ -16,7 +16,7 @@ public class StockquoteDetail implements Serializable {
     @Column(name = "stockquotedata_id")
     private Long stockquotedata_id;
     @Column(name = "fetch_date")
-    private Date fetch_date;
+    private LocalDate fetch_date;
     @Column(name = "return_on_equity")
     private Double return_on_equity;
     @Column(name = "ebit_margin")
@@ -131,11 +131,11 @@ public class StockquoteDetail implements Serializable {
         this.stockquotedata_id = stockquotedata_id;
     }
 
-    public Date getFetch_date() {
+    public LocalDate getFetch_date() {
         return fetch_date;
     }
 
-    public void setFetch_date(Date fetch_date) {
+    public void setFetch_date(LocalDate fetch_date) {
         this.fetch_date = fetch_date;
     }
 

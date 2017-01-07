@@ -8,7 +8,6 @@ import org.junit.jupiter.api.Test;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import java.sql.Date;
 
 
 /**
@@ -40,7 +39,7 @@ class StockquoteBasicTest {
         StockquoteBasic basicData = new StockquoteBasic();
         basicData.setIsin("Test");
         StockquoteDetail detail = new StockquoteDetail();
-        detail.setFetch_date(new Date(0));
+//        detail.setFetch_date(new LocalDate());
         basicData.addDetail(detail);
         StockquoteBasicDAO stockDao = new StockquoteBasicDAO();
         stockDao.merge(basicData);
