@@ -1,5 +1,3 @@
-rootProject.name = 'stocktool'
-include 'web'
 include 'dataretrieval'
 include 'datastorage'
 

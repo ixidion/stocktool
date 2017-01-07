@@ -1,18 +1,29 @@
 group 'de.bluemx'
 version '1.0-SNAPSHOT'
 
-apply plugin: 'java'
-apply plugin: 'idea'
-
-
-task wrapper(type: Wrapper) {
-    gradleVersion = '3.2.1'
+buildscript {
+    repositories {
+        jcenter()
+        // The following is only necessary if you want to use SNAPSHOT releases.
+        // maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
+    }
+    dependencies {
+        classpath 'org.junit.platform:junit-platform-gradle-plugin:1.0.0-M3'
+    }
 }
 
-repositories {
-    jcenter()
+subprojects {
+    version '1.0-SNAPSHOT'
+    apply plugin: 'org.junit.platform.gradle.plugin'
+    apply plugin: 'java'
+    apply plugin: 'idea'
+
+    repositories {
+        jcenter()
+    }
+
+    task wrapper(type: Wrapper) {
+        gradleVersion = '3.3'
+    }
 }
 
-
-dependencies {
-}

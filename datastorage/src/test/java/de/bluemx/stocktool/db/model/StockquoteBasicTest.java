@@ -8,15 +8,12 @@ import org.junit.jupiter.api.Test;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-
 import java.sql.Date;
-import java.util.ArrayList;
-import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * Created by teclis on 02.01.17.
+ * These tests don't work in the CI environment, because the database is not mocked
+ * Only used during development, to test the code.
  */
 @Disabled
 class StockquoteBasicTest {
@@ -30,7 +27,6 @@ class StockquoteBasicTest {
     }
 
     @Test
-    @Disabled
     void simpleDBConnect() {
         em.getTransaction().begin();
         StockquoteBasic basic = em.find(StockquoteBasic.class, 1);
@@ -40,7 +36,6 @@ class StockquoteBasicTest {
     }
 
     @Test
-    @Disabled
     void failedInsert() {
         StockquoteBasic basicData = new StockquoteBasic();
         basicData.setIsin("Test");

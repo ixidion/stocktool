@@ -1,34 +1,11 @@
+plugins {
+    id 'net.ltgt.apt' version '0.8'
+}
+
 group 'de.bluemx.stocktool'
-version '1.0-SNAPSHOT'
-
-apply plugin: 'java'
-apply plugin: 'idea'
-
-
-buildscript {
-    repositories {
-        jcenter()
-        // The following is only necessary if you want to use SNAPSHOT releases.
-        // maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
-    }
-    dependencies {
-        classpath 'org.junit.platform:junit-platform-gradle-plugin:1.0.0-M3'
-    }
-}
-
-apply plugin: 'org.junit.platform.gradle.plugin'
-
-
-task wrapper(type: Wrapper) {
-    gradleVersion = '3.2.1'
-}
-
-repositories {
-    jcenter()
-}
-
 
 dependencies {
+    compile project(':datastorage')
     testRuntime 'org.junit.jupiter:junit-jupiter-engine:5.0.0-M3'
     testCompile 'org.junit.jupiter:junit-jupiter-api:5.0.0-M3'
     testCompile 'org.hamcrest:java-hamcrest:2.0.0.0'
@@ -43,4 +20,6 @@ dependencies {
     compile 'ch.qos.logback:logback-classic:1.1.7'
     compile 'ch.qos.logback:logback-core:1.1.7'
     compile 'org.apache.commons:commons-lang3:3.5'
+    compile 'org.mapstruct:mapstruct-jdk8:1.1.0.Final'
+    apt 'org.mapstruct:mapstruct-processor:1.1.0.Final'
 }
