@@ -3,30 +3,21 @@ package de.bluemx.stocktool.db.model;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 @Entity(name="eps")
 public class Eps implements Serializable {
     @Id @GeneratedValue(strategy=GenerationType.IDENTITY) @Column(name="eps_id")
     private int epsId;
-    @Column(name="per_year")
-    private String perYear;
-    @Column(name="per_value")
-    private BigDecimal perValue;
+    @Column(name = "eps_year")
+    private LocalDate epsYear;
+    @Column(name = "eps_value")
+    private BigDecimal epsValue;
     @Column(name="estimated")
     private boolean estimated;
     @ManyToOne
     @JoinColumn(name = "stockquotedata_id")
     private StockquoteDetail stockquoteDetail;
-
-    @Override
-    public String toString() {
-        return "Eps{" +
-                "epsId=" + epsId +
-                ", perYear='" + perYear + '\'' +
-                ", perValue=" + perValue +
-                ", estimated=" + estimated +
-                '}';
-    }
 
     @Override
     public boolean equals(Object o) {
@@ -51,20 +42,20 @@ public class Eps implements Serializable {
         this.epsId = epsId;
     }
 
-    public String getPerYear() {
-        return perYear;
+    public LocalDate getEpsYear() {
+        return epsYear;
     }
 
-    public void setPerYear(String perYear) {
-        this.perYear = perYear;
+    public void setEpsYear(LocalDate epsYear) {
+        this.epsYear = epsYear;
     }
 
-    public BigDecimal getPerValue() {
-        return perValue;
+    public BigDecimal getEpsValue() {
+        return epsValue;
     }
 
-    public void setPerValue(BigDecimal perValue) {
-        this.perValue = perValue;
+    public void setEpsValue(BigDecimal epsValue) {
+        this.epsValue = epsValue;
     }
 
     public boolean isEstimated() {

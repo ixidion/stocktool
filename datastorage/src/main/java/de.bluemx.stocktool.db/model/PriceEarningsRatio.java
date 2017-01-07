@@ -3,17 +3,16 @@ package de.bluemx.stocktool.db.model;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 @Entity(name="price_earnings_ratio")
 public class PriceEarningsRatio implements Serializable {
     @Id @GeneratedValue(strategy=GenerationType.IDENTITY) @Column(name="price_earnings_ratio_id")
     private int epsId;
     @Column(name="per_year")
-    private String perYear;
+    private LocalDate perYear;
     @Column(name="per_value")
     private BigDecimal perValue;
-    @Column(name="estimated")
-    private boolean estimated;
     @ManyToOne
     @JoinColumn(name = "stockquotedata_id")
     private StockquoteDetail stockquoteDetail;
@@ -24,7 +23,6 @@ public class PriceEarningsRatio implements Serializable {
                 "epsId=" + epsId +
                 ", perYear='" + perYear + '\'' +
                 ", perValue=" + perValue +
-                ", estimated=" + estimated +
                 '}';
     }
 
@@ -51,11 +49,11 @@ public class PriceEarningsRatio implements Serializable {
         this.epsId = epsId;
     }
 
-    public String getPerYear() {
+    public LocalDate getPerYear() {
         return perYear;
     }
 
-    public void setPerYear(String perYear) {
+    public void setPerYear(LocalDate perYear) {
         this.perYear = perYear;
     }
 
@@ -65,14 +63,6 @@ public class PriceEarningsRatio implements Serializable {
 
     public void setPerValue(BigDecimal perValue) {
         this.perValue = perValue;
-    }
-
-    public boolean isEstimated() {
-        return estimated;
-    }
-
-    public void setEstimated(boolean estimated) {
-        this.estimated = estimated;
     }
 
     public StockquoteDetail getStockquoteDetail() {

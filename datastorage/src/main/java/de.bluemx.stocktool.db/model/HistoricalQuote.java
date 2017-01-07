@@ -8,7 +8,7 @@ import java.time.LocalDate;
 @Entity(name="historical_quotes")
 public class HistoricalQuote implements Serializable {
     @Id @GeneratedValue(strategy=GenerationType.IDENTITY) @Column(name="historical_quotes_id")
-    private int epsId;
+    private int quoteId;
     @Column(name="quote_date")
     private LocalDate quoteDate;
     @Column(name="quote")
@@ -20,7 +20,7 @@ public class HistoricalQuote implements Serializable {
     @Override
     public String toString() {
         return "HistoricalQuotes{" +
-                "epsId=" + epsId +
+                "epsId=" + quoteId +
                 ", quoteDate=" + quoteDate +
                 ", quote=" + quote +
                 '}';
@@ -33,20 +33,20 @@ public class HistoricalQuote implements Serializable {
 
         HistoricalQuote that = (HistoricalQuote) o;
 
-        return epsId == that.epsId;
+        return quoteId == that.quoteId;
     }
 
     @Override
     public int hashCode() {
-        return epsId;
+        return quoteId;
     }
 
-    public int getEpsId() {
-        return epsId;
+    public int getQuoteId() {
+        return quoteId;
     }
 
-    public void setEpsId(int epsId) {
-        this.epsId = epsId;
+    public void setQuoteId(int epsId) {
+        this.quoteId = epsId;
     }
 
     public LocalDate getQuoteDate() {

@@ -25,7 +25,13 @@ public enum Index {
         providerMap.put(Dataprovider.ONVISTA, new String[]{urlParts[0], urlParts[1]});
     }
 
+
     public String[] getIndexConfig(Dataprovider provider) {
         return providerMap.get(provider);
+    }
+
+    @Override
+    public String toString() {
+        return this.name();
     }
 }

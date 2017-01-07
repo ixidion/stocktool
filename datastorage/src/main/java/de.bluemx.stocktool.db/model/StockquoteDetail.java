@@ -5,6 +5,7 @@ import org.eclipse.persistence.annotations.JoinFetchType;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Vector;
@@ -14,19 +15,19 @@ public class StockquoteDetail implements Serializable {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "stockquotedata_id")
-    private Long stockquotedata_id;
+    private Long stockquotedataId;
     @Column(name = "fetch_date")
-    private LocalDate fetch_date;
+    private LocalDate fetchDate;
     @Column(name = "return_on_equity")
-    private Double return_on_equity;
+    private BigDecimal roe;
     @Column(name = "ebit_margin")
-    private Double ebit_margin;
+    private BigDecimal ebitMargin;
     @Column(name = "analysts_count")
-    private Long analysts_count;
-    @Column(name = "analysts_opinion")
-    private Long analysts_opinion;
-    @Column(name = "equity_ratio")
-    private Double equity_ratio;
+    private Integer analystsCount;
+    @Column(name = "analystsOpinion")
+    private Integer analystsOpinion;
+    @Column(name = "equityRatio")
+    private BigDecimal equityRatio;
     @ManyToOne
     @JoinColumn(name = "stockquotedatabasic_id")
     private StockquoteBasic stockquoteBasics;
@@ -95,13 +96,13 @@ public class StockquoteDetail implements Serializable {
     @Override
     public String toString() {
         return "StockquoteDetail{" +
-                "stockquotedata_id=" + stockquotedata_id +
-                ", fetch_date=" + fetch_date +
-                ", return_on_equity=" + return_on_equity +
-                ", ebit_margin=" + ebit_margin +
-                ", analysts_count=" + analysts_count +
-                ", analysts_opinion=" + analysts_opinion +
-                ", equity_ratio=" + equity_ratio +
+                "stockquotedata_id=" + stockquotedataId +
+                ", fetch_date=" + fetchDate +
+                ", return_on_equity=" + roe +
+                ", ebit_margin=" + ebitMargin +
+                ", analysts_count=" + analystsCount +
+                ", analysts_opinion=" + analystsOpinion +
+                ", equity_ratio=" + equityRatio +
                 ", epsList=" + epsList +
                 ", priceEarningsRatioList=" + priceEarningsRatioList +
                 ", historicalQuotesList=" + historicalQuoteList +
@@ -115,68 +116,68 @@ public class StockquoteDetail implements Serializable {
 
         StockquoteDetail that = (StockquoteDetail) o;
 
-        return stockquotedata_id != null ? stockquotedata_id.equals(that.stockquotedata_id) : that.stockquotedata_id == null;
+        return stockquotedataId != null ? stockquotedataId.equals(that.stockquotedataId) : that.stockquotedataId == null;
     }
 
     @Override
     public int hashCode() {
-        return stockquotedata_id != null ? stockquotedata_id.hashCode() : 0;
+        return stockquotedataId != null ? stockquotedataId.hashCode() : 0;
     }
 
-    public Long getStockquotedata_id() {
-        return stockquotedata_id;
+    public Long getStockquotedataId() {
+        return stockquotedataId;
     }
 
-    public void setStockquotedata_id(Long stockquotedata_id) {
-        this.stockquotedata_id = stockquotedata_id;
+    public void setStockquotedataId(Long stockquotedataId) {
+        this.stockquotedataId = stockquotedataId;
     }
 
-    public LocalDate getFetch_date() {
-        return fetch_date;
+    public LocalDate getFetchDate() {
+        return fetchDate;
     }
 
-    public void setFetch_date(LocalDate fetch_date) {
-        this.fetch_date = fetch_date;
+    public void setFetchDate(LocalDate fetchDate) {
+        this.fetchDate = fetchDate;
     }
 
-    public Double getReturn_on_equity() {
-        return return_on_equity;
+    public BigDecimal getRoe() {
+        return roe;
     }
 
-    public void setReturn_on_equity(Double return_on_equity) {
-        this.return_on_equity = return_on_equity;
+    public void setRoe(BigDecimal return_on_equity) {
+        this.roe = return_on_equity;
     }
 
-    public Double getEbit_margin() {
-        return ebit_margin;
+    public BigDecimal getEbitMargin() {
+        return ebitMargin;
     }
 
-    public void setEbit_margin(Double ebit_margin) {
-        this.ebit_margin = ebit_margin;
+    public void setEbitMargin(BigDecimal ebitMargin) {
+        this.ebitMargin = ebitMargin;
     }
 
-    public Long getAnalysts_count() {
-        return analysts_count;
+    public Integer getAnalystsCount() {
+        return analystsCount;
     }
 
-    public void setAnalysts_count(Long analysts_count) {
-        this.analysts_count = analysts_count;
+    public void setAnalystsCount(Integer analystsCount) {
+        this.analystsCount = analystsCount;
     }
 
-    public Long getAnalysts_opinion() {
-        return analysts_opinion;
+    public Integer getAnalystsOpinion() {
+        return analystsOpinion;
     }
 
-    public void setAnalysts_opinion(Long analysts_opinion) {
-        this.analysts_opinion = analysts_opinion;
+    public void setAnalystsOpinion(Integer analysts_opinion) {
+        this.analystsOpinion = analysts_opinion;
     }
 
-    public Double getEquity_ratio() {
-        return equity_ratio;
+    public BigDecimal getEquityRatio() {
+        return equityRatio;
     }
 
-    public void setEquity_ratio(Double equity_ratio) {
-        this.equity_ratio = equity_ratio;
+    public void setEquityRatio(BigDecimal equity_ratio) {
+        this.equityRatio = equity_ratio;
     }
 
     public StockquoteBasic getStockquoteBasics() {

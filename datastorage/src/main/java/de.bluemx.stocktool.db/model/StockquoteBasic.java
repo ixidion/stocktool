@@ -19,7 +19,7 @@ public class StockquoteBasic implements Serializable {
     @Column(name="stockname")
     private String stockname;
     @Column(name="stockindex")
-    private String stockindex;
+    private String index;
     @Column(name="symbol")
     private String symbol;
     @Column(name="financial_year")
@@ -50,7 +50,7 @@ public class StockquoteBasic implements Serializable {
                 "stockquotedatabasicId=" + stockquotedatabasicId +
                 ", isin='" + isin + '\'' +
                 ", stockname='" + stockname + '\'' +
-                ", stockindex='" + stockindex + '\'' +
+                ", stockindex='" + index + '\'' +
                 ", symbol='" + symbol + '\'' +
                 ", financialYear=" + financialYear +
                 ", fetches=" + fetches +
@@ -99,12 +99,12 @@ public class StockquoteBasic implements Serializable {
         this.stockname = stockname;
     }
 
-    public String getStockindex() {
-        return stockindex;
+    public String getIndex() {
+        return index;
     }
 
-    public void setStockindex(String stockindex) {
-        this.stockindex = stockindex;
+    public void setIndex(String index) {
+        this.index = index;
     }
 
     public String getSymbol() {

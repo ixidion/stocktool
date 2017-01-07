@@ -9,6 +9,7 @@ import java.time.LocalDate;
 import java.time.Year;
 import java.time.format.DateTimeFormatter;
 import java.util.Map;
+import java.util.SortedMap;
 
 /**
  * This class is the container for all fetched RawData from different Providers.
@@ -130,7 +131,7 @@ public class StockQuoteData {
             converter = @Converter(converterClass = PerConverter.class),
             validators = {@Validate(expression = "article.KENNZAHLEN table th.ZAHL", expected = "2018e"),
                     @Validate(expression = "article.KENNZAHLEN table tbody tr:nth-of-type(2) td.INFOTEXT", expected = "KGV")})})
-    private Map<Year, BigDecimal> per;
+    private SortedMap<Year, BigDecimal> per;
 
     @Resolvers({@Resolver(provider = "onvista-fundamental",
             extractors = {@Extract(searchType = SearchType.Selector, expression = "article.KENNZAHLEN div span")},
@@ -159,7 +160,7 @@ public class StockQuoteData {
             source = Source.RESPONSE_TEXT,
             converter = @Converter(converterClass = QuoteConverter.class)
     )})
-    private Map<LocalDate, BigDecimal> quotes;
+    private SortedMap<LocalDate, BigDecimal> quotes;
 
     // Reaction Quarter Quote
     // No  7
@@ -179,7 +180,7 @@ public class StockQuoteData {
             }
 
     )})
-    private Map<YearEstimated, BigDecimal> eps;
+    private SortedMap<YearEstimated, BigDecimal> eps;
 
     public StockQuoteData(String isin, Index index) {
         this.isin = isin;
@@ -197,61 +198,127 @@ public class StockQuoteData {
         return stockname;
     }
 
+    public void setStockname(String stockname) {
+        this.stockname = stockname;
+    }
+
     public String getIsin() {
         return isin;
     }
 
-    public Map<Dataprovider, String> getUrlParts() {
-        return urlParts;
-    }
-
-    public Map<Dataprovider, String> getHistoryParts() {
-        return historyParts;
-    }
-
-    public String getSymbol() {
-        return symbol;
-    }
-
-    public LocalDate getFetchDate() {
-        return fetchDate;
-    }
-
-    public BigDecimal getRoe() {
-        return roe;
-    }
-
-    public BigDecimal getEbitMargin() {
-        return ebitMargin;
-    }
-
-    public BigDecimal getEquityRatio() {
-        return equityRatio;
-    }
-
-    public Map<Year, BigDecimal> getPer() {
-        return per;
-    }
-
-
-    public LocalDate getFinancialYear() {
-        return financialYear;
-    }
-
-    public AnalystsOpinion getAnalystsOpinion() {
-        return analystsOpinion;
-    }
-
-    public int getAnalystsCount() {
-        return analystsCount;
+    public void setIsin(String isin) {
+        this.isin = isin;
     }
 
     public Index getIndex() {
         return index;
     }
 
-    public Map<LocalDate, BigDecimal> getQuotes() {
+    public void setIndex(Index index) {
+        this.index = index;
+    }
+
+    public Map<Dataprovider, String> getUrlParts() {
+        return urlParts;
+    }
+
+    public void setUrlParts(Map<Dataprovider, String> urlParts) {
+        this.urlParts = urlParts;
+    }
+
+    public Map<Dataprovider, String> getHistoryParts() {
+        return historyParts;
+    }
+
+    public void setHistoryParts(Map<Dataprovider, String> historyParts) {
+        this.historyParts = historyParts;
+    }
+
+    public String getSymbol() {
+        return symbol;
+    }
+
+    public void setSymbol(String symbol) {
+        this.symbol = symbol;
+    }
+
+    public LocalDate getFetchDate() {
+        return fetchDate;
+    }
+
+    public void setFetchDate(LocalDate fetchDate) {
+        this.fetchDate = fetchDate;
+    }
+
+    public BigDecimal getRoe() {
+        return roe;
+    }
+
+    public void setRoe(BigDecimal roe) {
+        this.roe = roe;
+    }
+
+    public BigDecimal getEbitMargin() {
+        return ebitMargin;
+    }
+
+    public void setEbitMargin(BigDecimal ebitMargin) {
+        this.ebitMargin = ebitMargin;
+    }
+
+    public BigDecimal getEquityRatio() {
+        return equityRatio;
+    }
+
+    public void setEquityRatio(BigDecimal equityRatio) {
+        this.equityRatio = equityRatio;
+    }
+
+    public SortedMap<Year, BigDecimal> getPer() {
+        return per;
+    }
+
+    public void setPer(SortedMap<Year, BigDecimal> per) {
+        this.per = per;
+    }
+
+    public LocalDate getFinancialYear() {
+        return financialYear;
+    }
+
+    public void setFinancialYear(LocalDate financialYear) {
+        this.financialYear = financialYear;
+    }
+
+    public AnalystsOpinion getAnalystsOpinion() {
+        return analystsOpinion;
+    }
+
+    public void setAnalystsOpinion(AnalystsOpinion analystsOpinion) {
+        this.analystsOpinion = analystsOpinion;
+    }
+
+    public int getAnalystsCount() {
+        return analystsCount;
+    }
+
+    public void setAnalystsCount(int analystsCount) {
+        this.analystsCount = analystsCount;
+    }
+
+    public SortedMap<LocalDate, BigDecimal> getQuotes() {
         return quotes;
     }
 
+    public void setQuotes(SortedMap<LocalDate, BigDecimal> quotes) {
+        this.quotes = quotes;
+    }
+
+    public SortedMap<YearEstimated, BigDecimal> getEps() {
+        return eps;
+    }
+
+    public void setEps(SortedMap<YearEstimated, BigDecimal> eps) {
+        this.eps = eps;
+    }
 }
