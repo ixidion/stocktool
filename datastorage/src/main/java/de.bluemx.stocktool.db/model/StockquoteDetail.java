@@ -27,9 +27,9 @@ public class StockquoteDetail implements Serializable {
     private BigDecimal ebitMargin;
     @Column(name = "analysts_count")
     private Integer analystsCount;
-    @Column(name = "analystsOpinion")
+    @Column(name = "analysts_opinion")
     private Integer analystsOpinion;
-    @Column(name = "equityRatio")
+    @Column(name = "equity_ratio")
     private BigDecimal equityRatio;
     @ManyToOne
     @JoinColumn(name = "stockquotedatabasic_id")

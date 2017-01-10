@@ -6,14 +6,14 @@ import org.slf4j.LoggerFactory;
 
 import java.math.BigDecimal;
 import java.time.Year;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.SortedMap;
+import java.util.TreeMap;
 
 public class PerConverter implements Conversion {
     final static Logger log = LoggerFactory.getLogger(PerConverter.class);
     final static String digitPattern = "(\\d{4})";
     final static String bigdecimalPattern = "\\d+[,.]\\d+";
-    Map<Year, BigDecimal> perMap = new HashMap<>();
+    SortedMap<Year, BigDecimal> perMap = new TreeMap<>();
     private StringUtil stringUtil;
 
     public PerConverter() {

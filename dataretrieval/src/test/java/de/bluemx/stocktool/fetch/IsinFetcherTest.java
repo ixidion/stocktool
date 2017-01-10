@@ -88,6 +88,7 @@ class IsinFetcherTest {
      * The testdata Fetcher is more experimental.
      */
     @Test
+    @Disabled
     void fetchStockquoteData() {
         StockQuoteData testdata = new StockQuoteData("DE000A1K0409", Index.SDAX);
         testdata = stockquoteFetcher.process(testdata);

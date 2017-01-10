@@ -36,6 +36,7 @@ public class StockquoteBasicDAO {
         try {
             tx.begin();
             stockquoteBasic = em.merge(stockquoteBasic);
+            em.flush();
             tx.commit();
             return stockquoteBasic;
         } catch (RuntimeException e) {

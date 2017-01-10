@@ -5,8 +5,8 @@ import de.bluemx.stocktool.model.YearEstimated;
 import java.math.BigDecimal;
 import java.time.Year;
 import java.time.format.DateTimeFormatter;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.SortedMap;
+import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -21,7 +21,7 @@ public class EPSConverter implements Conversion {
 
     @Override
     public Object convert(String... strings) {
-        Map<YearEstimated, BigDecimal> epsMap = new LinkedHashMap<>();
+        SortedMap<YearEstimated, BigDecimal> epsMap = new TreeMap<>();
         if (strings != null) {
             if (strings.length == 1) {
                 Pattern p = Pattern.compile(pattern);

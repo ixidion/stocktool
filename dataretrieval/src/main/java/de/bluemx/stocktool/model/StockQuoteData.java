@@ -79,32 +79,34 @@ public class StockQuoteData {
     private LocalDate fetchDate = LocalDate.now();
 
     // Return of Equity
-    // No 1
+    // No 1\
+    // @TODO Error prone, fetch full table and make decision
     @Resolvers({@Resolver(provider = "onvista-fundamental",
-            extractors = {@Extract(searchType = SearchType.Selector, expression = "article.KENNZAHLEN table:nth-of-type(8) tbody tr:nth-of-type(4) td:nth-of-type(5)")},
+            extractors = {@Extract(searchType = SearchType.Selector, expression = "article.KENNZAHLEN table:nth-of-type(8) tbody tr:nth-of-type(4) td:nth-of-type(6)")},
             source = Source.RESPONSE_TEXT,
             converter = @Converter(converterClass = BigDecimalConverter.class),
-            validators = {@Validate(expression = "article.KENNZAHLEN table th.ZAHL", expected = "2018e"),
+            validators = {@Validate(expression = "article.KENNZAHLEN table th.ZAHL", expected = "2019e"),
                     @Validate(expression = "article.KENNZAHLEN table:nth-of-type(8) tbody tr:nth-of-type(4) td.INFOTEXT", expected = "Eigenkapitalrendite")})})
     private BigDecimal roe;
 
     // EBIT-Margin
     // No 2
+    // @TODO Error prone, fetch full table and make decision
     @Resolvers({@Resolver(provider = "onvista-fundamental",
-            extractors = {@Extract(searchType = SearchType.Selector, expression = "article.KENNZAHLEN table:nth-of-type(8) tbody tr:nth-of-type(2) td:nth-of-type(5)")},
+            extractors = {@Extract(searchType = SearchType.Selector, expression = "article.KENNZAHLEN table:nth-of-type(8) tbody tr:nth-of-type(2) td:nth-of-type(6)")},
             source = Source.RESPONSE_TEXT,
             converter = @Converter(converterClass = BigDecimalConverter.class),
-            validators = {@Validate(expression = "article.KENNZAHLEN table th.ZAHL", expected = "2018e"),
+            validators = {@Validate(expression = "article.KENNZAHLEN table th.ZAHL", expected = "2019e"),
                     @Validate(expression = "article.KENNZAHLEN table:nth-of-type(8) tbody tr:nth-of-type(2) td.INFOTEXT", expected = "EBIT-Marge")})})
     private BigDecimal ebitMargin;
 
     // Equity Ratio
     // No 3
     @Resolvers({@Resolver(provider = "onvista-fundamental",
-            extractors = {@Extract(searchType = SearchType.Selector, expression = "article.KENNZAHLEN table:nth-of-type(6) tbody tr:nth-of-type(2) td:nth-of-type(5)")},
+            extractors = {@Extract(searchType = SearchType.Selector, expression = "article.KENNZAHLEN table:nth-of-type(6) tbody tr:nth-of-type(2) td:nth-of-type(6)")},
             source = Source.RESPONSE_TEXT,
             converter = @Converter(converterClass = BigDecimalConverter.class),
-            validators = {@Validate(expression = "article.KENNZAHLEN table th.ZAHL", expected = "2018e"),
+            validators = {@Validate(expression = "article.KENNZAHLEN table th.ZAHL", expected = "2019e"),
                     @Validate(expression = "article.KENNZAHLEN table:nth-of-type(6) tbody tr:nth-of-type(2) td.INFOTEXT", expected = "Eigenkapitalquote")})})
     private BigDecimal equityRatio;
 
@@ -129,7 +131,7 @@ public class StockQuoteData {
             },
             source = Source.RESPONSE_TEXT,
             converter = @Converter(converterClass = PerConverter.class),
-            validators = {@Validate(expression = "article.KENNZAHLEN table th.ZAHL", expected = "2018e"),
+            validators = {@Validate(expression = "article.KENNZAHLEN table th.ZAHL", expected = "2019e"),
                     @Validate(expression = "article.KENNZAHLEN table tbody tr:nth-of-type(2) td.INFOTEXT", expected = "KGV")})})
     private SortedMap<Year, BigDecimal> per;
 
@@ -175,8 +177,8 @@ public class StockQuoteData {
             source = Source.RESPONSE_TEXT,
             converter = @Converter(converterClass = EPSConverter.class),
             validators = {
-                    @Validate(expression = "article.KENNZAHLEN table th.ZAHL:nth-of-type(4)", expected = "2016e"),
-                    @Validate(expression = "article.KENNZAHLEN table th.ZAHL:nth-of-type(5)", expected = "2015")
+                    @Validate(expression = "article.KENNZAHLEN table th.ZAHL:nth-of-type(4)", expected = "2017e"),
+                    @Validate(expression = "article.KENNZAHLEN table th.ZAHL:nth-of-type(6)", expected = "2015")
             }
 
     )})

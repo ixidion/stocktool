@@ -3,8 +3,8 @@ package de.bluemx.stocktool.converter;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.SortedMap;
+import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -14,7 +14,7 @@ public class QuoteConverter implements Conversion {
 
     @Override
     public Object convert(String... strings) {
-        Map<LocalDate, BigDecimal> quoteMap = new LinkedHashMap<>();
+        SortedMap<LocalDate, BigDecimal> quoteMap = new TreeMap<>();
         if (strings != null) {
             if (strings.length == 1) {
                 Pattern p = Pattern.compile(pattern);

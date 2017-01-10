@@ -17,6 +17,7 @@ class StockquoteMapperTest {
 
     @Test
     void testBasicMapping() {
+        StockquoteBasic basic = new StockquoteBasic();
         StockquoteMapper map = Mappers.getMapper(StockquoteMapper.class);
         StockQuoteData stockdata = new StockQuoteData("123456789", Index.DAX);
         stockdata.setStockname("STOCKNAME");
@@ -25,7 +26,7 @@ class StockquoteMapperTest {
         SortedMap<YearEstimated, BigDecimal> treemap = new TreeMap<>();
         treemap.put(new YearEstimated(Year.of(2016), true), new BigDecimal("2.3"));
         stockdata.setEps(treemap);
-        StockquoteBasic basic = map.quoteToBasic(stockdata, null);
+        basic = map.quoteToBasic(stockdata, basic);
 
     }
 

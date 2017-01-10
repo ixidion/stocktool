@@ -31,7 +31,8 @@ public class BatchRunner {
             StockquoteBasic basic = basicList.get(0);
             StockQuoteData stockdata = fetcher.populateByIsin(basic.getIsin(), Index.DAX);
             basic = map.quoteToBasic(stockdata, basic);
-            stockquoteDao.merge(basic);
+            basic = stockquoteDao.merge(basic);
+            System.out.println("bla");
         }
     }
 }
