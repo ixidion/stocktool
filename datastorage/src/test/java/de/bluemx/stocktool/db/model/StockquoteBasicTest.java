@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import java.util.List;
 
 
 /**
@@ -43,6 +44,12 @@ class StockquoteBasicTest {
         basicData.addDetail(detail);
         StockquoteBasicDAO stockDao = new StockquoteBasicDAO();
         stockDao.merge(basicData);
+    }
+
+    @Test
+    void testFetchAll() {
+        StockquoteBasicDAO dao = new StockquoteBasicDAO();
+        List<StockquoteBasic> basic = dao.fetchAll();
     }
 
 }

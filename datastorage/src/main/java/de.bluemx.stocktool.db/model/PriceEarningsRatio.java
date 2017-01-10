@@ -5,7 +5,8 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-@Entity(name="price_earnings_ratio")
+@Entity
+@Table(name = "price_earnings_ratio")
 public class PriceEarningsRatio implements Serializable {
     @Id @GeneratedValue(strategy=GenerationType.IDENTITY) @Column(name="price_earnings_ratio_id")
     private int epsId;

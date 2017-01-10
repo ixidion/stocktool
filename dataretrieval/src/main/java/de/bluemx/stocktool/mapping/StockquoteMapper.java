@@ -5,6 +5,7 @@ import de.bluemx.stocktool.db.model.StockquoteDetail;
 import de.bluemx.stocktool.model.StockQuoteData;
 import org.mapstruct.DecoratedWith;
 import org.mapstruct.Mapper;
+import org.mapstruct.MappingTarget;
 import org.mapstruct.factory.Mappers;
 
 
@@ -13,7 +14,7 @@ import org.mapstruct.factory.Mappers;
 public interface StockquoteMapper {
     StockquoteMapper INSTANCE = Mappers.getMapper(StockquoteMapper.class);
 
-    StockquoteBasic quoteToBasic(StockQuoteData source);
+    StockquoteBasic quoteToBasic(StockQuoteData source, @MappingTarget StockquoteBasic basicData);
 
     StockquoteDetail quoteToDetail(StockQuoteData source);
 

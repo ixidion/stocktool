@@ -3,10 +3,8 @@ package de.bluemx.stocktool.db.dao;
 import de.bluemx.stocktool.db.helper.StaticVariables;
 import de.bluemx.stocktool.db.model.StockquoteBasic;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
+import javax.persistence.*;
+import java.util.List;
 
 
 public class StockquoteBasicDAO {
@@ -17,6 +15,19 @@ public class StockquoteBasicDAO {
     public StockquoteBasicDAO(){
         emf = Persistence.createEntityManagerFactory(StaticVariables.PERISTENCE_UNIT);
         em = emf.createEntityManager();
+    }
+
+    public List<StockquoteBasic> fetchAll() {
+        EntityTransaction tx = em.getTransaction();
+        try {
+            tx.begin();
+            TypedQuery<StockquoteBasic> query = em.createNamedQuery("StockquoteBasic.findAll", StockquoteBasic.class);
+            List<StockquoteBasic> resultList = query.getResultList();
+            tx.commit();
+            return resultList;
+        } catch (RuntimeException e) {
+            throw new DBException("Entities could not be loaded.", e, null);
+        }
     }
 
 

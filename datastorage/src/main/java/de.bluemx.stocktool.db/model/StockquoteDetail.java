@@ -1,5 +1,6 @@
 package de.bluemx.stocktool.db.model;
 
+import de.bluemx.stocktool.db.converter.LocalDateAttributeConverter;
 import org.eclipse.persistence.annotations.JoinFetch;
 import org.eclipse.persistence.annotations.JoinFetchType;
 
@@ -10,13 +11,15 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Vector;
 
-@Entity(name = "stockquotedata")
+@Entity
+@Table(name = "stockquotedata")
 public class StockquoteDetail implements Serializable {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "stockquotedata_id")
     private Long stockquotedataId;
     @Column(name = "fetch_date")
+    @Convert(converter = LocalDateAttributeConverter.class)
     private LocalDate fetchDate;
     @Column(name = "return_on_equity")
     private BigDecimal roe;

@@ -8,23 +8,25 @@
 
     <!-- Enables auto discovery of persistent classes, -->
     <!-- otherwise they must be listed using <class>  -->
-    <exclude-unlisted-classes>false</exclude-unlisted-classes>
+    <exclude-unlisted-classes>true</exclude-unlisted-classes>
 
     <class>de.bluemx.stocktool.db.model.StockquoteBasic</class>
     <class>de.bluemx.stocktool.db.model.StockquoteDetail</class>
     <class>de.bluemx.stocktool.db.model.HistoricalQuote</class>
     <class>de.bluemx.stocktool.db.model.Eps</class>
     <class>de.bluemx.stocktool.db.model.PriceEarningsRatio</class>
+    <class>de.bluemx.stocktool.db.converter.LocalDateAttributeConverter</class>
+
 
     <properties>
         <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver" />
         <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/stocktool" />
         <property name="javax.persistence.jdbc.user" value="stocktool" />
         <property name="javax.persistence.jdbc.password" value="local" />
-        <property name="eclipselink.logging.level"       value="ALL" />
-        <property name="eclipselink.logging.level.sql"   value="ALL" />
-        <property name="eclipselink.logging.parameters"  value="true"/>
-        <property name="jdbc.persistence.logging"        value="true" />
+        <!--<property name="eclipselink.logging.level"       value="ALL" />-->
+        <!--<property name="eclipselink.logging.level.sql"   value="ALL" />-->
+        <!--<property name="eclipselink.logging.parameters"  value="true"/>-->
+        <!--<property name="jdbc.persistence.logging"        value="true" />-->
     </properties>
 </persistence-unit>
 </persistence>

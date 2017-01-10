@@ -88,7 +88,7 @@ public class UrlFetcher {
                     // After forwarding to new page
                     String resultingUrl = con.response().url().toString();
                     if (caching) {
-                        cache.put(url, doc.html());
+                        cache.put(url, resultingUrl);
                     }
                     return extractFromUrl(resultingUrl, resolver);
                 } else {

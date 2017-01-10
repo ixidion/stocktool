@@ -17,8 +17,8 @@ public class StockquoteMapperDecorator implements StockquoteMapper {
     }
 
     @Override
-    public StockquoteBasic quoteToBasic(StockQuoteData stockdata) {
-        StockquoteBasic basic = delegate.quoteToBasic(stockdata);
+    public StockquoteBasic quoteToBasic(StockQuoteData stockdata, StockquoteBasic basicData) {
+        StockquoteBasic basic = delegate.quoteToBasic(stockdata, basicData);
         StockquoteDetail detail = quoteToDetail(stockdata);
         basic.addDetail(detail);
         return basic;

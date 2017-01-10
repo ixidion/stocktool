@@ -5,7 +5,8 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-@Entity(name="historical_quotes")
+@Entity
+@Table(name = "historical_quotes")
 public class HistoricalQuote implements Serializable {
     @Id @GeneratedValue(strategy=GenerationType.IDENTITY) @Column(name="historical_quotes_id")
     private int quoteId;

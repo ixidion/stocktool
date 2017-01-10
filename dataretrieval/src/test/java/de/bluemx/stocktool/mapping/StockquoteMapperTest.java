@@ -1,5 +1,6 @@
+package de.bluemx.stocktool.mapping;
+
 import de.bluemx.stocktool.db.model.StockquoteBasic;
-import de.bluemx.stocktool.mapping.StockquoteMapper;
 import de.bluemx.stocktool.model.Index;
 import de.bluemx.stocktool.model.StockQuoteData;
 import de.bluemx.stocktool.model.YearEstimated;
@@ -24,7 +25,7 @@ class StockquoteMapperTest {
         SortedMap<YearEstimated, BigDecimal> treemap = new TreeMap<>();
         treemap.put(new YearEstimated(Year.of(2016), true), new BigDecimal("2.3"));
         stockdata.setEps(treemap);
-        StockquoteBasic basic = map.quoteToBasic(stockdata);
+        StockquoteBasic basic = map.quoteToBasic(stockdata, null);
 
     }
 

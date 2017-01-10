@@ -9,7 +9,9 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Vector;
 
-@Entity(name = "stockquotedata_basic")
+@Entity
+@Table(name = "stockquotedata_basic")
+@NamedQuery(name = "StockquoteBasic.findAll", query = "SELECT basic FROM StockquoteBasic basic")
 public class StockquoteBasic implements Serializable {
     @Id @GeneratedValue(strategy=GenerationType.IDENTITY) @Column(name="stockquotedatabasic_id")
     private int stockquotedatabasicId;
