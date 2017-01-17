@@ -4,8 +4,6 @@ import com.google.inject.Inject;
 import de.bluemx.stocktool.db.dao.StockquoteBasicDAO;
 import de.bluemx.stocktool.db.model.StockquoteBasic;
 import de.bluemx.stocktool.mapping.StockquoteMapper;
-import de.bluemx.stocktool.model.Index;
-import de.bluemx.stocktool.model.StockQuoteData;
 import org.mapstruct.factory.Mappers;
 
 import java.util.List;
@@ -26,13 +24,19 @@ public class BatchRunner {
     }
 
     public void updateDatabase() {
+        ThreadPool pool = new ThreadPool(8);
         List<StockquoteBasic> basicList = stockquoteDao.fetchAll();
-        if (basicList.size() > 1) {
-            StockquoteBasic basic = basicList.get(0);
-            StockQuoteData stockdata = fetcher.populateByIsin(basic.getIsin(), Index.DAX);
-            basic = map.quoteToBasic(stockdata, basic);
-            basic = stockquoteDao.merge(basic);
-            System.out.println("bla");
+        for (StockquoteBasic basic : basicList) {
+            FetchTask fetchTask = new FetchTask(basic);
+            pool.execute(fetchTask);
+        }
+        while (pool.getQueueSize() > 0) {
+            try {
+                Thread.sleep(10000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
     }
+
 }

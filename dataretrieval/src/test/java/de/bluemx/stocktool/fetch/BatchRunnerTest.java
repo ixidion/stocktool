@@ -1,7 +1,7 @@
 package de.bluemx.stocktool.fetch;
 
-import com.google.inject.Guice;
-import de.bluemx.stocktool.helper.DefaultInject;
+import de.bluemx.stocktool.cache.Cacheprovider;
+import de.bluemx.stocktool.helper.GlobalGuiceInjector;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
@@ -12,7 +12,8 @@ import org.junit.jupiter.api.Test;
 class BatchRunnerTest {
     @Test
     void updateDatabase() {
-        BatchRunner runner = Guice.createInjector(new DefaultInject()).getInstance(BatchRunner.class);
+        new Cacheprovider().createCache();
+        BatchRunner runner = GlobalGuiceInjector.getInjector().getInstance(BatchRunner.class);
         runner.updateDatabase();
     }
 
