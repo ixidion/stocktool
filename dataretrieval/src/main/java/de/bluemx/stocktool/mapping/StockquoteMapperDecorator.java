@@ -37,8 +37,8 @@ public class StockquoteMapperDecorator implements StockquoteMapper {
         if (stockdata.getPer() == null) return detail;
         for (Map.Entry<Year, BigDecimal> entry : stockdata.getPer().entrySet()) {
             PriceEarningsRatio per = new PriceEarningsRatio();
-            per.setPerYear(entry.getKey().atDay(1));
-            per.setPerValue(entry.getValue());
+            per.setTableYear(entry.getKey().atDay(1));
+            per.setTableValue(entry.getValue());
             detail.addPer(per);
         }
         return detail;
@@ -59,9 +59,9 @@ public class StockquoteMapperDecorator implements StockquoteMapper {
         if (stockdata.getEps() == null) return detail;
         for (Map.Entry<YearEstimated, BigDecimal> entry : stockdata.getEps().entrySet()) {
             Eps eps = new Eps();
-            eps.setEpsYear(entry.getKey().getLocalDate());
+            eps.setTableYear(entry.getKey().getLocalDate());
             eps.setEstimated(entry.getKey().isEstimated());
-            eps.setEpsValue(entry.getValue());
+            eps.setTableValue(entry.getValue());
             detail.addEps(eps);
         }
         return detail;

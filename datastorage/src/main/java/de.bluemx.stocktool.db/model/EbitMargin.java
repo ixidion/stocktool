@@ -4,7 +4,7 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
 @Entity
-@DiscriminatorValue(value = "EPS")
-public class Eps extends TableKeyValues {
+@DiscriminatorValue(value = "EBIT_MARGIN")
+public class EbitMargin extends TableKeyValues {
 
 }

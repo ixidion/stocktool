@@ -4,7 +4,7 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
 @Entity
-@DiscriminatorValue(value = "EPS")
-public class Eps extends TableKeyValues {
+@DiscriminatorValue(value = "ROE")
+public class ReturnOnEquity extends TableKeyValues {
 
 }

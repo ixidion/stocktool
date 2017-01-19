@@ -85,8 +85,7 @@ public class StockQuoteData {
             extractors = {@Extract(searchType = SearchType.Selector, expression = "article.KENNZAHLEN table:nth-of-type(8) tbody tr:nth-of-type(4) td:nth-of-type(6)")},
             source = Source.RESPONSE_TEXT,
             converter = @Converter(converterClass = BigDecimalConverter.class),
-            validators = {@Validate(expression = "article.KENNZAHLEN table th.ZAHL", expected = "2019e"),
-                    @Validate(expression = "article.KENNZAHLEN table:nth-of-type(8) tbody tr:nth-of-type(4) td.INFOTEXT", expected = "Eigenkapitalrendite")})})
+            validators = {@Validate(expression = "article.KENNZAHLEN table:nth-of-type(8) tbody tr:nth-of-type(4) td.INFOTEXT", expected = "Eigenkapitalrendite")})})
     private BigDecimal roe;
 
     // EBIT-Margin
@@ -96,8 +95,7 @@ public class StockQuoteData {
             extractors = {@Extract(searchType = SearchType.Selector, expression = "article.KENNZAHLEN table:nth-of-type(8) tbody tr:nth-of-type(2) td:nth-of-type(6)")},
             source = Source.RESPONSE_TEXT,
             converter = @Converter(converterClass = BigDecimalConverter.class),
-            validators = {@Validate(expression = "article.KENNZAHLEN table th.ZAHL", expected = "2019e"),
-                    @Validate(expression = "article.KENNZAHLEN table:nth-of-type(8) tbody tr:nth-of-type(2) td.INFOTEXT", expected = "EBIT-Marge")})})
+            validators = {@Validate(expression = "article.KENNZAHLEN table:nth-of-type(8) tbody tr:nth-of-type(2) td.INFOTEXT", expected = "EBIT-Marge")})})
     private BigDecimal ebitMargin;
 
     // Equity Ratio
@@ -106,8 +104,7 @@ public class StockQuoteData {
             extractors = {@Extract(searchType = SearchType.Selector, expression = "article.KENNZAHLEN table:nth-of-type(6) tbody tr:nth-of-type(2) td:nth-of-type(6)")},
             source = Source.RESPONSE_TEXT,
             converter = @Converter(converterClass = BigDecimalConverter.class),
-            validators = {@Validate(expression = "article.KENNZAHLEN table th.ZAHL", expected = "2019e"),
-                    @Validate(expression = "article.KENNZAHLEN table:nth-of-type(6) tbody tr:nth-of-type(2) td.INFOTEXT", expected = "Eigenkapitalquote")})})
+            validators = {@Validate(expression = "article.KENNZAHLEN table:nth-of-type(6) tbody tr:nth-of-type(2) td.INFOTEXT", expected = "Eigenkapitalquote")})})
     private BigDecimal equityRatio;
 
     // Price Earnings Ratio / KGV / PER actual No 5
@@ -131,7 +128,7 @@ public class StockQuoteData {
             },
             source = Source.RESPONSE_TEXT,
             converter = @Converter(converterClass = PerConverter.class),
-            validators = {@Validate(expression = "article.KENNZAHLEN table th.ZAHL", expected = "2019e"),
+            validators = {
                     @Validate(expression = "article.KENNZAHLEN table tbody tr:nth-of-type(2) td.INFOTEXT", expected = "KGV")})})
     private SortedMap<Year, BigDecimal> per;
 
@@ -176,9 +173,7 @@ public class StockQuoteData {
             extractors = {@Extract(searchType = SearchType.Selector, expression = "article.KENNZAHLEN div")},
             source = Source.RESPONSE_TEXT,
             converter = @Converter(converterClass = EPSConverter.class),
-            validators = {
-                    @Validate(expression = "article.KENNZAHLEN table th.ZAHL:nth-of-type(4)", expected = "2017e"),
-                    @Validate(expression = "article.KENNZAHLEN table th.ZAHL:nth-of-type(6)", expected = "2015")
+            validators = {@Validate(expression = "article.KENNZAHLEN table tbody tr:nth-of-type(1) td.INFOTEXT", expected = "Gewinn pro Aktie in EUR")
             }
 
     )})
