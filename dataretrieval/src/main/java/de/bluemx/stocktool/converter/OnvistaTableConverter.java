@@ -15,7 +15,7 @@ import java.util.regex.Pattern;
  * It extracts all entries with Years and saves them in a Map for later use.
  * Also it is saved, if the value is estimated or not, e.g. 2018e inestead of 2018 without 'e'.
  */
-public class EPSConverter implements Conversion {
+public class OnvistaTableConverter implements Conversion {
     private final String pattern = "(\\d{4}e?)\\W(\\d{4}e?)\\W(\\d{4}e?)\\W(\\d{4}e?)\\W(\\d{4}e?)\\W(\\d{4}e?)\\W(\\d{4}e?)\\WGewinn pro Aktie in EUR\\W(-|\\d+,\\d+)\\W(-|\\d+,\\d+)\\W(-|\\d+,\\d+)\\W(-|\\d+,\\d+)\\W(-|\\d+,\\d+)\\W(-|\\d+,\\d+)\\W(-|\\d+,\\d+)\\W";
     private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.uuuu");
 
@@ -23,7 +23,7 @@ public class EPSConverter implements Conversion {
     public Object convert(String... strings) {
         SortedMap<YearEstimated, BigDecimal> epsMap = new TreeMap<>();
         if (strings != null) {
-            if (strings.length == 1) {
+            if (strings.length > 0) {
                 Pattern p = Pattern.compile(pattern);
                 Matcher m = p.matcher(strings[0]);
 

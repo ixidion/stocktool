@@ -1,5 +1,6 @@
 package de.bluemx.stocktool.converter;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
@@ -9,11 +10,11 @@ import java.util.SortedMap;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.collection.IsMapContaining.hasEntry;
 
-@SuppressWarnings("unchecked")
-public class PerConverterTest {
+@Disabled
+public class OnvistaConverterTest {
     @Test
     void convert() {
-        PerConverter conv = new PerConverter();
+        OnvistaTableConverter conv = new OnvistaTableConverter();
         SortedMap<Year, BigDecimal> map = (SortedMap<Year, BigDecimal>) conv.convert("2012", "1,3", "2013", "1,5");
         assertThat(map, hasEntry(Year.of(2012), BigDecimal.valueOf(1.3)));
         assertThat(map, hasEntry(Year.of(2013), BigDecimal.valueOf(1.5)));
@@ -21,7 +22,7 @@ public class PerConverterTest {
 
     @Test
     void convertBadParameter() {
-        PerConverter conv = new PerConverter();
+        OnvistaTableConverter conv = new OnvistaTableConverter();
         SortedMap<Year, BigDecimal> map = (SortedMap<Year, BigDecimal>) conv.convert("2012e", "1,3", "2013", "1,5");
         assertThat(map, hasEntry(Year.of(2012), BigDecimal.valueOf(1.3)));
         assertThat(map, hasEntry(Year.of(2013), BigDecimal.valueOf(1.5)));

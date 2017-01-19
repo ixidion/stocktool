@@ -6,7 +6,6 @@ import org.eclipse.persistence.annotations.JoinFetchType;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Vector;
@@ -21,16 +20,10 @@ public class StockquoteDetail implements Serializable {
     @Column(name = "fetch_date")
     @Convert(converter = LocalDateAttributeConverter.class)
     private LocalDate fetchDate;
-    @Column(name = "return_on_equity")
-    private BigDecimal roe;
-    @Column(name = "ebit_margin")
-    private BigDecimal ebitMargin;
     @Column(name = "analysts_count")
     private Integer analystsCount;
     @Column(name = "analysts_opinion")
     private Integer analystsOpinion;
-    @Column(name = "equity_ratio")
-    private BigDecimal equityRatio;
     @ManyToOne
     @JoinColumn(name = "stockquotedatabasic_id")
     private StockquoteBasic stockquoteBasics;
@@ -46,6 +39,18 @@ public class StockquoteDetail implements Serializable {
     @OneToMany(mappedBy = "stockquoteDetail", cascade = CascadeType.ALL)
     @JoinFetch(JoinFetchType.OUTER)
     private List<HistoricalQuote> historicalQuoteList;
+
+    @OneToMany(mappedBy = "stockquoteDetail", cascade = CascadeType.ALL)
+    @JoinFetch(JoinFetchType.OUTER)
+    private List<EquityRatio> equityRatioList;
+
+    @OneToMany(mappedBy = "stockquoteDetail", cascade = CascadeType.ALL)
+    @JoinFetch(JoinFetchType.OUTER)
+    private List<ReturnOnEquity> returnOnEquityList;
+
+    @OneToMany(mappedBy = "stockquoteDetail", cascade = CascadeType.ALL)
+    @JoinFetch(JoinFetchType.OUTER)
+    private List<EbitMargin> ebitMarginList;
 
     public void addEps(Eps eps) {
         if (epsList == null) {
@@ -95,20 +100,20 @@ public class StockquoteDetail implements Serializable {
         quote.setStockquoteDetail(null);
     }
 
-
     @Override
     public String toString() {
         return "StockquoteDetail{" +
-                "stockquotedata_id=" + stockquotedataId +
-                ", fetch_date=" + fetchDate +
-                ", return_on_equity=" + roe +
-                ", ebit_margin=" + ebitMargin +
-                ", analysts_count=" + analystsCount +
-                ", analysts_opinion=" + analystsOpinion +
-                ", equity_ratio=" + equityRatio +
+                "stockquotedataId=" + stockquotedataId +
+                ", fetchDate=" + fetchDate +
+                ", analystsCount=" + analystsCount +
+                ", analystsOpinion=" + analystsOpinion +
+                ", stockquoteBasics=" + stockquoteBasics +
                 ", epsList=" + epsList +
                 ", priceEarningsRatioList=" + priceEarningsRatioList +
-                ", historicalQuotesList=" + historicalQuoteList +
+                ", historicalQuoteList=" + historicalQuoteList +
+                ", equityRatioList=" + equityRatioList +
+                ", returnOnEquityList=" + returnOnEquityList +
+                ", ebitMarginList=" + ebitMarginList +
                 '}';
     }
 
@@ -143,22 +148,6 @@ public class StockquoteDetail implements Serializable {
         this.fetchDate = fetchDate;
     }
 
-    public BigDecimal getRoe() {
-        return roe;
-    }
-
-    public void setRoe(BigDecimal return_on_equity) {
-        this.roe = return_on_equity;
-    }
-
-    public BigDecimal getEbitMargin() {
-        return ebitMargin;
-    }
-
-    public void setEbitMargin(BigDecimal ebitMargin) {
-        this.ebitMargin = ebitMargin;
-    }
-
     public Integer getAnalystsCount() {
         return analystsCount;
     }
@@ -173,14 +162,6 @@ public class StockquoteDetail implements Serializable {
 
     public void setAnalystsOpinion(Integer analysts_opinion) {
         this.analystsOpinion = analysts_opinion;
-    }
-
-    public BigDecimal getEquityRatio() {
-        return equityRatio;
-    }
-
-    public void setEquityRatio(BigDecimal equity_ratio) {
-        this.equityRatio = equity_ratio;
     }
 
     public StockquoteBasic getStockquoteBasics() {
@@ -213,5 +194,29 @@ public class StockquoteDetail implements Serializable {
 
     public void setHistoricalQuoteList(List<HistoricalQuote> historicalQuoteList) {
         this.historicalQuoteList = historicalQuoteList;
+    }
+
+    public List<EquityRatio> getEquityRatioList() {
+        return equityRatioList;
+    }
+
+    public void setEquityRatioList(List<EquityRatio> equityRatioList) {
+        this.equityRatioList = equityRatioList;
+    }
+
+    public List<ReturnOnEquity> getReturnOnEquityList() {
+        return returnOnEquityList;
+    }
+
+    public void setReturnOnEquityList(List<ReturnOnEquity> returnOnEquityList) {
+        this.returnOnEquityList = returnOnEquityList;
+    }
+
+    public List<EbitMargin> getEbitMarginList() {
+        return ebitMarginList;
+    }
+
+    public void setEbitMarginList(List<EbitMargin> ebitMarginList) {
+        this.ebitMarginList = ebitMarginList;
     }
 }

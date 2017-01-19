@@ -6,7 +6,6 @@ import de.bluemx.stocktool.converter.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.time.Year;
 import java.time.format.DateTimeFormatter;
 import java.util.Map;
 import java.util.SortedMap;
@@ -86,7 +85,7 @@ public class StockQuoteData {
             source = Source.RESPONSE_TEXT,
             converter = @Converter(converterClass = BigDecimalConverter.class),
             validators = {@Validate(expression = "article.KENNZAHLEN table:nth-of-type(8) tbody tr:nth-of-type(4) td.INFOTEXT", expected = "Eigenkapitalrendite")})})
-    private BigDecimal roe;
+    private SortedMap<YearEstimated, BigDecimal> roe;
 
     // EBIT-Margin
     // No 2
@@ -96,7 +95,7 @@ public class StockQuoteData {
             source = Source.RESPONSE_TEXT,
             converter = @Converter(converterClass = BigDecimalConverter.class),
             validators = {@Validate(expression = "article.KENNZAHLEN table:nth-of-type(8) tbody tr:nth-of-type(2) td.INFOTEXT", expected = "EBIT-Marge")})})
-    private BigDecimal ebitMargin;
+    private SortedMap<YearEstimated, BigDecimal> ebitMargin;
 
     // Equity Ratio
     // No 3
@@ -105,7 +104,7 @@ public class StockQuoteData {
             source = Source.RESPONSE_TEXT,
             converter = @Converter(converterClass = BigDecimalConverter.class),
             validators = {@Validate(expression = "article.KENNZAHLEN table:nth-of-type(6) tbody tr:nth-of-type(2) td.INFOTEXT", expected = "Eigenkapitalquote")})})
-    private BigDecimal equityRatio;
+    private SortedMap<YearEstimated, BigDecimal> equityRatio;
 
     // Price Earnings Ratio / KGV / PER actual No 5
     // No 4 (Basis)
@@ -127,10 +126,10 @@ public class StockQuoteData {
                     @Extract(searchType = SearchType.Selector, expression = "article.KENNZAHLEN table tbody tr:nth-of-type(2) td:nth-of-type(8)")
             },
             source = Source.RESPONSE_TEXT,
-            converter = @Converter(converterClass = PerConverter.class),
+            converter = @Converter(converterClass = OnvistaTableConverter.class),
             validators = {
                     @Validate(expression = "article.KENNZAHLEN table tbody tr:nth-of-type(2) td.INFOTEXT", expected = "KGV")})})
-    private SortedMap<Year, BigDecimal> per;
+    private SortedMap<YearEstimated, BigDecimal> per;
 
     @Resolvers({@Resolver(provider = "onvista-fundamental",
             extractors = {@Extract(searchType = SearchType.Selector, expression = "article.KENNZAHLEN div span")},
@@ -172,7 +171,7 @@ public class StockQuoteData {
     @Resolvers({@Resolver(provider = "onvista-fundamental",
             extractors = {@Extract(searchType = SearchType.Selector, expression = "article.KENNZAHLEN div")},
             source = Source.RESPONSE_TEXT,
-            converter = @Converter(converterClass = EPSConverter.class),
+            converter = @Converter(converterClass = OnvistaTableConverter.class),
             validators = {@Validate(expression = "article.KENNZAHLEN table tbody tr:nth-of-type(1) td.INFOTEXT", expected = "Gewinn pro Aktie in EUR")
             }
 
@@ -247,35 +246,35 @@ public class StockQuoteData {
         this.fetchDate = fetchDate;
     }
 
-    public BigDecimal getRoe() {
+    public SortedMap<YearEstimated, BigDecimal> getRoe() {
         return roe;
     }
 
-    public void setRoe(BigDecimal roe) {
+    public void setRoe(SortedMap<YearEstimated, BigDecimal> roe) {
         this.roe = roe;
     }
 
-    public BigDecimal getEbitMargin() {
+    public SortedMap<YearEstimated, BigDecimal> getEbitMargin() {
         return ebitMargin;
     }
 
-    public void setEbitMargin(BigDecimal ebitMargin) {
+    public void setEbitMargin(SortedMap<YearEstimated, BigDecimal> ebitMargin) {
         this.ebitMargin = ebitMargin;
     }
 
-    public BigDecimal getEquityRatio() {
+    public SortedMap<YearEstimated, BigDecimal> getEquityRatio() {
         return equityRatio;
     }
 
-    public void setEquityRatio(BigDecimal equityRatio) {
+    public void setEquityRatio(SortedMap<YearEstimated, BigDecimal> equityRatio) {
         this.equityRatio = equityRatio;
     }
 
-    public SortedMap<Year, BigDecimal> getPer() {
+    public SortedMap<YearEstimated, BigDecimal> getPer() {
         return per;
     }
 
-    public void setPer(SortedMap<Year, BigDecimal> per) {
+    public void setPer(SortedMap<YearEstimated, BigDecimal> per) {
         this.per = per;
     }
 

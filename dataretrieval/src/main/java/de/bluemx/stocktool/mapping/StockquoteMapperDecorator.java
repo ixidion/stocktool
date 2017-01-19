@@ -6,7 +6,6 @@ import de.bluemx.stocktool.model.YearEstimated;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.time.Year;
 import java.util.Map;
 
 public class StockquoteMapperDecorator implements StockquoteMapper {
@@ -35,9 +34,9 @@ public class StockquoteMapperDecorator implements StockquoteMapper {
 
     private StockquoteDetail mapPriceEarningsRatio(StockquoteDetail detail, StockQuoteData stockdata) {
         if (stockdata.getPer() == null) return detail;
-        for (Map.Entry<Year, BigDecimal> entry : stockdata.getPer().entrySet()) {
+        for (Map.Entry<YearEstimated, BigDecimal> entry : stockdata.getPer().entrySet()) {
             PriceEarningsRatio per = new PriceEarningsRatio();
-            per.setTableYear(entry.getKey().atDay(1));
+            per.setTableYear(entry.getKey().getYear().atDay(1));
             per.setTableValue(entry.getValue());
             detail.addPer(per);
         }
