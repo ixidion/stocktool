@@ -45,17 +45,19 @@ public class StockquoteMapperDecorator implements StockquoteMapper {
 
     private <T extends TableKeyValues> List<T> mapTableData(SortedMap<YearEstimated, BigDecimal> entryMap, StockquoteDetail detail, Class<T> clazz) {
         List<T> keyValueList = new Vector<T>();
-        for (Map.Entry<YearEstimated, BigDecimal> entry : entryMap.entrySet()) {
-            T keyValuesv = null;
-            try {
-                keyValuesv = clazz.newInstance();
-                keyValuesv.setTableYear(entry.getKey().getYear().atDay(1));
-                keyValuesv.setEstimated(entry.getKey().isEstimated());
-                keyValuesv.setTableValue(entry.getValue());
-                keyValuesv.setStockquoteDetail(detail);
-                keyValueList.add(keyValuesv);
-            } catch (Exception e) {
-                throw new RuntimeException(e);
+        if (!(entryMap == null)) {
+            for (Map.Entry<YearEstimated, BigDecimal> entry : entryMap.entrySet()) {
+                T keyValuesv = null;
+                try {
+                    keyValuesv = clazz.newInstance();
+                    keyValuesv.setTableYear(entry.getKey().getYear().atDay(1));
+                    keyValuesv.setEstimated(entry.getKey().isEstimated());
+                    keyValuesv.setTableValue(entry.getValue());
+                    keyValuesv.setStockquoteDetail(detail);
+                    keyValueList.add(keyValuesv);
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
             }
         }
         return keyValueList;
