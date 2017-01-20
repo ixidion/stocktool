@@ -9,7 +9,7 @@ import java.time.LocalDate;
 @Table(name = "table_key_value")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "discriminator", discriminatorType = DiscriminatorType.STRING)
-public class TableKeyValues implements Serializable {
+public abstract class TableKeyValues implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "table_key_value_id")
@@ -46,7 +46,6 @@ public class TableKeyValues implements Serializable {
                 ", tableYear=" + tableYear +
                 ", tableValue=" + tableValue +
                 ", estimated=" + estimated +
-                ", stockquoteDetail=" + stockquoteDetail +
                 '}';
     }
 

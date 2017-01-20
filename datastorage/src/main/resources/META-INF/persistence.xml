@@ -14,7 +14,11 @@
     <class>de.bluemx.stocktool.db.model.StockquoteDetail</class>
     <class>de.bluemx.stocktool.db.model.HistoricalQuote</class>
     <class>de.bluemx.stocktool.db.model.Eps</class>
+    <class>de.bluemx.stocktool.db.model.EbitMargin</class>
+    <class>de.bluemx.stocktool.db.model.EquityRatio</class>
+    <class>de.bluemx.stocktool.db.model.TableKeyValues</class>
     <class>de.bluemx.stocktool.db.model.PriceEarningsRatio</class>
+    <class>de.bluemx.stocktool.db.model.ReturnOnEquity</class>
     <class>de.bluemx.stocktool.db.converter.LocalDateAttributeConverter</class>
 
 

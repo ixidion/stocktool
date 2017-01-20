@@ -92,12 +92,60 @@ public class StockquoteDetail implements Serializable {
         quote.setStockquoteDetail(this);
     }
 
-    public void removeDetail(HistoricalQuote quote) {
+    public void removeQuote(HistoricalQuote quote) {
         if (historicalQuoteList == null) {
             return;
         }
         historicalQuoteList.remove(quote);
         quote.setStockquoteDetail(null);
+    }
+
+    public void addEquityRatio(EquityRatio equityRatio) {
+        if (equityRatioList == null) {
+            equityRatioList = new Vector<>();
+        }
+        equityRatioList.add(equityRatio);
+        equityRatio.setStockquoteDetail(this);
+    }
+
+    public void removeEquityRatio(EquityRatio equityRatio) {
+        if (equityRatioList == null) {
+            return;
+        }
+        equityRatioList.remove(equityRatio);
+        equityRatio.setStockquoteDetail(null);
+    }
+
+    public void addEquityRatio(ReturnOnEquity returnOnEquity) {
+        if (returnOnEquityList == null) {
+            returnOnEquityList = new Vector<>();
+        }
+        returnOnEquityList.add(returnOnEquity);
+        returnOnEquity.setStockquoteDetail(this);
+    }
+
+    public void removeEquityRatio(ReturnOnEquity returnOnEquity) {
+        if (returnOnEquityList == null) {
+            return;
+        }
+        returnOnEquityList.remove(returnOnEquity);
+        returnOnEquity.setStockquoteDetail(null);
+    }
+
+    public void addEquityRatio(EbitMargin ebitMargin) {
+        if (ebitMarginList == null) {
+            ebitMarginList = new Vector<>();
+        }
+        ebitMarginList.add(ebitMargin);
+        ebitMargin.setStockquoteDetail(this);
+    }
+
+    public void removeEquityRatio(EbitMargin ebitMargin) {
+        if (ebitMarginList == null) {
+            return;
+        }
+        ebitMarginList.remove(ebitMargin);
+        ebitMargin.setStockquoteDetail(null);
     }
 
     @Override
