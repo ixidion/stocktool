@@ -27,9 +27,11 @@ public class BigDecimalConverter implements Conversion {
                     return new BigDecimal(number);
                 } else {
                     log.error("Extraction of value '{}' failed.", strings[0]);
+                    return null;
                 }
+            } else {
+                throw new IllegalArgumentException("The Argument length is not 1.");
             }
-            throw new IllegalArgumentException("The Argument length is not 1.");
         }
         throw new IllegalArgumentException("The Argument is null.");
     }

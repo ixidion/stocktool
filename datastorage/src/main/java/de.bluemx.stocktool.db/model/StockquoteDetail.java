@@ -155,7 +155,6 @@ public class StockquoteDetail implements Serializable {
                 ", fetchDate=" + fetchDate +
                 ", analystsCount=" + analystsCount +
                 ", analystsOpinion=" + analystsOpinion +
-                ", stockquoteBasics=" + stockquoteBasics +
                 ", epsList=" + epsList +
                 ", priceEarningsRatioList=" + priceEarningsRatioList +
                 ", historicalQuoteList=" + historicalQuoteList +

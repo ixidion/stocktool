@@ -79,30 +79,74 @@ public class StockQuoteData {
 
     // Return of Equity
     // No 1\
-    // @TODO Error prone, fetch full table and make decision
     @Resolvers({@Resolver(provider = "onvista-fundamental",
-            extractors = {@Extract(searchType = SearchType.Selector, expression = "article.KENNZAHLEN table:nth-of-type(8) tbody tr:nth-of-type(4) td:nth-of-type(6)")},
+            extractors = {
+                    @Extract(searchType = SearchType.Selector, expression = "article.KENNZAHLEN table th.ZAHL:nth-of-type(2)"),
+                    @Extract(searchType = SearchType.Selector, expression = "article.KENNZAHLEN table:nth-of-type(8) tbody tr:nth-of-type(4) td:nth-of-type(2)"),
+                    @Extract(searchType = SearchType.Selector, expression = "article.KENNZAHLEN table th.ZAHL:nth-of-type(3)"),
+                    @Extract(searchType = SearchType.Selector, expression = "article.KENNZAHLEN table:nth-of-type(8) tbody tr:nth-of-type(4) td:nth-of-type(3)"),
+                    @Extract(searchType = SearchType.Selector, expression = "article.KENNZAHLEN table th.ZAHL:nth-of-type(4)"),
+                    @Extract(searchType = SearchType.Selector, expression = "article.KENNZAHLEN table:nth-of-type(8) tbody tr:nth-of-type(4) td:nth-of-type(4)"),
+                    @Extract(searchType = SearchType.Selector, expression = "article.KENNZAHLEN table th.ZAHL:nth-of-type(5)"),
+                    @Extract(searchType = SearchType.Selector, expression = "article.KENNZAHLEN table:nth-of-type(8) tbody tr:nth-of-type(4) td:nth-of-type(5)"),
+                    @Extract(searchType = SearchType.Selector, expression = "article.KENNZAHLEN table th.ZAHL:nth-of-type(6)"),
+                    @Extract(searchType = SearchType.Selector, expression = "article.KENNZAHLEN table:nth-of-type(8) tbody tr:nth-of-type(4) td:nth-of-type(6)"),
+                    @Extract(searchType = SearchType.Selector, expression = "article.KENNZAHLEN table th.ZAHL:nth-of-type(7)"),
+                    @Extract(searchType = SearchType.Selector, expression = "article.KENNZAHLEN table:nth-of-type(8) tbody tr:nth-of-type(4) td:nth-of-type(7)"),
+                    @Extract(searchType = SearchType.Selector, expression = "article.KENNZAHLEN table th.ZAHL:nth-of-type(8)"),
+                    @Extract(searchType = SearchType.Selector, expression = "article.KENNZAHLEN table:nth-of-type(8) tbody tr:nth-of-type(4) td:nth-of-type(8)")
+            },
             source = Source.RESPONSE_TEXT,
-            converter = @Converter(converterClass = BigDecimalConverter.class),
-            validators = {@Validate(expression = "article.KENNZAHLEN table:nth-of-type(8) tbody tr:nth-of-type(4) td.INFOTEXT", expected = "Eigenkapitalrendite")})})
+            converter = @Converter(converterClass = OnvistaTableConverter.class),
+            validators = {@Validate(expression = "article.KENNZAHLEN table:nth-of-type(8) tbody tr:nth-of-type(4) td.INFOTEXT", expected = "Eigenkapitalrendite")}
+    )})
     private SortedMap<YearEstimated, BigDecimal> roe;
 
     // EBIT-Margin
     // No 2
-    // @TODO Error prone, fetch full table and make decision
     @Resolvers({@Resolver(provider = "onvista-fundamental",
-            extractors = {@Extract(searchType = SearchType.Selector, expression = "article.KENNZAHLEN table:nth-of-type(8) tbody tr:nth-of-type(2) td:nth-of-type(6)")},
+            extractors = {
+                    @Extract(searchType = SearchType.Selector, expression = "article.KENNZAHLEN table th.ZAHL:nth-of-type(2)"),
+                    @Extract(searchType = SearchType.Selector, expression = "article.KENNZAHLEN table:nth-of-type(8) tbody tr:nth-of-type(2) td:nth-of-type(2)"),
+                    @Extract(searchType = SearchType.Selector, expression = "article.KENNZAHLEN table th.ZAHL:nth-of-type(3)"),
+                    @Extract(searchType = SearchType.Selector, expression = "article.KENNZAHLEN table:nth-of-type(8) tbody tr:nth-of-type(2) td:nth-of-type(3)"),
+                    @Extract(searchType = SearchType.Selector, expression = "article.KENNZAHLEN table th.ZAHL:nth-of-type(4)"),
+                    @Extract(searchType = SearchType.Selector, expression = "article.KENNZAHLEN table:nth-of-type(8) tbody tr:nth-of-type(2) td:nth-of-type(4)"),
+                    @Extract(searchType = SearchType.Selector, expression = "article.KENNZAHLEN table th.ZAHL:nth-of-type(5)"),
+                    @Extract(searchType = SearchType.Selector, expression = "article.KENNZAHLEN table:nth-of-type(8) tbody tr:nth-of-type(2) td:nth-of-type(5)"),
+                    @Extract(searchType = SearchType.Selector, expression = "article.KENNZAHLEN table th.ZAHL:nth-of-type(6)"),
+                    @Extract(searchType = SearchType.Selector, expression = "article.KENNZAHLEN table:nth-of-type(8) tbody tr:nth-of-type(2) td:nth-of-type(6)"),
+                    @Extract(searchType = SearchType.Selector, expression = "article.KENNZAHLEN table th.ZAHL:nth-of-type(7)"),
+                    @Extract(searchType = SearchType.Selector, expression = "article.KENNZAHLEN table:nth-of-type(8) tbody tr:nth-of-type(2) td:nth-of-type(7)"),
+                    @Extract(searchType = SearchType.Selector, expression = "article.KENNZAHLEN table th.ZAHL:nth-of-type(8)"),
+                    @Extract(searchType = SearchType.Selector, expression = "article.KENNZAHLEN table:nth-of-type(8) tbody tr:nth-of-type(2) td:nth-of-type(8)")
+            },
             source = Source.RESPONSE_TEXT,
-            converter = @Converter(converterClass = BigDecimalConverter.class),
+            converter = @Converter(converterClass = OnvistaTableConverter.class),
             validators = {@Validate(expression = "article.KENNZAHLEN table:nth-of-type(8) tbody tr:nth-of-type(2) td.INFOTEXT", expected = "EBIT-Marge")})})
     private SortedMap<YearEstimated, BigDecimal> ebitMargin;
 
     // Equity Ratio
     // No 3
     @Resolvers({@Resolver(provider = "onvista-fundamental",
-            extractors = {@Extract(searchType = SearchType.Selector, expression = "article.KENNZAHLEN table:nth-of-type(6) tbody tr:nth-of-type(2) td:nth-of-type(6)")},
+            extractors = {
+                    @Extract(searchType = SearchType.Selector, expression = "article.KENNZAHLEN table th.ZAHL:nth-of-type(2)"),
+                    @Extract(searchType = SearchType.Selector, expression = "article.KENNZAHLEN table:nth-of-type(6) tbody tr:nth-of-type(2) td:nth-of-type(2)"),
+                    @Extract(searchType = SearchType.Selector, expression = "article.KENNZAHLEN table th.ZAHL:nth-of-type(3)"),
+                    @Extract(searchType = SearchType.Selector, expression = "article.KENNZAHLEN table:nth-of-type(6) tbody tr:nth-of-type(2) td:nth-of-type(3)"),
+                    @Extract(searchType = SearchType.Selector, expression = "article.KENNZAHLEN table th.ZAHL:nth-of-type(4)"),
+                    @Extract(searchType = SearchType.Selector, expression = "article.KENNZAHLEN table:nth-of-type(6) tbody tr:nth-of-type(2) td:nth-of-type(4)"),
+                    @Extract(searchType = SearchType.Selector, expression = "article.KENNZAHLEN table th.ZAHL:nth-of-type(5)"),
+                    @Extract(searchType = SearchType.Selector, expression = "article.KENNZAHLEN table:nth-of-type(6) tbody tr:nth-of-type(2) td:nth-of-type(5)"),
+                    @Extract(searchType = SearchType.Selector, expression = "article.KENNZAHLEN table th.ZAHL:nth-of-type(6)"),
+                    @Extract(searchType = SearchType.Selector, expression = "article.KENNZAHLEN table:nth-of-type(6) tbody tr:nth-of-type(2) td:nth-of-type(6)"),
+                    @Extract(searchType = SearchType.Selector, expression = "article.KENNZAHLEN table th.ZAHL:nth-of-type(7)"),
+                    @Extract(searchType = SearchType.Selector, expression = "article.KENNZAHLEN table:nth-of-type(6) tbody tr:nth-of-type(2) td:nth-of-type(7)"),
+                    @Extract(searchType = SearchType.Selector, expression = "article.KENNZAHLEN table th.ZAHL:nth-of-type(8)"),
+                    @Extract(searchType = SearchType.Selector, expression = "article.KENNZAHLEN table:nth-of-type(6) tbody tr:nth-of-type(2) td:nth-of-type(8)")
+            },
             source = Source.RESPONSE_TEXT,
-            converter = @Converter(converterClass = BigDecimalConverter.class),
+            converter = @Converter(converterClass = OnvistaTableConverter.class),
             validators = {@Validate(expression = "article.KENNZAHLEN table:nth-of-type(6) tbody tr:nth-of-type(2) td.INFOTEXT", expected = "Eigenkapitalquote")})})
     private SortedMap<YearEstimated, BigDecimal> equityRatio;
 
@@ -169,10 +213,25 @@ public class StockQuoteData {
     // Earnigs per Share / Needed for No 8
     // No 13 (Basis)
     @Resolvers({@Resolver(provider = "onvista-fundamental",
-            extractors = {@Extract(searchType = SearchType.Selector, expression = "article.KENNZAHLEN div")},
+            extractors = {
+                    @Extract(searchType = SearchType.Selector, expression = "article.KENNZAHLEN table th.ZAHL:nth-of-type(2)"),
+                    @Extract(searchType = SearchType.Selector, expression = "article.KENNZAHLEN table tbody tr td:nth-of-type(2)"),
+                    @Extract(searchType = SearchType.Selector, expression = "article.KENNZAHLEN table th.ZAHL:nth-of-type(3)"),
+                    @Extract(searchType = SearchType.Selector, expression = "article.KENNZAHLEN table tbody tr td:nth-of-type(3)"),
+                    @Extract(searchType = SearchType.Selector, expression = "article.KENNZAHLEN table th.ZAHL:nth-of-type(4)"),
+                    @Extract(searchType = SearchType.Selector, expression = "article.KENNZAHLEN table tbody tr td:nth-of-type(4)"),
+                    @Extract(searchType = SearchType.Selector, expression = "article.KENNZAHLEN table th.ZAHL:nth-of-type(5)"),
+                    @Extract(searchType = SearchType.Selector, expression = "article.KENNZAHLEN table tbody tr td:nth-of-type(5)"),
+                    @Extract(searchType = SearchType.Selector, expression = "article.KENNZAHLEN table th.ZAHL:nth-of-type(6)"),
+                    @Extract(searchType = SearchType.Selector, expression = "article.KENNZAHLEN table tbody tr td:nth-of-type(6)"),
+                    @Extract(searchType = SearchType.Selector, expression = "article.KENNZAHLEN table th.ZAHL:nth-of-type(7)"),
+                    @Extract(searchType = SearchType.Selector, expression = "article.KENNZAHLEN table tbody tr td:nth-of-type(7)"),
+                    @Extract(searchType = SearchType.Selector, expression = "article.KENNZAHLEN table th.ZAHL:nth-of-type(8)"),
+                    @Extract(searchType = SearchType.Selector, expression = "article.KENNZAHLEN table tbody tr td:nth-of-type(8)")
+            },
             source = Source.RESPONSE_TEXT,
             converter = @Converter(converterClass = OnvistaTableConverter.class),
-            validators = {@Validate(expression = "article.KENNZAHLEN table tbody tr:nth-of-type(1) td.INFOTEXT", expected = "Gewinn pro Aktie in EUR")
+            validators = {@Validate(expression = "article.KENNZAHLEN table tbody tr td.INFOTEXT", expected = "Gewinn pro Aktie in EUR")
             }
 
     )})

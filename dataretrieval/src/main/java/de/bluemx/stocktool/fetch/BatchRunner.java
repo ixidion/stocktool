@@ -24,7 +24,7 @@ public class BatchRunner {
     }
 
     public void updateDatabase() {
-        ThreadPool pool = new ThreadPool(8);
+        ThreadPool pool = new ThreadPool(20);
         List<StockquoteBasic> basicList = stockquoteDao.fetchAll();
         for (StockquoteBasic basic : basicList) {
             FetchTask fetchTask = new FetchTask(basic);
