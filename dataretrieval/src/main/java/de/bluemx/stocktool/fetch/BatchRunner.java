@@ -6,6 +6,8 @@ import de.bluemx.stocktool.db.model.StockquoteBasic;
 import de.bluemx.stocktool.mapping.StockquoteMapper;
 import org.mapstruct.factory.Mappers;
 
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -14,20 +16,20 @@ import java.util.List;
 public class BatchRunner {
 
     private StockquoteBasicDAO stockquoteDao;
-    private IsinFetcher fetcher;
     private StockquoteMapper map = Mappers.getMapper(StockquoteMapper.class);
+    private Timestamp batchRun;
 
     @Inject
-    public BatchRunner(StockquoteBasicDAO dao, IsinFetcher fetcher) {
+    public BatchRunner(StockquoteBasicDAO dao) {
         this.stockquoteDao = dao;
-        this.fetcher = fetcher;
     }
 
     public void updateDatabase() {
+        this.batchRun = new Timestamp(new Date().getTime());
         ThreadPool pool = new ThreadPool(20);
         List<StockquoteBasic> basicList = stockquoteDao.fetchAll();
         for (StockquoteBasic basic : basicList) {
-            FetchTask fetchTask = new FetchTask(basic);
+            FetchTask fetchTask = new FetchTask(basic, batchRun);
             pool.execute(fetchTask);
         }
         while (pool.getQueueSize() > 0) {

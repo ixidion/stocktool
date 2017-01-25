@@ -11,7 +11,11 @@ import java.util.Vector;
 
 @Entity
 @Table(name = "stockquotedata_basic")
-@NamedQuery(name = "StockquoteBasic.findAll", query = "SELECT basic FROM StockquoteBasic basic")
+@NamedQueries({
+        @NamedQuery(name = "StockquoteBasic.findAll", query = "SELECT basic FROM StockquoteBasic basic"),
+        @NamedQuery(name = "StockquoteBasic.findByISIN", query = "SELECT basic FROM StockquoteBasic basic JOIN basic.fetches fetches WHERE basic.isin = :isin AND " +
+                "fetches.fetchDate = (SELECT MAX(fetches.fetchDate) FROM basic.fetches fetches WHERE fetches.stockquoteBasics = basic)")
+})
 public class StockquoteBasic implements Serializable {
     @Id @GeneratedValue(strategy=GenerationType.IDENTITY) @Column(name="stockquotedatabasic_id")
     private int stockquotedatabasicId;
@@ -26,6 +30,8 @@ public class StockquoteBasic implements Serializable {
     private String symbol;
     @Column(name="financial_year")
     private LocalDate financialYear;
+    @Column(name = "financialsector")
+    private boolean financialSector = false;
     @OneToMany(mappedBy = "stockquoteBasics", cascade = CascadeType.ALL)
     @JoinFetch(JoinFetchType.OUTER)
     private List<StockquoteDetail> fetches;
@@ -55,6 +61,7 @@ public class StockquoteBasic implements Serializable {
                 ", stockindex='" + index + '\'' +
                 ", symbol='" + symbol + '\'' +
                 ", financialYear=" + financialYear +
+                ", financialSector=" + financialSector +
                 ", fetches=" + fetches +
                 '}';
     }
@@ -123,6 +130,14 @@ public class StockquoteBasic implements Serializable {
 
     public void setFinancialYear(LocalDate financialYear) {
         this.financialYear = financialYear;
+    }
+
+    public boolean isFinancialSector() {
+        return financialSector;
+    }
+
+    public void setFinancialSector(boolean financialSector) {
+        this.financialSector = financialSector;
     }
 
     public List<StockquoteDetail> getFetches() {

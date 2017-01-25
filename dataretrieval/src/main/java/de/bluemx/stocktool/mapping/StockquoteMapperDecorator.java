@@ -30,10 +30,10 @@ public class StockquoteMapperDecorator implements StockquoteMapper {
     public StockquoteDetail quoteToDetail(StockQuoteData stockdata) {
         StockquoteDetail detail = delegate.quoteToDetail(stockdata);
         List<PriceEarningsRatio> perList = mapTableData(stockdata.getPer(), detail, PriceEarningsRatio.class);
-        List<EbitMargin> ebitMarginList = mapTableData(stockdata.getPer(), detail, EbitMargin.class);
-        List<ReturnOnEquity> returnOnEquityList = mapTableData(stockdata.getPer(), detail, ReturnOnEquity.class);
-        List<EquityRatio> equityRatioList = mapTableData(stockdata.getPer(), detail, EquityRatio.class);
-        List<Eps> epsList = mapTableData(stockdata.getPer(), detail, Eps.class);
+        List<EbitMargin> ebitMarginList = mapTableData(stockdata.getEbitMargin(), detail, EbitMargin.class);
+        List<ReturnOnEquity> returnOnEquityList = mapTableData(stockdata.getRoe(), detail, ReturnOnEquity.class);
+        List<EquityRatio> equityRatioList = mapTableData(stockdata.getEquityRatio(), detail, EquityRatio.class);
+        List<Eps> epsList = mapTableData(stockdata.getEps(), detail, Eps.class);
         detail.setPriceEarningsRatioList(perList);
         detail.setEbitMarginList(ebitMarginList);
         detail.setEquityRatioList(equityRatioList);

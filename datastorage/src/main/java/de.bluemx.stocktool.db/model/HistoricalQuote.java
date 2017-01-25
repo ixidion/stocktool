@@ -1,6 +1,7 @@
 package de.bluemx.stocktool.db.model;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlTransient;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -16,6 +17,7 @@ public class HistoricalQuote implements Serializable {
     private BigDecimal quote;
     @ManyToOne
     @JoinColumn(name = "stockquotedata_id")
+    @XmlTransient
     private StockquoteDetail stockquoteDetail;
 
     @Override

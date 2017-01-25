@@ -6,6 +6,8 @@ import org.eclipse.persistence.annotations.JoinFetchType;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Vector;
@@ -24,6 +26,11 @@ public class StockquoteDetail implements Serializable {
     private Integer analystsCount;
     @Column(name = "analysts_opinion")
     private Integer analystsOpinion;
+    @Column(name = "marketcap")
+    private BigDecimal marketCapitalization;
+    @Column(name = "batch_run")
+    private Timestamp batchRun;
+
     @ManyToOne
     @JoinColumn(name = "stockquotedatabasic_id")
     private StockquoteBasic stockquoteBasics;
@@ -155,6 +162,8 @@ public class StockquoteDetail implements Serializable {
                 ", fetchDate=" + fetchDate +
                 ", analystsCount=" + analystsCount +
                 ", analystsOpinion=" + analystsOpinion +
+                ", marketCap=" + marketCapitalization +
+                ", batchRun=" + batchRun +
                 ", epsList=" + epsList +
                 ", priceEarningsRatioList=" + priceEarningsRatioList +
                 ", historicalQuoteList=" + historicalQuoteList +
@@ -209,6 +218,22 @@ public class StockquoteDetail implements Serializable {
 
     public void setAnalystsOpinion(Integer analysts_opinion) {
         this.analystsOpinion = analysts_opinion;
+    }
+
+    public BigDecimal getMarketCapitalization() {
+        return marketCapitalization;
+    }
+
+    public void setMarketCapitalization(BigDecimal marketCap) {
+        this.marketCapitalization = marketCap;
+    }
+
+    public Timestamp getBatchRun() {
+        return batchRun;
+    }
+
+    public void setBatchRun(Timestamp batchRun) {
+        this.batchRun = batchRun;
     }
 
     public StockquoteBasic getStockquoteBasics() {

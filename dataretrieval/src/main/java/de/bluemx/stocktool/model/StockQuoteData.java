@@ -237,6 +237,21 @@ public class StockQuoteData {
     )})
     private SortedMap<YearEstimated, BigDecimal> eps;
 
+    @Resolvers({@Resolver(provider = "onvista-basic",
+            extractors = {@Extract(searchType = SearchType.Selector, expression = "table.MARKT tbody tr td.ZAHL")},
+            source = Source.RESPONSE_TEXT,
+            converter = @Converter(converterClass = BigDecimalConverter.class),
+            validators = {@Validate(expression = "table.MARKT tbody tr th", expected = "Marktkapitalisierung")}
+    )})
+    private BigDecimal marketCapitalization;
+
+    @Resolvers({@Resolver(provider = "onvista-basic",
+            extractors = {@Extract(searchType = SearchType.Selector, expression = "div.WERTPAPIER_DETAILS")},
+            source = Source.RESPONSE_TEXT,
+            converter = @Converter(converterClass = SectorConverter.class)
+    )})
+    private boolean financialSector;
+
     public StockQuoteData(String isin, Index index) {
         this.isin = isin;
         this.index = index;
@@ -375,5 +390,21 @@ public class StockQuoteData {
 
     public void setEps(SortedMap<YearEstimated, BigDecimal> eps) {
         this.eps = eps;
+    }
+
+    public BigDecimal getMarketCapitalization() {
+        return marketCapitalization;
+    }
+
+    public void setMarketCapitalization(BigDecimal marketCapitalization) {
+        this.marketCapitalization = marketCapitalization;
+    }
+
+    public boolean isFinancialSector() {
+        return financialSector;
+    }
+
+    public void setFinancialSector(boolean financialSector) {
+        this.financialSector = financialSector;
     }
 }

@@ -44,4 +44,20 @@ public class StockquoteBasicDAO {
             throw new DBException("Insert with entity failed.", e, stockquoteBasic);
         }
     }
+
+    public StockquoteBasic fetchByISIN(String isin) {
+        EntityTransaction tx = em.getTransaction();
+        try {
+            tx.begin();
+            StockquoteBasic b = (StockquoteBasic) em.createNamedQuery("StockquoteBasic.findByISIN")
+                    .setParameter("isin", isin)
+                    .getSingleResult();
+            em.flush();
+            tx.commit();
+            return b;
+        } catch (RuntimeException e) {
+            tx.rollback();
+            throw new DBException("Try to find StockquoteBasic by ISIN failed.", e, isin);
+        }
+    }
 }
