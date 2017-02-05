@@ -5,7 +5,9 @@ import org.eclipse.persistence.annotations.JoinFetchType;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import java.util.Vector;
 
@@ -51,6 +53,23 @@ public class StockquoteBasic implements Serializable {
         fetches.remove(detail);
         detail.setStockquoteBasics(null);
     }
+
+    public StockquoteDetail getLastestFetch() {
+        Timestamp latestRun = new Timestamp(new Date(0).getTime());
+        StockquoteDetail foundDetail = null;
+        if (fetches != null && fetches.size() > 0) {
+            for (StockquoteDetail detail : fetches) {
+                if (detail.getBatchRun().compareTo(latestRun) == 1) {
+                    latestRun = detail.getBatchRun();
+                    foundDetail = detail;
+                }
+            }
+            return foundDetail;
+        }
+        return null;
+    }
+
+
 
     @Override
     public String toString() {
