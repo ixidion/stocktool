@@ -7,4 +7,4 @@ Stocktool
 **Continuous Integration:** [![Build Status](https://travis-ci.org/ixidion/stocktool.svg?branch=master)](https://travis-ci.org/ixidion/stocktool) <br/>
 **License:** [Apache 2.0](http://www.apache.org/licenses/LICENSE-2.0)
 
-A descriptions will follow here.
+A descriptions will follow here
