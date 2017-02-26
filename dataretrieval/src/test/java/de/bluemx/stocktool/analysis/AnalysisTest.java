@@ -7,6 +7,7 @@ import de.bluemx.stocktool.db.model.StockquoteBasic;
 import de.bluemx.stocktool.db.model.StockquoteDetail;
 import de.bluemx.stocktool.helper.DefaultInject;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import javax.xml.bind.JAXBException;
@@ -19,6 +20,7 @@ import java.util.Vector;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+@Disabled
 class AnalysisTest {
 
     private StockquoteBasicDAO stockquoteDao;
