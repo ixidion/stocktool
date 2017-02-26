@@ -13,18 +13,18 @@ import static de.bluemx.stocktool.helper.ArgsChecker.*;
 /**
  * Created by teclis on 23.01.17.
  */
-public class LowLevelRules {
+public final class LowLevelRules {
 
-    private final BigDecimal ROE_HIGH = new BigDecimal("20.0");
-    private final BigDecimal ROE_LOW = new BigDecimal("10.0");
-    private final BigDecimal EBITMARGIN_HIGH = new BigDecimal("12.0");
-    private final BigDecimal EBITMARGIN_LOW = new BigDecimal("6.0");
-    private final BigDecimal EQUITYRATIO_HIGH = new BigDecimal("25.0");
-    private final BigDecimal EQUITYRATIO_LOW = new BigDecimal("15.0");
-    private final BigDecimal EPS_GROWTH_HIGH = new BigDecimal("0.05");
-    private final BigDecimal EPS_GROWTH_LOW = new BigDecimal("-0.05");
-    private final BigDecimal fiveMrd = new BigDecimal("5000");
-    private final MathContext mathContext = new MathContext(32, RoundingMode.HALF_UP);
+    private static final BigDecimal ROE_HIGH = new BigDecimal("20.0");
+    private static final BigDecimal ROE_LOW = new BigDecimal("10.0");
+    private static final BigDecimal EBITMARGIN_HIGH = new BigDecimal("12.0");
+    private static final BigDecimal EBITMARGIN_LOW = new BigDecimal("6.0");
+    private static final BigDecimal EQUITYRATIO_HIGH = new BigDecimal("25.0");
+    private static final BigDecimal EQUITYRATIO_LOW = new BigDecimal("15.0");
+    private static final BigDecimal EPS_GROWTH_HIGH = new BigDecimal("0.05");
+    private static final BigDecimal EPS_GROWTH_LOW = new BigDecimal("-0.05");
+    private static final BigDecimal fiveMrd = new BigDecimal("5000");
+    private static final MathContext mathContext = new MathContext(32, RoundingMode.HALF_UP);
 
 
     /**
@@ -36,7 +36,7 @@ public class LowLevelRules {
      * @return
      * @throws NullPointerException if roeValue is null
      */
-    public int applyRoeRule(BigDecimal roeValue) {
+    public static int applyRoeRule(BigDecimal roeValue) {
         checkForNull(roeValue);
         if (roeValue.compareTo(ROE_HIGH) == 1) return 1;
         if (roeValue.compareTo(ROE_LOW) == -1) return -1;
@@ -52,7 +52,7 @@ public class LowLevelRules {
      * @return
      * @throws NullPointerException if ebitMargin is null
      */
-    public int applyEbitMarginRule(BigDecimal ebitMargin, boolean financial) {
+    public static int applyEbitMarginRule(BigDecimal ebitMargin, boolean financial) {
         checkForNull(ebitMargin);
         if (financial) return 0;
         if (ebitMargin.compareTo(EBITMARGIN_HIGH) == 1) return 1;
@@ -69,7 +69,7 @@ public class LowLevelRules {
      * @return
      * @throws NullPointerException if equityRatio is null
      */
-    public int applyEquityRatioRule(BigDecimal equityRatio) {
+    public static int applyEquityRatioRule(BigDecimal equityRatio) {
         checkForNull(equityRatio);
         if (equityRatio.compareTo(EQUITYRATIO_HIGH) == 1) return 1;
         if (equityRatio.compareTo(EQUITYRATIO_LOW) == -1) return -1;
@@ -89,7 +89,7 @@ public class LowLevelRules {
      * @return
      * @throws NullPointerException if any parameter is null
      */
-    public int applyAverageKGV5(BigDecimal yearNMinus3, BigDecimal yearNMinus2, BigDecimal yearNMinus1, BigDecimal year, BigDecimal yearNPlus1, BigDecimal actualQuote) {
+    public static int applyAverageKGV5(BigDecimal yearNMinus3, BigDecimal yearNMinus2, BigDecimal yearNMinus1, BigDecimal year, BigDecimal yearNPlus1, BigDecimal actualQuote) {
         checkForNull(yearNMinus3);
         checkForNull(yearNMinus2);
         checkForNull(yearNMinus1);
@@ -102,7 +102,7 @@ public class LowLevelRules {
         return evaluateKGV(result);
     }
 
-    private int evaluateKGV(BigDecimal result) {
+    private static int evaluateKGV(BigDecimal result) {
         checkForNull(result);
         if (result.compareTo(new BigDecimal("12")) == -1) {
             return 1;
@@ -121,7 +121,7 @@ public class LowLevelRules {
      * @return
      * @throws NullPointerException if any parameter is null
      */
-    public int applyActualPriceEarningsRatio(BigDecimal earningsActualYear, BigDecimal actualQUote) {
+    public static int applyActualPriceEarningsRatio(BigDecimal earningsActualYear, BigDecimal actualQUote) {
         checkForNull(earningsActualYear);
         checkForNull(actualQUote);
         BigDecimal result = actualQUote.divide(earningsActualYear, mathContext);
@@ -138,7 +138,7 @@ public class LowLevelRules {
      * @throws NullPointerException if analystsOpinion or marketCap is null
      * @throws IllegalArgumentException if analystsCount is 0
      */
-    public int applyAnalystsOpinion(int analystsCount, AnalystsOpinion analystsOpinion, BigDecimal marketCap) {
+    public static int applyAnalystsOpinion(int analystsCount, AnalystsOpinion analystsOpinion, BigDecimal marketCap) {
         int returnValue = 0;
         checkNumberGreaterThan(0, analystsCount);
         checkForNull(analystsOpinion);
@@ -167,7 +167,7 @@ public class LowLevelRules {
      * @return
      * @throws NullPointerException if any parameter is null
      */
-    public int reactionToQuarterQuotes(BigDecimal dayBefore, BigDecimal quarterQuotes) {
+    public static int reactionToQuarterQuotes(BigDecimal dayBefore, BigDecimal quarterQuotes) {
         checkForNull(dayBefore);
         checkForNull(quarterQuotes);
         return percentageResult(dayBefore, quarterQuotes, "-0.01", "0.01");
@@ -181,23 +181,10 @@ public class LowLevelRules {
      * @return
      * @throws NullPointerException if any parameter is null
      */
-    public int earningsRevision(BigDecimal oneMonthBefore, BigDecimal actualValue) {
+    public static int earningsRevision(BigDecimal oneMonthBefore, BigDecimal actualValue) {
         checkForNull(oneMonthBefore);
         checkForNull(actualValue);
         return percentageResult(oneMonthBefore, actualValue, "-0.05", "0.05");
-    }
-
-    /**
-     * Rule #09
-     *
-     * @param sixMonthsAgo
-     * @param actualValue
-     * @return
-     */
-    public int quote6MonthsAgo(BigDecimal sixMonthsAgo, BigDecimal actualValue) {
-        checkForNull(sixMonthsAgo);
-        checkForNull(actualValue);
-        return percentageResult(sixMonthsAgo, actualValue, "-0.05", "0.05");
     }
 
     /**
@@ -207,31 +194,13 @@ public class LowLevelRules {
      * @param actualValue
      * @return
      */
-    public int quote1YearAgo(BigDecimal oneYearAgo, BigDecimal actualValue) {
+    public static int quote1YearAgo(BigDecimal oneYearAgo, BigDecimal actualValue) {
         checkForNull(oneYearAgo);
         checkForNull(actualValue);
         return percentageResult(oneYearAgo, actualValue, "-0.05", "0.05");
     }
 
-    /**
-     * Rule #11
-     *
-     * @param quote6MonthsAgo
-     * @param quote1YearAgo
-     * @return
-     */
-    public int momentum(int quote6MonthsAgo, int quote1YearAgo) {
-        if (quote6MonthsAgo == 1 && quote1YearAgo < 1) {
-            return 1;
-        } else if (quote6MonthsAgo == -1 && quote1YearAgo > -1) {
-            return -1;
-        } else {
-            return 0;
-        }
-    }
-
-
-    private int percentageResult(BigDecimal pastNo, BigDecimal actualValue, String percentageLow, String percentageHigh) {
+    private static int percentageResult(BigDecimal pastNo, BigDecimal actualValue, String percentageLow, String percentageHigh) {
         BigDecimal highThreshold = new BigDecimal(percentageHigh);
         BigDecimal lowThreshold = new BigDecimal(percentageLow);
         BigDecimal percent = actualValue.divide(pastNo, mathContext).subtract(BigDecimal.ONE);
@@ -245,7 +214,6 @@ public class LowLevelRules {
         }
     }
 
-
     /**
      * Rule #12
      * Not relevant for Small&Mid-Caps
@@ -257,7 +225,7 @@ public class LowLevelRules {
      * @throws IllegalArgumentException if both list are not of size 4
      * @throws NullPointerException if any parameter is null
      */
-    public int threeMonthReversal(List<BigDecimal> quotes, List<BigDecimal> indexQuotes, BigDecimal marketCap) {
+    public static int threeMonthReversal(List<BigDecimal> quotes, List<BigDecimal> indexQuotes, BigDecimal marketCap) {
         collectionHasSize(quotes, 4);
         collectionHasSize(indexQuotes, 4);
         checkForNull(marketCap);
@@ -293,7 +261,7 @@ public class LowLevelRules {
      * @param quotes
      * @return
      */
-    private List<BigDecimal> percentageDifference(List<BigDecimal> quotes) {
+    private static List<BigDecimal> percentageDifference(List<BigDecimal> quotes) {
         List<BigDecimal> differenceList = new Vector<>();
         if (quotes.size() == 4) {
             for (int i = 0; i < 3; i++) {
@@ -309,7 +277,6 @@ public class LowLevelRules {
         }
     }
 
-
     /**
      * Rule #13
      *
@@ -318,13 +285,43 @@ public class LowLevelRules {
      * @return
      * @throws NullPointerException for both parameters
      */
-    public int applyEarningsGrowth(BigDecimal epsActual, BigDecimal epsNext) {
+    public static int applyEarningsGrowth(BigDecimal epsActual, BigDecimal epsNext) {
         checkForNull(epsActual);
         checkForNull(epsNext);
         BigDecimal percent = epsNext.divide(epsActual, mathContext).subtract(BigDecimal.ONE);
         if (percent.compareTo(EPS_GROWTH_HIGH) == 1) return 1;
         if (percent.compareTo(EPS_GROWTH_LOW) == -1) return -1;
         return 0;
+    }
+
+    /**
+     * Rule #09
+     *
+     * @param sixMonthsAgo
+     * @param actualValue
+     * @return
+     */
+    public int quote6MonthsAgo(BigDecimal sixMonthsAgo, BigDecimal actualValue) {
+        checkForNull(sixMonthsAgo);
+        checkForNull(actualValue);
+        return percentageResult(sixMonthsAgo, actualValue, "-0.05", "0.05");
+    }
+
+    /**
+     * Rule #11
+     *
+     * @param quote6MonthsAgo
+     * @param quote1YearAgo
+     * @return
+     */
+    public int momentum(int quote6MonthsAgo, int quote1YearAgo) {
+        if (quote6MonthsAgo == 1 && quote1YearAgo < 1) {
+            return 1;
+        } else if (quote6MonthsAgo == -1 && quote1YearAgo > -1) {
+            return -1;
+        } else {
+            return 0;
+        }
     }
 
 }
