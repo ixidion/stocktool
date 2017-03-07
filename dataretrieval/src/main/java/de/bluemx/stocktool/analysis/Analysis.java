@@ -1,14 +1,15 @@
 package de.bluemx.stocktool.analysis;
 
-import de.bluemx.stocktool.db.model.ReturnOnEquity;
-import de.bluemx.stocktool.db.model.StockquoteBasic;
-import de.bluemx.stocktool.db.model.TableKeyValues;
-import de.bluemx.stocktool.db.model.YearComparator;
+import de.bluemx.stocktool.db.model.*;
 
 import java.time.LocalDate;
 import java.util.Collections;
 import java.util.List;
 import java.util.Vector;
+
+import static de.bluemx.stocktool.analysis.LowLevelRules.applyEbitMarginRule;
+import static de.bluemx.stocktool.analysis.LowLevelRules.applyRoeRule;
+
 /**
  * Created by teclis on 23.01.17.
  */
@@ -19,15 +20,30 @@ public class Analysis {
 
     public AnalysisObject analyseRoE(StockquoteBasic basic) {
         ReturnOnEquity roe = (ReturnOnEquity) extractYear(basic.getLastestFetch().getReturnOnEquityList(), -1);
-        LowLevelRules rules = new LowLevelRules();
         AnalysisObject ao = new AnalysisObject();
         try {
-            int result = rules.applyRoeRule(roe.getTableValue());
+            int result = applyRoeRule(roe.getTableValue());
             ao.setResult(result);
         } catch (RuntimeException e) {
             ao.setEx(e);
         } finally {
             ao.setFieldname("RULE01_ROE");
+            anlysisList.add(ao);
+            return ao;
+        }
+    }
+
+    public AnalysisObject analyseEbitLY(StockquoteBasic basic) {
+        EbitMargin ebitMargin = (EbitMargin) extractYear(basic.getLastestFetch().getEbitMarginList(), -1);
+        boolean financialSector = basic.isFinancialSector();
+        AnalysisObject ao = new AnalysisObject();
+        try {
+            int result = applyEbitMarginRule(ebitMargin.getTableValue(), financialSector);
+            ao.setResult(result);
+        } catch (RuntimeException e) {
+            ao.setEx(e);
+        } finally {
+            ao.setFieldname("RULE02_EBIT_MARGIN");
             anlysisList.add(ao);
             return ao;
         }
