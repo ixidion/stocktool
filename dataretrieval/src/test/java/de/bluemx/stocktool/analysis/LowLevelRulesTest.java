@@ -68,19 +68,37 @@ class LowLevelRulesTest {
     @Test
     void applyEquityRatioRuleHigh() {
         BigDecimal high = new BigDecimal("25.1");
-        assertEquals(1, rules.applyEquityRatioRule(high));
+        assertEquals(1, rules.applyEquityRatioRule(high, false));
     }
 
     @Test
     void applyEquityRatioRuleMiddle() {
         BigDecimal middle = new BigDecimal("15");
-        assertEquals(0, rules.applyEquityRatioRule(middle));
+        assertEquals(0, rules.applyEquityRatioRule(middle, false));
     }
 
     @Test
     void applyEquityRatioRule() {
         BigDecimal low = new BigDecimal("14.9");
-        assertEquals(-1, rules.applyEquityRatioRule(low));
+        assertEquals(-1, rules.applyEquityRatioRule(low, false));
+    }
+
+    @Test
+    void applyEquityRatioFinRuleHigh() {
+        BigDecimal high = new BigDecimal("21.1");
+        assertEquals(1, rules.applyEquityRatioRule(high, true));
+    }
+
+    @Test
+    void applyEquityRatioFinRuleMiddle() {
+        BigDecimal middle = new BigDecimal("5");
+        assertEquals(0, rules.applyEquityRatioRule(middle, true));
+    }
+
+    @Test
+    void applyEquityRatioFinRule() {
+        BigDecimal low = new BigDecimal("4.9");
+        assertEquals(-1, rules.applyEquityRatioRule(low, true));
     }
 
     @Test

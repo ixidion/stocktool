@@ -55,4 +55,5 @@ class AnalysisTest {
         assertEquals(1, result.getResult());
     }
 
+
 }

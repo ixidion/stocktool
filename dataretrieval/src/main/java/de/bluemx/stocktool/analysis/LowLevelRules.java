@@ -21,6 +21,8 @@ public final class LowLevelRules {
     private static final BigDecimal EBITMARGIN_LOW = new BigDecimal("6.0");
     private static final BigDecimal EQUITYRATIO_HIGH = new BigDecimal("25.0");
     private static final BigDecimal EQUITYRATIO_LOW = new BigDecimal("15.0");
+    private static final BigDecimal EQUITYRATIO_FINANCIAL_HIGH = new BigDecimal("10.0");
+    private static final BigDecimal EQUITYRATIO_FINANCIAL_LOW = new BigDecimal("5.0");
     private static final BigDecimal EPS_GROWTH_HIGH = new BigDecimal("0.05");
     private static final BigDecimal EPS_GROWTH_LOW = new BigDecimal("-0.05");
     private static final BigDecimal fiveMrd = new BigDecimal("5000");
@@ -49,6 +51,7 @@ public final class LowLevelRules {
      * Normally these figures are available approx. 3 months after business year has ended.
      *
      * @param ebitMargin
+     * @param financial
      * @return
      * @throws NullPointerException if ebitMargin is null
      */
@@ -66,13 +69,19 @@ public final class LowLevelRules {
      * For finance caps this has to be ignored
      *
      * @param equityRatio
+     * @param financial
      * @return
      * @throws NullPointerException if equityRatio is null
      */
-    public static int applyEquityRatioRule(BigDecimal equityRatio) {
+    public static int applyEquityRatioRule(BigDecimal equityRatio, boolean financial) {
         checkForNull(equityRatio);
-        if (equityRatio.compareTo(EQUITYRATIO_HIGH) == 1) return 1;
-        if (equityRatio.compareTo(EQUITYRATIO_LOW) == -1) return -1;
+        if (financial) {
+            if (equityRatio.compareTo(EQUITYRATIO_FINANCIAL_HIGH) == 1) return 1;
+            if (equityRatio.compareTo(EQUITYRATIO_FINANCIAL_LOW) == -1) return -1;
+        } else {
+            if (equityRatio.compareTo(EQUITYRATIO_HIGH) == 1) return 1;
+            if (equityRatio.compareTo(EQUITYRATIO_LOW) == -1) return -1;
+        }
         return 0;
     }
 
