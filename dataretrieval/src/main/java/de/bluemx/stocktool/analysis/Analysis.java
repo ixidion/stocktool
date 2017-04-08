@@ -1,6 +1,7 @@
 package de.bluemx.stocktool.analysis;
 
 import de.bluemx.stocktool.db.model.*;
+import de.bluemx.stocktool.model.AnalystsOpinion;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -80,6 +81,39 @@ public class Analysis {
             ao.setEx(e);
         } finally {
             ao.setFieldname("RULE04_AVERAGE_QUOTE_EARNINGS_RATIO");
+            anlysisList.add(ao);
+            return ao;
+        }
+    }
+
+    public AnalysisObject analyseKGVActual(StockquoteBasic basic) {
+        BigDecimal year = extractYear(basic.getLastestFetch().getEpsList(), -1).getTableValue();
+        BigDecimal quote = getLatestHistoricalQuote(basic.getLastestFetch().getHistoricalQuoteList());
+        AnalysisObject ao = new AnalysisObject();
+        try {
+            int result = applyActualPriceEarningsRatio(year, quote);
+            ao.setResult(result);
+        } catch (RuntimeException e) {
+            ao.setEx(e);
+        } finally {
+            ao.setFieldname("RULE05_ACTUAL_QUOTE_EARNINGS_RATIO");
+            anlysisList.add(ao);
+            return ao;
+        }
+    }
+
+    public AnalysisObject analyseAnlystsOpinion(StockquoteBasic basic) {
+        int analystsCount = basic.getLastestFetch().getAnalystsCount();
+        AnalystsOpinion opinion = AnalystsOpinion.getOpinion(basic.getLastestFetch().getAnalystsOpinion());
+        BigDecimal marketCap = basic.getLastestFetch().getMarketCapitalization();
+        AnalysisObject ao = new AnalysisObject();
+        try {
+            int result = applyAnalystsOpinion(analystsCount, opinion, marketCap);
+            ao.setResult(result);
+        } catch (RuntimeException e) {
+            ao.setEx(e);
+        } finally {
+            ao.setFieldname("RULE05_ACTUAL_QUOTE_EARNINGS_RATIO");
             anlysisList.add(ao);
             return ao;
         }

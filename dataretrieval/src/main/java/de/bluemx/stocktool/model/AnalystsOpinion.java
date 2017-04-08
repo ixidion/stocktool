@@ -17,16 +17,16 @@ public enum AnalystsOpinion {
         this.value = value;
     }
 
-    public int getValue() {
-        return value;
-    }
-
-    public AnalystsOpinion getOpinion(int value) {
+    public static AnalystsOpinion getOpinion(int value) {
         for (AnalystsOpinion opinion : AnalystsOpinion.values()) {
             if (value == opinion.getValue()) {
                 return opinion;
             }
         }
         throw new RuntimeException("Opinion not found with value: " + value);
+    }
+
+    public int getValue() {
+        return value;
     }
 }
