@@ -6,8 +6,8 @@ group 'de.bluemx.stocktool'
 
 dependencies {
     compile project(':datastorage')
-    testRuntime 'org.junit.jupiter:junit-jupiter-engine:5.0.0-M3'
-    testCompile 'org.junit.jupiter:junit-jupiter-api:5.0.0-M3'
+    testRuntime 'org.junit.jupiter:junit-jupiter-engine:5.0.0-M4'
+    testCompile 'org.junit.jupiter:junit-jupiter-api:5.0.0-M4'
     testCompile 'org.hamcrest:java-hamcrest:2.0.0.0'
     testCompile 'org.mockito:mockito-core:2.3.7'
     compile 'com.yahoofinance-api:YahooFinanceAPI:3.5.0'
