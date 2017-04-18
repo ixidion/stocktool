@@ -34,6 +34,8 @@ public class StockquoteBasic implements Serializable {
     private LocalDate financialYear;
     @Column(name = "financialsector")
     private boolean financialSector = false;
+    @Column(name = "quarterly_figures")
+    private LocalDate quarterlyFigures;
     @OneToMany(mappedBy = "stockquoteBasics", cascade = CascadeType.ALL)
     @JoinFetch(JoinFetchType.OUTER)
     private List<StockquoteDetail> fetches;
@@ -165,5 +167,13 @@ public class StockquoteBasic implements Serializable {
 
     public void setFetches(List<StockquoteDetail> fetches) {
         this.fetches = fetches;
+    }
+
+    public LocalDate getQuarterlyFigures() {
+        return quarterlyFigures;
+    }
+
+    public void setQuarterlyFigures(LocalDate quarterlyFigures) {
+        this.quarterlyFigures = quarterlyFigures;
     }
 }
