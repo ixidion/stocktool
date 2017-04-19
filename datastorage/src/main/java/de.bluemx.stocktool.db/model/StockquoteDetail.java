@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.util.Collections;
 import java.util.List;
 import java.util.Vector;
 
@@ -153,6 +154,31 @@ public class StockquoteDetail implements Serializable {
         }
         ebitMarginList.remove(ebitMargin);
         ebitMargin.setStockquoteDetail(null);
+    }
+
+    /**
+     * Sorts the quotesList and returns the latest quote.
+     *
+     * @return the stockquote
+     */
+    public BigDecimal getLatestQuote() {
+        Collections.sort(historicalQuoteList, new HistoricalQuoteComparator());
+        return historicalQuoteList.get(historicalQuoteList.size() - 1).getQuote();
+    }
+
+    /**
+     * Searches for quote on a specific date
+     *
+     * @param searchDate
+     * @return Can return null if nothing was found.
+     */
+    public BigDecimal getQuoteFromDate(LocalDate searchDate) {
+        for (HistoricalQuote quote : historicalQuoteList) {
+            if (quote.getQuoteDate().equals(searchDate)) {
+                return quote.getQuote();
+            }
+        }
+        return null;
     }
 
     @Override

@@ -72,7 +72,7 @@ public class Analysis {
         BigDecimal yearMinus1 = extractYear(basic.getLastestFetch().getEpsList(), -1).getTableValue();
         BigDecimal year = extractYear(basic.getLastestFetch().getEpsList(), -1).getTableValue();
         BigDecimal yearPlus1 = extractYear(basic.getLastestFetch().getEpsList(), -1).getTableValue();
-        BigDecimal quote = getLatestHistoricalQuote(basic.getLastestFetch().getHistoricalQuoteList());
+        BigDecimal quote = basic.getLastestFetch().getLatestQuote();
         AnalysisObject ao = new AnalysisObject();
         try {
             int result = applyAverageKGV5(yearMinus3, yearMinus2, yearMinus1, year, yearPlus1, quote);
@@ -88,7 +88,7 @@ public class Analysis {
 
     public AnalysisObject analyseKGVActual(StockquoteBasic basic) {
         BigDecimal year = extractYear(basic.getLastestFetch().getEpsList(), -1).getTableValue();
-        BigDecimal quote = getLatestHistoricalQuote(basic.getLastestFetch().getHistoricalQuoteList());
+        BigDecimal quote = basic.getLastestFetch().getLatestQuote();
         AnalysisObject ao = new AnalysisObject();
         try {
             int result = applyActualPriceEarningsRatio(year, quote);
@@ -143,12 +143,5 @@ public class Analysis {
         }
         throw new RuntimeException("Something went wrong here. Check data in DB.");
     }
-
-    private BigDecimal getLatestHistoricalQuote(List<HistoricalQuote> quoteList) {
-        Collections.sort(quoteList, new HistoricalQuoteComparator());
-        return quoteList.get(quoteList.size() - 1).getQuote();
-
-    }
-
 
 }
