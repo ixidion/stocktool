@@ -1,12 +1,38 @@
 group 'de.bluemx.stocktool'
+apply plugin: 'liquibase'
+
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'org.liquibase:liquibase-core:3.5.3'
+        classpath "org.liquibase:liquibase-gradle-plugin:1.2.4"
+        classpath 'mysql:mysql-connector-java:6.0.6'
+    }
+}
 
 dependencies {
     testRuntime group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.0.0-M4'
     testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.0.0-M4'
     testCompile 'org.hamcrest:java-hamcrest:2.0.0.0'
     testCompile 'org.mockito:mockito-core:2.3.7'
-    compile 'mysql:mysql-connector-java:6.0.5'
+    compile 'mysql:mysql-connector-java:6.0.6'
     compile 'org.eclipse.persistence:javax.persistence:2.1.1'
     compile 'org.xerial:sqlite-jdbc:3.15.1'
     compile 'org.eclipse.persistence:eclipselink:2.6.4'
+}
+
+liquibase {
+    activities {
+        main {
+            changeLogFile 'changelog.yml'
+            url 'jdbc:mysql://localhost:3306/stocktool'
+            username 'stocktool'
+            password 'local'
+        }
+    }
+
+    runList = 'main'
 }
