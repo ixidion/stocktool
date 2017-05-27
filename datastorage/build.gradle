@@ -28,7 +28,7 @@ liquibase {
     activities {
         main {
             changeLogFile 'changelog.yml'
-            url 'jdbc:mysql://localhost:3306/stocktool'
+            url 'jdbc:mysql://localhost:3306/stocktool?useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Europe/Berlin&useSSL=false&nullNamePatternMatchesAll=true'
             username 'stocktool'
             password 'local'
         }

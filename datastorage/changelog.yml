@@ -1,0 +1,218 @@
+databaseChangeLog:
+- changeSet:
+    id: 1495864861531-1
+    author: teclis (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            autoIncrement: true
+            constraints:
+              primaryKey: true
+            name: historical_quotes_id
+            type: INT
+        - column:
+            constraints:
+              nullable: false
+            name: stockquotedata_id
+            type: INT
+        - column:
+            constraints:
+              nullable: false
+            name: quote_date
+            type: date
+        - column:
+            name: quote
+            type: DECIMAL(5, 2)
+        tableName: historical_quotes
+- changeSet:
+    id: 1495864861531-2
+    author: teclis (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            autoIncrement: true
+            constraints:
+              primaryKey: true
+            name: stockquotedata_id
+            type: INT
+        - column:
+            constraints:
+              nullable: false
+            name: stockquotedatabasic_id
+            type: INT
+        - column:
+            constraints:
+              nullable: false
+            name: fetch_date
+            type: date
+        - column:
+            name: analysts_count
+            type: SMALLINT UNSIGNED
+        - column:
+            name: analysts_opinion
+            type: SMALLINT UNSIGNED
+        - column:
+            name: marketcap
+            type: DECIMAL(9, 2)
+        - column:
+            constraints:
+              nullable: false
+            defaultValueComputed: CURRENT_TIMESTAMP
+            name: batch_run
+            type: TIMESTAMP(26)
+        tableName: stockquotedata
+- changeSet:
+    id: 1495864861531-3
+    author: teclis (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            autoIncrement: true
+            constraints:
+              primaryKey: true
+            name: stockquotedatabasic_id
+            type: INT
+        - column:
+            constraints:
+              nullable: false
+            name: isin
+            type: CHAR(12)
+        - column:
+            name: stockname
+            type: VARCHAR(100)
+        - column:
+            name: stockindex
+            type: VARCHAR(10)
+        - column:
+            name: symbol
+            type: VARCHAR(7)
+        - column:
+            name: financial_year
+            type: date
+        - column:
+            name: financialsector
+            type: BIT(1)
+        - column:
+            name: quarterly_figures
+            type: date
+        tableName: stockquotedata_basic
+- changeSet:
+    id: 1495864861531-4
+    author: teclis (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            autoIncrement: true
+            constraints:
+              primaryKey: true
+            name: table_key_value_id
+            type: INT
+        - column:
+            constraints:
+              nullable: false
+            name: stockquotedata_id
+            type: INT
+        - column:
+            name: table_year
+            type: date
+        - column:
+            name: table_value
+            type: DECIMAL(10, 4)
+        - column:
+            constraints:
+              nullable: false
+            name: estimated
+            type: BIT(1)
+        - column:
+            constraints:
+              nullable: false
+            name: discriminator
+            type: VARCHAR(20)
+        tableName: table_key_value
+- changeSet:
+    id: 1495864861531-5
+    author: teclis (generated)
+    changes:
+    - createIndex:
+        columns:
+        - column:
+            name: stockquotedata_id
+        indexName: hq_stockquotedata_fk_idx
+        tableName: historical_quotes
+- changeSet:
+    id: 1495864861531-6
+    author: teclis (generated)
+    changes:
+    - createIndex:
+        columns:
+        - column:
+            name: isin
+        indexName: isin_idx
+        tableName: stockquotedata_basic
+- changeSet:
+    id: 1495864861531-7
+    author: teclis (generated)
+    changes:
+    - createIndex:
+        columns:
+        - column:
+            name: stockquotedatabasic_id
+        indexName: stockquotedatabasic_fk_idx
+        tableName: stockquotedata
+- changeSet:
+    id: 1495864861531-8
+    author: teclis (generated)
+    changes:
+    - createIndex:
+        columns:
+        - column:
+            name: stockquotedata_id
+        indexName: tablekv_stockquotedata_fk_idx
+        tableName: table_key_value
+- changeSet:
+    id: 1495864861531-9
+    author: teclis (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: stockquotedata_id
+        baseTableName: historical_quotes
+        constraintName: hq_stockquotedata_fk
+        deferrable: false
+        initiallyDeferred: false
+        onDelete: NO ACTION
+        onUpdate: NO ACTION
+        referencedColumnNames: stockquotedata_id
+        referencedTableName: stockquotedata
+- changeSet:
+    id: 1495864861531-10
+    author: teclis (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: stockquotedatabasic_id
+        baseTableName: stockquotedata
+        constraintName: stockquotedatabasic_fk
+        deferrable: false
+        initiallyDeferred: false
+        onDelete: NO ACTION
+        onUpdate: NO ACTION
+        referencedColumnNames: stockquotedatabasic_id
+        referencedTableName: stockquotedata_basic
+- changeSet:
+    id: 1495864861531-11
+    author: teclis (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: stockquotedata_id
+        baseTableName: table_key_value
+        constraintName: tablekv_stockquotedata_fk20
+        deferrable: false
+        initiallyDeferred: false
+        onDelete: NO ACTION
+        onUpdate: NO ACTION
+        referencedColumnNames: stockquotedata_id
+        referencedTableName: stockquotedata
+
