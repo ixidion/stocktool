@@ -186,66 +186,72 @@ class LowLevelRulesTest {
 
     @Test
     void earningsRevisionHigh() {
-        BigDecimal monthBefore = new BigDecimal("100");
-        BigDecimal actualDay = new BigDecimal("105.1");
-        assertEquals(1, rules.earningsRevision(monthBefore, actualDay));
+        BigDecimal monthBeforeAY = new BigDecimal("100");
+        BigDecimal actualDayAY = new BigDecimal("105.1");
+        BigDecimal monthBeforeLY = new BigDecimal("100");
+        BigDecimal actualDayLY = new BigDecimal("106");
+        assertEquals(1, rules.earningsRevision(monthBeforeAY, actualDayAY, monthBeforeLY, actualDayLY));
     }
 
     @Test
     void earningsRevisionMiddle() {
-        BigDecimal monthBefore = new BigDecimal("100");
-        BigDecimal actualDay = new BigDecimal("105");
-        assertEquals(0, rules.earningsRevision(monthBefore, actualDay));
+        BigDecimal monthBeforeAY = new BigDecimal("100");
+        BigDecimal actualDayAY = new BigDecimal("110");
+        BigDecimal monthBeforeLY = new BigDecimal("100");
+        BigDecimal actualDayLY = new BigDecimal("95");
+        assertEquals(0, rules.earningsRevision(monthBeforeAY, actualDayAY, monthBeforeLY, actualDayLY));
     }
 
     @Test
     void earningsRevisionLow() {
-        BigDecimal monthBefore = new BigDecimal("100");
-        BigDecimal actualDay = new BigDecimal("94.9");
-        assertEquals(-1, rules.earningsRevision(monthBefore, actualDay));
+        BigDecimal monthBeforeAY = new BigDecimal("100");
+        BigDecimal actualDayAY = new BigDecimal("94.9");
+        BigDecimal monthBeforeLY = new BigDecimal("100");
+        BigDecimal actualDayLY = new BigDecimal("94");
+        assertEquals(-1, rules.earningsRevision(monthBeforeAY, actualDayAY, monthBeforeLY, actualDayLY));
     }
-
-    @Test
-    void quote6MonthsAgoHigh() {
-        BigDecimal sixMonthsBefore = new BigDecimal("100");
-        BigDecimal actualDay = new BigDecimal("105.1");
-        assertEquals(1, rules.earningsRevision(sixMonthsBefore, actualDay));
-    }
-
-    @Test
-    void quote6MonthsAgoMiddle() {
-        BigDecimal sixMonthsBefore = new BigDecimal("100");
-        BigDecimal actualDay = new BigDecimal("105");
-        assertEquals(0, rules.earningsRevision(sixMonthsBefore, actualDay));
-    }
-
-    @Test
-    void quote6MonthsAgoLow() {
-        BigDecimal sixMonthsBefore = new BigDecimal("100");
-        BigDecimal actualDay = new BigDecimal("94.9");
-        assertEquals(-1, rules.earningsRevision(sixMonthsBefore, actualDay));
-    }
-
-    @Test
-    void quote1YearAgoHigh() {
-        BigDecimal yearBefore = new BigDecimal("100");
-        BigDecimal actualDay = new BigDecimal("105.1");
-        assertEquals(1, rules.earningsRevision(yearBefore, actualDay));
-    }
-
-    @Test
-    void quote1YearAgoMiddle() {
-        BigDecimal yearBefore = new BigDecimal("100");
-        BigDecimal actualDay = new BigDecimal("95");
-        assertEquals(0, rules.earningsRevision(yearBefore, actualDay));
-    }
-
-    @Test
-    void quote1YearAgoLow() {
-        BigDecimal yearBefore = new BigDecimal("100");
-        BigDecimal actualDay = new BigDecimal("94.9999999999");
-        assertEquals(-1, rules.earningsRevision(yearBefore, actualDay));
-    }
+//
+//    @Test
+//    void quote6MonthsAgoHigh() {
+//        BigDecimal sixMonthsBefore = new BigDecimal("100");
+//        BigDecimal actualDay = new BigDecimal("105.1");
+//        assertEquals(1, rules.earningsRevision(sixMonthsBefore, actualDay));
+//    }
+//
+//    @Test
+//    void quote6MonthsAgoMiddle() {
+//        BigDecimal sixMonthsBefore = new BigDecimal("100");
+//        BigDecimal actualDay = new BigDecimal("105");
+//        assertEquals(0, rules.earningsRevision(sixMonthsBefore, actualDay));
+//    }
+//
+//    @Test
+//    void quote6MonthsAgoLow() {
+//        BigDecimal sixMonthsBefore = new BigDecimal("100");
+//        BigDecimal actualDay = new BigDecimal("94.9");
+//        assertEquals(-1, rules.earningsRevision(sixMonthsBefore, actualDay));
+//    }
+//
+//    @Test
+//    void quote1YearAgoHigh() {
+//        BigDecimal yearBefore = new BigDecimal("100");
+//        BigDecimal actualDay = new BigDecimal("105.1");
+//        assertEquals(1, rules.earningsRevision(yearBefore, actualDay));
+//    }
+//
+//    @Test
+//    void quote1YearAgoMiddle() {
+//        BigDecimal yearBefore = new BigDecimal("100");
+//        BigDecimal actualDay = new BigDecimal("95");
+//        assertEquals(0, rules.earningsRevision(yearBefore, actualDay));
+//    }
+//
+//    @Test
+//    void quote1YearAgoLow() {
+//        BigDecimal yearBefore = new BigDecimal("100");
+//        BigDecimal actualDay = new BigDecimal("94.9999999999");
+//        assertEquals(-1, rules.earningsRevision(yearBefore, actualDay));
+//    }
 
     @Test
     void momentumIncrease() {

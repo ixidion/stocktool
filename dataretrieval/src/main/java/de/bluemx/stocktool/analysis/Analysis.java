@@ -6,6 +6,7 @@ import de.bluemx.stocktool.model.AnalystsOpinion;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Vector;
 
@@ -113,7 +114,56 @@ public class Analysis {
         } catch (RuntimeException e) {
             ao.setEx(e);
         } finally {
-            ao.setFieldname("RULE05_ACTUAL_QUOTE_EARNINGS_RATIO");
+            ao.setFieldname("RULE06_ANALYSTSOPINION");
+            anlysisList.add(ao);
+            return ao;
+        }
+    }
+
+    public AnalysisObject analyseQuarterQuoteReaction(StockquoteBasic basic) {
+        LocalDate quarterFigures = basic.getQuarterlyFigures();
+        AnalysisObject ao = new AnalysisObject();
+        try {
+            LocalDate quarterFiguresOneDayBefore = basic.getQuarterlyFigures().minusDays(1);
+            BigDecimal quaterQuote = basic.getLastestFetch().getQuoteFromDate(quarterFigures);
+            BigDecimal quaterQuoteOneDayBefore = basic.getLastestFetch().getQuoteFromDateOrBefore(quarterFiguresOneDayBefore);
+            int result = reactionToQuarterQuotes(quaterQuoteOneDayBefore, quaterQuote);
+            ao.setResult(result);
+        } catch (RuntimeException e) {
+            ao.setEx(e);
+        } finally {
+            ao.setFieldname("RULE07_QUARTERQUOTE_REACTION");
+            anlysisList.add(ao);
+            return ao;
+        }
+    }
+
+    public AnalysisObject analyseEarningsRevisions(StockquoteBasic basic) {
+        // Intervall festlegen, in dem vorherige Eps gesucht werden.
+        int intervalStart = 70;
+        int intervalEnd = 20;
+        int actualYear = LocalDate.now().getYear();
+        AnalysisObject ao = new AnalysisObject();
+        try {
+            BigDecimal epsActualAY = basic.getLastestFetch().getEps(actualYear).getTableValue();
+            int nextYear = actualYear + 1;
+            BigDecimal epsActualNY = basic.getLastestFetch().getEps(nextYear).getTableValue();
+            StockquoteDetail earlierFetch = basic.getFetches().stream()
+                    .sorted(Comparator.comparing(StockquoteDetail::getFetchDate).reversed())
+                    .filter(s -> s.getFetchDate().isBefore(LocalDate.now().minusDays(intervalEnd))
+                            && s.getFetchDate().isAfter(LocalDate.now().minusDays(intervalEnd)))
+                    .findFirst()
+                    .get();
+            if (earlierFetch != null) throw new RuntimeException("No earlier Fetch available.");
+            BigDecimal epsEarlierFetchAY = earlierFetch.getEps(actualYear).getTableValue();
+            BigDecimal epsEarlierFetchNY = earlierFetch.getEps(nextYear).getTableValue();
+
+            int result = earningsRevision(epsEarlierFetchAY, epsActualAY, epsEarlierFetchNY, epsActualNY);
+            ao.setResult(result);
+        } catch (RuntimeException e) {
+            ao.setEx(e);
+        } finally {
+            ao.setFieldname("RULE08_EARNINGSREVISION");
             anlysisList.add(ao);
             return ao;
         }

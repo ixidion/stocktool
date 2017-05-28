@@ -183,17 +183,21 @@ public final class LowLevelRules {
     }
 
     /**
-     * Rule #08
      *
-     * @param oneMonthBefore
-     * @param actualValue
+     * @param oneMonthBeforeAY
+     * @param actualValueAY
+     * @param oneMonthBeforeLY
+     * @param actualValueLY
      * @return
-     * @throws NullPointerException if any parameter is null
      */
-    public static int earningsRevision(BigDecimal oneMonthBefore, BigDecimal actualValue) {
-        checkForNull(oneMonthBefore);
-        checkForNull(actualValue);
-        return percentageResult(oneMonthBefore, actualValue, "-0.05", "0.05");
+    public static int earningsRevision(BigDecimal oneMonthBeforeAY, BigDecimal actualValueAY, BigDecimal oneMonthBeforeLY, BigDecimal actualValueLY) {
+        checkForNull(oneMonthBeforeAY);
+        checkForNull(actualValueAY);
+        checkForNull(oneMonthBeforeLY);
+        checkForNull(actualValueLY);
+        int actualYear = percentageResult(oneMonthBeforeAY, actualValueAY, "-0.05", "0.05");
+        int nextYear = percentageResult(oneMonthBeforeLY, actualValueLY, "-0.05", "0.05");
+        return (actualYear + nextYear) / 2;
     }
 
     /**

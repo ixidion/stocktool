@@ -76,6 +76,13 @@ public class StockquoteDetail implements Serializable {
         eps.setStockquoteDetail(null);
     }
 
+    public Eps getEps(int year) {
+        return epsList.stream()
+                .filter(x -> x.getTableYear().getYear() == year)
+                .findFirst()
+                .get();
+    }
+
     public void addPer(PriceEarningsRatio per) {
         if (priceEarningsRatioList == null) {
             priceEarningsRatioList = new Vector<>();
@@ -164,6 +171,36 @@ public class StockquoteDetail implements Serializable {
     public BigDecimal getLatestQuote() {
         Collections.sort(historicalQuoteList, new HistoricalQuoteComparator());
         return historicalQuoteList.get(historicalQuoteList.size() - 1).getQuote();
+    }
+
+
+    /**
+     * Contains Recursion - Stops if stopdate is reached or quote is found.
+     *
+     * @param searchDate
+     * @param stopDate
+     * @return
+     */
+    private BigDecimal getQuoteFromDateBefore(LocalDate searchDate, LocalDate stopDate) {
+        if (searchDate.isBefore(stopDate)) return null;
+        for (HistoricalQuote quote : historicalQuoteList) {
+            if (quote.getQuoteDate().equals(searchDate)) {
+                return quote.getQuote();
+            } else {
+                return getQuoteFromDateBefore(searchDate.minusDays(1), stopDate);
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Searches for quote on a specific date or latest quotes some Days before
+     *
+     * @param searchDate
+     * @return Can return null if nothing was found.
+     */
+    public BigDecimal getQuoteFromDateOrBefore(LocalDate searchDate) {
+        return getQuoteFromDateBefore(searchDate, searchDate.minusDays(10));
     }
 
     /**
